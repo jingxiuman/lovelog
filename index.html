@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>首页</title>
+    
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script src="js/require.min.js" data-main = "js/index" charset="utf-8"></script>
+</head>
+<body>
+	<div class="mui-content own-container">
+		<div class="index_pic_main">
+			<img src="img/index_pic.png" class="index_pic"/>
+		</div>
+		<form class="mui-input-group index_form">
+			<div class="mui-input-row">
+				<label>账号</label>
+				<input type="text" id="username" placeholder="输入你的用户名">
+			</div>
+			<div class="mui-input-row">
+				<label>密码</label>
+				<input type="password" id="password" class="mui-input-clear" placeholder="输入你的密码">
+			</div>
+		
+			<div class="mui-button-row">
+				<button class="mui-btn mui-btn-primary" id="loginBtn" onclick="return false;">登陆</button>
+			</div>
+		</form>
+		<div class="index_register">
+			<h6><a href="reg.html">没有账号，我要注册</a></h6>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+@import "common";
+
+@font-face {
+  font-family: 'open_sansregular';
+  src: url('../fonts/opensans-regular-webfont.eot');
+  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/opensans-regular-webfont.woff2') format('woff2'),
+  url('../fonts/opensans-regular-webfont.woff') format('woff'),
+  url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
+  url('../fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'flagship_slabbold';
+  src: url('../fonts/flagship_slab_-_bold-webfont.eot');
+  src: url('../fonts/flagship_slab_-_bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/flagship_slab_-_bold-webfont.woff2') format('woff2'),
+  url('../fonts/flagship_slab_-_bold-webfont.woff') format('woff'),
+  url('../fonts/flagship_slab_-_bold-webfont.ttf') format('truetype'),
+  url('../fonts/flagship_slab_-_bold-webfont.svg#flagship_slabbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+@font-face {
+  font-family: 'weimihei';
+  font-weight: normal;
+  font-style: normal;
+
+  src: url('../fonts/weimihei.ttf') format('truetype');
+}
+@pink: #6F256F;
+@pink-200:#cd1a6e;
+html{
+  height: 100%;
+  font-size: 10px;
+  font-family: 'flagship_slabbold';
+}
+body{
+    height: 100%;
+  font-size: 1.2rem;
+    background-image: -webkit-linear-gradient(to bottom, @pink-200,@pink);
+    background-image: linear-gradient(to bottom, @pink-200, @pink);
+    background-color: @pink;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.own-container{
+    background-color: transparent;
+
+}
+.index_pic_main{
+    width: 100%;
+    margin: 20% auto;
+}
+.index_pic{
+    width: 45%;
+   margin-left: 27.5%;
+    border-radius: 200px;
+}
+.index_form{
+    margin: 0 5%;
+}
+.index_register{
+    margin-top: 10px;
+    text-align: center;
+    a{
+       color: #FFFFFF;  
+    }
+}
+.mui-bar-nav~.main_content{
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+.main_content{
+    background-color: transparent;
+ overflow: scroll;
+  overflow-x: hidden;
+    padding:  1%;
+}
+.box{
+    width: 48%;
+    height: 150px;
+    background-color: rgba(114, 17, 57, 0.47);
+    float: left;
+  margin: 1%;
+  text-align: center;
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+.box_del{
+  position: absolute;
+  right: 1px;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
+  background-color: #ff0000;
+
+  line-height: 2rem;
+  border-radius: 54px;
+  &:active{
+    background-color: #9f0000;
+  }
+}
+.box_time{
+  height: 60%;
+
+}
+.box_day_num{
+  font-size: 8rem;
+  line-height: 8rem;
+  font-family: flagship_slabbold;
+}
+.box_day_name{
+  font-family: 'weimihei';
+}
+.box_event{
+  margin-top: 10px;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-family: 'weimihei';
+}
+.main_mask{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  text-align: center;
+  background-color: rgba(0,0,0,.3);
+  display: none;
+}
+.main_mask_main{
+  position: absolute;
+  bottom: 54px;
+  left: 0;
+  right: 0;
+}
+/*
+列表页*/
+.list_box{
+  color: #ffffff;
+  background-color: rgba(114, 17, 57, 0.47);
+  margin: 10px;
+  padding: 5px;
+  min-height: 100px;
+
+}
+.list_box_user{
+  border-bottom: 1px dashed #871245;
+}
+.list_box_main{
+  .flexbox();
+  text-align: center;
+}
+.list_box_day{
+  .flex(1)
+}
+.list_box_day_num{
+  font-family: flagship_slabbold;
+  font-size: 6rem;
+  line-height: 6rem;
+}
+.list_box_day_name{
+  font-family: weimihei;
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.list_box_event {
+  .flex(1);
+  font-family: weimihei;
+  font-size: 2rem;
+  line-height: 6rem;
+}
+/*
+个人用户中心*/
+
+.person_header{
+width: 100%;
+  background-color: rgba(135, 18, 69, 0.47);
+  .flexbox();
+}
+.person_header_img{
+  .flex(1);
+  padding: 10px;
+  border-right: 1px solid #ffffff;
+  img{
+    width: 100%;
+    border-radius: 5px;
+  }
+}
+.person_header_info{
+  .flex(1);
+  color: #ffffff;
+  padding: 10px;
+
+}
+.person_header_info_name{
+  margin-top: 20%;
+  font-family: 'weimihei';
+  font-size: 2rem;
+  line-height: 2rem;
+}
+.person_header_info_num{
+  margin-top: 20%;
+  .flexbox();
+}
+.person_header_info_num_item{
+  .flex(1);
+  font-family: 'weimihei';
+  font-size: 1.5rem;
+}
