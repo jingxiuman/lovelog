@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/lib/mui.dtpicker.css"/>
+    <link rel="stylesheet" type="text/css" href="css/lib/mui.listpicker.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	</head>
+	<body>
+		<div class="main_content">
+			<form class="mui-input-group addBox_content">
+				<div class="mui-input-row">
+					<label>时间</label>
+					<div class="weimihei ">
+						<span class="ab_input"  id="eventTime_show">点击右边，获取时间</span>
+						<span id='getTime' class="ab_date" data-options='{"beginYear":1970}'>&#xe600;</span>
+					</div>
+					<input type="datetime" class="mui-hidden" id="eventTime" placeholder="例如：2015-7-12" disabled="disabled">
+				</div>
+				<div class="mui-input-row">
+					<label>事件名称</label>
+					<input type="text" class="mui-input-clear" id="eventName" placeholder="恋爱纪念日">
+				</div>
+				<div class="mui-input-row">
+					<label>公开</label>
+					<select id="eventShow">
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+				</div>
+				
+				<button id="save_btn" type="button" class="mui-btn mui-btn-primary mui-btn-block">保存</button>
+			</form>
+			<div class="mui-content-padded">
+			
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="js/lib/mui.min.js" ></script>
+		<script src="js/lib/mui.listpicker.js"></script>
+		<script src="js/lib/mui.dtpicker.js" type="text/javascript" charset="utf-8"></script>
+		<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
+		<script src="js/lib/md5.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			(function($) {
+				$.init({
+					beforeback: function(){
+						//获得列表界面的webview
+						var main = plus.webview.getWebviewById('main1');
+						//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+						mui.fire(main,'refresh');
+						//返回true，继续页面关闭逻辑
+						return true;
+					}
+				});
+				var btns = $('#getTime');
+				btns.each(function(i, btn) {
+					btn.addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						var picker = new $.DtPicker(options);
+						picker.show(function(rs) {
+							document.getElementById('eventTime').value = rs.text;
+							document.getElementById('eventTime_show').innerHTML = rs.text;
+							picker.dispose(); 
+						});
+					}, false);
+				});
+				$.plusReady(function(){
+					var save_btn = document.getElementById("save_btn");
+					save_btn.addEventListener('tap', function(){
+						var  eventTime  = document.getElementById("eventTime").value,
+						eventName = document.getElementById("eventName").value,
+						eventShow = document.getElementById("eventShow").value;
+						if(eventTime !="" && eventName != "" && eventShow != "" ){
+							//var box_md5 = md5(eventName+eventTime);
+							var getUsername = localStorage.getItem("token");
+							console.log(getUsername)
+							if(getUsername !=""){
+								
+								var eventdata = new Date(eventTime);
+								var boxInfo = {
+									eventTime: eventdata.getTime(),
+									eventName: eventName,
+									//eventShow:eventShow,
+									//eventMd5: box_md5，
+									//userID:getUsername,
+								};
+								/*var boxList = JSON.parse(localStorage.getItem("boxList") || '[]');
+								boxList.push(boxInfo);
+								localStorage.setItem("boxList", JSON.stringify(boxList));
+								console.log(localStorage.getItem("boxList"))*/
+								var rootRef = new Wilddog('https://lovelog.wilddogio.com/boxList');
+								var box_list = rootRef.child(getUsername);
+								box_list.push(boxInfo)
+								$.openWindow({
+									url:'main.html',
+									id:'main1',
+									show:{
+										aniShow:'slide-in-left',
+										duration:"200"
+									},
+									waiting:{
+										title:'正在加载中。。。。',
+										options:{
+											width:'100%',
+											height:'100%'
+										}
+									}
+								});
+							}else{
+								plus.nativeUI.toast("哎呀初始化失败了，得回到首页去");mui.openWindow("main.html")
+							}
+							
+						}else{
+							plus.nativeUI.toast("请按照上方提示输入全部信息")
+						}
+					})
+				})
+				
+			})(mui);
+		</script>
+	</body>
+</html>

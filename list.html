@@ -4,78 +4,91 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
-    <script src="js/lib/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <script src="js/lib/FFF.fc.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        mui.init();
-
-    </script>
 </head>
 <body>
-<header class="mui-bar mui-bar-nav">
-    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <h1 class="mui-title">首页</h1>
-    <a class="mui-icon mui-icon-home  mui-pull-right"></a>
-</header>
-<div class="mui-content main_content">
-   <div class="list_box">
+
+
+<div class="mui-content main_content list_content">
+   <!--<div class="list_box">
        <div class="list_box_user">zhoubenbentime</div>
        <div class="list_box_main">
            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
            <div class="list_box_event">恋爱纪念日</div>
        </div>
-   </div>
-    <div class="list_box">
-        <div class="list_box_user">zhoubenbentime</div>
-        <div class="list_box_main">
-            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
-            <div class="list_box_event">恋爱纪念日</div>
-        </div>
-    </div>
-    <div class="list_box">
-        <div class="list_box_user">zhoubenbentime</div>
-        <div class="list_box_main">
-            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
-            <div class="list_box_event">恋爱纪念日</div>
-        </div>
-    </div>
-    <div class="list_box">
-        <div class="list_box_user">zhoubenbentime</div>
-        <div class="list_box_main">
-            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
-            <div class="list_box_event">恋爱纪念日</div>
-        </div>
-    </div>
-    <div class="list_box">
-        <div class="list_box_user">zhoubenbentime</div>
-        <div class="list_box_main">
-            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
-            <div class="list_box_event">恋爱纪念日</div>
-        </div>
-    </div>
-    <div class="list_box">
-        <div class="list_box_user">zhoubenbentime</div>
-        <div class="list_box_main">
-            <div class="list_box_day"><span class="list_box_day_num">132</span><span class="list_box_day_name">天</span></div>
-            <div class="list_box_event">恋爱纪念日</div>
-        </div>
-    </div>
+   </div>-->
 </div>
-<nav class="mui-bar mui-bar-tab">
-    <a class="mui-tab-item " href="#tabbar">
-        <span class="mui-icon mui-icon-pengyouquan"></span>
-        <span class="mui-tab-label">恩爱圈</span>
-    </a>
-    <a class="mui-tab-item mui-active" id="main_add" href="#tabbar-with-sms">
-        <span class="mui-icon mui-icon-plusempty"></span>
-        <span class="mui-tab-label">添加</span>
-    </a>
-    <a class="mui-tab-item" href="#tabbar-with-map">
-        <span class="mui-icon mui-icon-person"></span>
-        <span class="mui-tab-label">个人中心</span>
-    </a>
-</nav>
+ <script src="js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src = "https://cdn.wilddog.com/js/client/current/wilddog.js" ></script>
+	<script src="js/lib/FFF.fc.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		require(['FFF', 'zepto'], function(FFF, $){
+			var F = FFF.FFF,Widght = F.Widght;
+			
+			function listBox(){
+				Widght.apply(this, arguments);
+			}
+			
+			listBox.ATTRS = {
+				boudingBox :{
+					value :$("<div class='list_box'></div>")
+				},
+				boxDay:{
+	            	value:'',
+		        },
+		        boxInfo:{
+		            value:''
+		        },
+		        boxID:{
+		            value:''
+		        },  
+				username:{
+					value:""
+				}
+			}
+			F.extend(listBox, Widght, {
+				initialize: function(obj){
+					 var nowDay = new Date();
+		            var dayNum = parseInt((nowDay.getTime() - obj.boxDay) / 86400000);
+		            this.setBoxDay(dayNum);
+	            	this.setBoxInfo(obj.boxInfo);
+		         	this.setBoxID(obj.boxId);
+		         	this.setUsername(obj.boxUserID);
+				},
+				renderUI:function(){
+					var that = this, boxList = that.getBoundingBox();
+					var list_user = '<div class="list_box_user">'+that.getUsername()+'</div>';
+					var list_main = '<div class="list_box_main"><div class="list_box_day">'+
+					'<span class="list_box_day_num">'+that.getBoxDay()+'</span><span class="list_box_day_name">天</span></div>'+
+					'<div class="list_box_event">'+that.getBoxInfo()+'</div></div>';
+					boxList.append(list_user);
+					boxList.append(list_main);
+				}
+			});
+			var rootRef = new Wilddog('https://lovelog.wilddogio.com/boxList');
+			rootRef.on("child_added",function(snapshot){
+			var value = snapshot.val();
+				//console.log(all)
+				console.log(snapshot.key());
+				
+				if(value.eventShow == "1"){
+					var box = new listBox({
+				   		boxDay: value.eventTime,
+			         	boxInfo:value.eventName,
+			         	boxId:snapshot.key(),
+			         	boxUserId: value.userID
+					});
+					box.render({
+				   		container: $(".list_content"),
+		            	type:'append'
+					});
+				}
+			//console.log(all.eventName)
+			}, function(err){
+				console.log(err.code)
+			})				
+			
+		})
+	</script>
 </body>
 </html>

@@ -41,6 +41,7 @@
 			dataType: 'json',
 			success: function(data){
 				if(data == 101 ){
+					owner.createState()
 					callback("登陆成功");
 					mui.openWindow({
 						url:'main.html',
@@ -49,7 +50,16 @@
       						autoShow:true,//页面loaded事件发生后自动显示，默认为true
       						aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
       						duration:"100"//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
-    					}
+    					},
+    					waiting:{
+      autoShow:true,//自动显示等待框，默认为true
+      title:'正在加载...',//等待对话框上显示的提示内容
+      options:{
+        width:'100%',//等待框背景区域宽度，默认根据内容自动计算合适宽度%
+        height:'100%',//等待框背景区域高度，默认根据内容自动计算合适高度
+    
+      }
+    }
 					})
 				}else if(data == 100){
 					callback("用户名或密码错误");
@@ -62,10 +72,10 @@
 
 	};
 
-	owner.createState = function(name, callback) {
+	owner.createState = function(callback) {
 		var state = owner.getState();
-		state.account = name;
-		state.token = "token123456789";
+		state.account = plus.getCookie('14c4b06b824ec593239362517f538b29');
+		state.token = plus.getCookie("token");
 		owner.setState(state);
 		return callback();
 	};
@@ -121,6 +131,7 @@
 		localStorage.setItem('$users', JSON.stringify(users));*/
 		/*return callback();*/
 	};
+	
 
 	/**
 	 * 获取当前状态
@@ -135,6 +146,7 @@
 	 **/
 	owner.setState = function(state) {
 		state = state || {};
+		
 		localStorage.setItem('$state', JSON.stringify(state));
 		//var settings = owner.getSettings();
 		//settings.gestures = '';

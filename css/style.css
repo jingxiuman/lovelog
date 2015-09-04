@@ -1,16 +1,17 @@
 @font-face {
-  font-family: 'open_sansregular';
-  src: url('../fonts/opensans-regular-webfont.eot');
-  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/opensans-regular-webfont.woff2') format('woff2'), url('../fonts/opensans-regular-webfont.woff') format('woff'), url('../fonts/opensans-regular-webfont.ttf') format('truetype'), url('../fonts/opensans-regular-webfont.svg#open_sansregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'flagship_slabbold';
   src: url('../fonts/flagship_slab_-_bold-webfont.eot');
   src: url('../fonts/flagship_slab_-_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/flagship_slab_-_bold-webfont.woff2') format('woff2'), url('../fonts/flagship_slab_-_bold-webfont.woff') format('woff'), url('../fonts/flagship_slab_-_bold-webfont.ttf') format('truetype'), url('../fonts/flagship_slab_-_bold-webfont.svg#flagship_slabbold') format('svg');
   font-weight: normal;
   font-style: normal;
+}
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/iconfont.eot');/* IE9*/
+  src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */
+  url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../fonts/iconfont.svg#iconfont') format('svg');/* iOS 4.1- */
 }
 @font-face {
   font-family: 'weimihei';
@@ -26,14 +27,21 @@ html {
 body {
   height: 100%;
   font-size: 1.2rem;
-  background-image: -webkit-linear-gradient(to bottom, #cd1a6e, #6f256f);
-  background-image: linear-gradient(to bottom, #cd1a6e, #6f256f);
-  background-color: #6f256f;
+  background-image: -webkit-linear-gradient(to bottom, #cd1a6e, #6F256F);
+  background-image: linear-gradient(to bottom, #cd1a6e, #6F256F);
+  background-color: #6F256F;
   background-repeat: no-repeat;
   background-size: 100%;
 }
+.weimihei {
+  font-family: 'weimihei';
+}
+.zimu {
+  font-family: "flagship_slabbold";
+}
 .own-container {
   background-color: transparent;
+  overflow: hidden;
 }
 .index_pic_main {
   width: 100%;
@@ -65,15 +73,17 @@ body {
   padding: 1%;
 }
 .box {
-  width: 48%;
-  height: 150px;
+  width: 98%;
+  height: 10rem;
   background-color: rgba(114, 17, 57, 0.47);
-  float: left;
   margin: 1%;
   text-align: center;
   color: #ffffff;
-  overflow: hidden;
   position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 .box_del {
   position: absolute;
@@ -89,21 +99,36 @@ body {
 .box_del:active {
   background-color: #9f0000;
 }
+.box_type {
+  position: absolute;
+  left: -10px;
+  top: -10px;
+}
 .box_time {
   height: 60%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  width: 100%;
+  line-height: 100px;
 }
 .box_day_num {
   font-size: 8rem;
-  line-height: 8rem;
+  line-height: 10rem;
   font-family: flagship_slabbold;
 }
 .box_day_name {
   font-family: 'weimihei';
 }
 .box_event {
-  margin-top: 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  width: 100%;
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 8rem;
   font-family: 'weimihei';
 }
 .main_mask {
@@ -222,4 +247,62 @@ body {
   width: 100%;
   font-family: 'weimihei';
   font-size: 1.5rem;
+  -moz-backface-visibility: ;
 }
+.main_share {
+  background-image: url(../img/iconfont-share.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  display: block;
+}
+.share_main {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.share_list {
+  background-color: #FFFFFF;
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+}
+.share_close {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+/*
+ * 添加信息页面
+ */
+.ab_date {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  float: right;
+  margin-right: 20px;
+  display: block;
+  z-index: 999;
+}
+.ab_date:active {
+  background-color: #007AFF;
+}
+.ab_input {
+  font-size: 1.5rem;
+  line-height: 3rem;
+}
+/*# sourceMappingURL=style.css.map */
