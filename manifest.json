@@ -187,5 +187,97 @@
 			"debug": true
 		}
 	},
-	"fullscreen": false
+	"fullscreen": false,
+	"dependencies":{
+		"pages": {
+			"addBox.html": {
+				"href": "addBox.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/lib/mui.dtpicker.css",
+					"css/lib/mui.listpicker.css",
+					"css/style.css",
+					"fonts/flagship_slab_-_bold-webfont.eot",
+					"fonts/flagship_slab_-_bold-webfont.woff2",
+					"fonts/flagship_slab_-_bold-webfont.woff",
+					"fonts/flagship_slab_-_bold-webfont.ttf",
+					"fonts/flagship_slab_-_bold-webfont.svg",
+					"fonts/iconfont.eot",
+					"fonts/iconfont.woff",
+					"fonts/iconfont.ttf",
+					"fonts/iconfont.svg",
+					"fonts/weimihei.ttf",
+					"img/iconfont-share.png",
+					"js/lib/mui.min.js",
+					"js/lib/mui.listpicker.js",
+					"js/lib/mui.dtpicker.js",
+					"js/lib/md5.min.js"
+				],
+				"refer": [
+					"main.html"
+				],
+				"priority": 0
+			},
+			"main.html": {
+				"href": "main.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"css/style.css",
+					"fonts/flagship_slab_-_bold-webfont.eot",
+					"fonts/flagship_slab_-_bold-webfont.woff2",
+					"fonts/flagship_slab_-_bold-webfont.woff",
+					"fonts/flagship_slab_-_bold-webfont.ttf",
+					"fonts/flagship_slab_-_bold-webfont.svg",
+					"fonts/iconfont.eot",
+					"fonts/iconfont.woff",
+					"fonts/iconfont.ttf",
+					"fonts/iconfont.svg",
+					"fonts/weimihei.ttf",
+					"img/iconfont-share.png",
+					"js/lib/mui.min.js",
+					"js/lib/FFF.fc.min.js",
+					"js/main.js"
+				],
+				"refer": [
+					"addBox.html",
+					"main.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"img/Thumbs.db",
+				"fonts/opensans-regular-webfont.woff",
+				"css/common.less",
+				"list.html",
+				"LICENSE",
+				"img/index_pic.png",
+				"js/mui.min.js",
+				"fonts/opensans-regular-webfont.eot",
+				"person.html",
+				"js/mui.js",
+				"js/boxList.js",
+				"README.md",
+				"img/app_icon.png",
+				"js/app.js",
+				"fis-conf.js",
+				"js/lib/mui.js",
+				"reg.html",
+				"css/mui.css",
+				"css/style.less",
+				"index.html",
+				"js/ajax.js",
+				"fonts/opensans-regular-webfont.ttf",
+				"fonts/opensans-regular-webfont.svg",
+				"js/lib/zepto_1.1.3.js",
+				"js/require.min.js",
+				"fonts/opensans-regular-webfont.woff2",
+				"boxList.html",
+				"js/index.js"
+			]
+		}
+	}
 }
