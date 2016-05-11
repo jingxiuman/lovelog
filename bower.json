@@ -1,0 +1,25 @@
+{
+  "name": "lovelog",
+  "authors": [
+    "knowthis <admin@zhouxianbao.cn>"
+  ],
+  "description": "some thing record",
+  "main": "main.html",
+  "keywords": [
+    "lovelog"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "vue": "^1.0.22",
+    "zepto": "^1.1.6",
+    "mui": "https://github.com/dcloudio/mui.git#^3.0.0"
+  }
+}

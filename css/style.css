@@ -105,13 +105,18 @@ body {
   top: -10px;
 }
 .box_time {
-  height: 60%;
+  height: 100%;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   width: 100%;
   line-height: 100px;
+}
+.own_label {
+  position: absolute;
+  left: 0;
+  top: -5px;
 }
 .box_day_num {
   font-size: 8rem;

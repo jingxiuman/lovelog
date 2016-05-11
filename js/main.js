@@ -145,7 +145,6 @@ mui.plusReady(function(){
       			aniShow:'fade-in',
       		},
       		waiting:{
-		    
 		      title:'正在加载...'//等待对话框上显示的提示内容
       		},
       		options:{
