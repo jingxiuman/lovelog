@@ -17,8 +17,14 @@
 	</header>
 	<div class="mui-content main_content" >
 		<div class="box" v-for="item in boxList" v-if="boxList.length>0">
-			<div class="box_time"><span class="box_day_num" v-bind="item.event"></span><span class="box_day_name">天</span></div>
-			<div class="box_event"><span class="mui-badge mui-badge-primary own_label" id="box_type">未来</span>恋爱纪念日</div>
+			<div class="box_time">
+                <span class="box_day_num">{{ item.eventTime }}</span>
+                <span class="box_day_name">天</span>
+            </div>
+			<div class="box_event">
+                <span class="mui-badge mui-badge-primary own_label" >{{ item.eventType }}</span>
+                {{ item.eventName }}
+            </div>
 			<div class="box_del">X</div>
 		</div>
 
@@ -34,7 +40,7 @@
 	<nav class="mui-bar mui-bar-tab">
 		  <a class="mui-tab-item " href="#" id="update">
 				<span class="mui-icon mui-icon-reload"></span>
-				<span class="mui-tab-label">系统更新</span>
+				<span class="mui-tab-label">广告</span>
 			</a>
 			<a class="mui-tab-item mui-active" @click="boxAdd()" >
 				<span class="mui-icon mui-icon-plusempty"></span>

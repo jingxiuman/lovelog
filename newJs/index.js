@@ -31,12 +31,34 @@ main.init = function(){
 main.getDataFunc = function(){
 	var boxDataClass = Bmob.Object.extend('boxlist');
 	var boxData = new Bmob.Query(boxDataClass);
-	console.log(plus.device.uuid)
-	boxData.equalTo('machineId',plus.device.uuid || '');
+	boxData.equalTo('machineId', '352562076467276');
 	boxData.find({
 		success:function(response){
+            var nowTime = new Date().getTime(),interval,type;
 			if(response.length > 0){
-				main.boxListFunc.boxList =response;
+                response.forEach(function (item) {
+
+                    if(item.get('eventTime') > nowTime){
+                        type = '未来' ;
+
+                    }else{
+                        type = '过去';
+                    }
+                    interval = Math.round( Math.abs((item.get('eventTime') - nowTime)/86400000));
+                    console.log(interval+'');
+
+                    // if(interval < 365){
+                    //     interval = interval +'天';
+                    // }else{
+                    //     interval = parseInt(interval%365)+'年'
+                    // }
+                    main.boxListFunc.$data.boxList.push({
+                        eventName:item.get('eventName'),
+                        eventTime:interval,
+                        eventType:type
+                    });
+                });
+
 			}else{
 				plus.nativeUI.toast("你的数据被偷走了，下面加一个")
 			}
