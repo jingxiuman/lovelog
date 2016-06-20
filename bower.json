@@ -18,11 +18,13 @@
     "tests"
   ],
   "devDependencies": {
-    "vue": "^1.0.22",
     "zepto": "^1.1.6",
     "mui": "https://github.com/dcloudio/mui.git#^3.0.0"
   },
   "dependencies": {
-    "requirejs": "^2.2.0"
+    "requirejs": "^2.2.0",
+
+    "artTemplate": "^3.0.1",
+    "js-url": "^2.3.0"
   }
 }

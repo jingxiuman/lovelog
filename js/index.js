@@ -1,50 +1,46 @@
-requirejs.config({
-	paths: {
-		zepto : 'lib/zepto_1.1.3',
-		muiMain: 'lib/mui.min',
-		app : 'app'
-	},
-	shim:{
-		'app':['muiMain']
-	}
-});
-/*
- * 首页
+/**
+ * Created by knowthis on 16/6/18.
  */
-require(['muiMain', 'app'],function(){
-	mui.init();
-	mui.plusReady(function(){
-		if(app.getState().token){
-			var lognBtn = document.getElementById("loginBtn"),
-			username = document.getElementById("username"), 
-			password = document.getElementById("password");
-			loginBtn.addEventListener('tap', function(){
-				if(app.getState().token){
-					var loginInfo = {
-						username : username.value,
-						password : password.value
-					};
-					app.login(loginInfo, function(err){
-						if(err){
-							plus.nativeUI.toast(err);
-							app.setState()
-							return ;
-						}
-					})
-				}else{
-					plus.nativeUI.toast("已经登陆了！")
-					mui.openWindow({
-						url:'main.html',
-						id:'main'
-					})
-				}
-			})
-		}else{
-			plus.nativeUI.toast("已经登陆了！")
-			mui.openWindow({
-				url:'main.html',
-				id:'main'
-			})
-		}
-	})
+var version = 1;
+
+requirejs.config({
+    paths:{
+        zepto:'../assets/lib/zepto/zepto.min',
+        bmob:'../assets/lib/bmob/bmob',
+        template:'../assets/lib/artTemplate/dist/template',
+        common:'./common',
+        router:'./router',
+        url:'../assets/lib/js-url/url.min',
+        
+        boxList:'../modules/boxList/indexCtrl'
+    },
+    shim:{
+        zepto:{
+            exports:'$'
+        },
+        bmob:{
+            exports:'Bmob'
+        },
+        url:{
+            exports:'url'
+        },
+        template:{
+            exports:'template'
+        }
+    },
+    urlArgs:'v='+version
+});
+require(['common','router','template'],function (common,router) {
+    console.log('版本号:'+version);
+    var main = {
+        init:function () {
+            
+            common.bmobInit();
+            router.init();
+           
+
+        }
+    };
+    main.init();
+
 })
