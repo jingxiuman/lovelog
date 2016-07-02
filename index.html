@@ -5,6 +5,7 @@
     <title>事件纪念日</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/lib/date/zepto.mdatetimer.css">
     <script data-main="js/index" src="assets/lib/requirejs/require.js"></script>
 </head>
 <body>
@@ -17,16 +18,8 @@
     <div class="content" id="app">
 
     </div>
-    <footer class="footer">
-        <div class="footer-item"><a href="?page=news">事件新闻</a></div>
-        <div class="footer-item">
-            <a href="?page=add">
-                <div class="box-add iconfont">&#xe601;</div>
-                <div class="clearfix"></div>
-            </a>
+    <footer class="footer" id="footer">
 
-        </div>
-        <div class="footer-item"><a href="?page=my">我的事件</a></div>
 
     </footer>
 
@@ -56,6 +49,50 @@
         </div>
     </div>
     {{ /each }}
+</script>
+<script id="addBox" type="text/html">
+    <div class="add">
+        <div class="form-group">
+            <label>事件名称</label>
+            <div class="input-group">
+                <input type="text" id="incidentName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>事件时间</label>
+            <div class="input-group">
+                <input type="text" id="picktime" placeholder="点击添加时间"  readonly="readonly">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label>封&nbsp;&nbsp;面&nbsp;&nbsp;图 </label>
+            <div class="input-group">
+                <button type="button" class="btn btn-main">添加封面</button>
+                <input type="text" class="hidden">
+            </div>
+        </div>
+        <div class="box-img">
+
+        </div>
+
+    </div>
+</script>
+<script type="text/html" id="template_footer">
+    <div class="footer-item"><a href="?page=news">事件新闻</a></div>
+    <div class="footer-item" >
+        <a href="{{ type == 'index'?'?page=add':'javascript:void(0)' }}">
+            {{ if type == 'index' }}
+            <div class="box-add iconfont" >&#xe601;</div>
+            {{ else  }}
+            <div class="box-add box-save-btn" >保存</div>
+            {{ /if }}
+            <div class="clearfix"></div>
+
+        </a>
+
+    </div>
+    <div class="footer-item"><a href="?page=index">我的事件</a></div>
 </script>
 </body>
 </html>

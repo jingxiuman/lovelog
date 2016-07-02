@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-var version = 1;
+var version = "1.0.0";
 
 requirejs.config({
     paths:{
@@ -11,8 +11,10 @@ requirejs.config({
         common:'./common',
         router:'./router',
         url:'../assets/lib/js-url/url.min',
+        dataPick:'../assets/lib/date/zepto.mdatetimer',
+        boxList:'../modules/indexCtrl',
+        addBox:'../modules/addBox'
         
-        boxList:'../modules/boxList/indexCtrl'
     },
     shim:{
         zepto:{
@@ -26,11 +28,14 @@ requirejs.config({
         },
         template:{
             exports:'template'
+        },
+        dataPick:{
+            deps:['zepto']
         }
     },
     urlArgs:'v='+version
 });
-require(['common','router','template'],function (common,router) {
+require(['common','router','template','dataPick'],function (common,router) {
     console.log('版本号:'+version);
     var main = {
         init:function () {
@@ -41,6 +46,9 @@ require(['common','router','template'],function (common,router) {
 
         }
     };
+    Object.defineProperty(window, 'APP', {
+        value: main
+    }) ;
     main.init();
 
-})
+});

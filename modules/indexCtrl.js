@@ -7,8 +7,8 @@ define(['router','template','bmob'],function (router,template,Bmob) {
             main.getDataFunc();
         },
         render:function(id,data){
-
-            $("#app").html(template(id,data))
+            $("#app").html(template(id,data));
+            $("#footer").html(template('template_footer',{type:'index'}))
         }
     };
     main.data =[];
@@ -65,4 +65,4 @@ define(['router','template','bmob'],function (router,template,Bmob) {
 
     };
     return main
-})
+});

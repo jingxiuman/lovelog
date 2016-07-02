@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-define(['url','zepto','boxList'],function (url, $,boxList) {
+define(['url','zepto','boxList','addBox'],function (url, $,boxList,addBox) {
     var main = {
         init :function () {
             this.list();
@@ -20,6 +20,9 @@ define(['url','zepto','boxList'],function (url, $,boxList) {
                     break;
                 case 'news':
 
+                    break;
+                case 'add':
+                    addBox.init();
                     break;
                 default:
                     boxList.init();
