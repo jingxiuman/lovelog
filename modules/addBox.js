@@ -1,13 +1,28 @@
 /**
  * Created by knowthis on 16/7/2.
  */
-define(['router','template','bmob','zepto'],function (router,template,Bmob,$) {
+define(['router','template','bmob','zepto','qiniu','plupload','common'],function (router,template,Bmob,$,Qiniu,plupload,common) {
     var main = {
         init:function () {
-            this.render('addBox',{})
+            this.render('addBox',{});
+            //common.msgShow("你好")
         },
         bindUI:function () {
-            
+            this.uploadImgToQiniu();
+            var thingName = $("#incidentName").val().trim(),
+                thingTime = $("#picktime").val().trim(),
+                thingImg = $("#pickfilesInput").val().trim();
+            $(".box-save-btn").on('click',function(){
+                if(thingName !=''  && thingTime !=''){
+                    console.log("名称:"+thingName);
+                    console.log("时间:"+thingTime);
+                    console.log("图片:"+thingImg)
+                    
+                }else{
+                    common.msgShow("名称和事件,你都填了么?")
+                }
+
+            })
         },
         render:function(id,data){
             var that = this;
@@ -27,6 +42,51 @@ define(['router','template','bmob','zepto'],function (router,template,Bmob,$) {
             this.bindUI();
 
             $("#footer").html(template('template_footer',{type:'add'}))
+        },
+        uploadImgToQiniu:function () {
+            var uploader = Qiniu.uploader({
+                runtimes: 'html5,flash,html4',      // 上传模式，依次退化
+                browse_button: 'pickfiles',         // 上传选择的点选按钮，必需
+                uptoken_url: common.tokenUrl,         // Ajax请求uptoken的Url，强烈建议设置（服务端提供）
+                get_new_uptoken: false,             // 设置上传文件的时候是否每次都重新获取新的uptoken
+                unique_names: true,              // 默认false，key为文件名。若开启该选项，JS-SDK会为每个文件自动生成key（文件名）
+                domain: 'lovelog',     // bucket域名，下载资源时用到，必需
+                container: 'addContent',             // 上传区域DOM ID，默认是browser_button的父元素
+                max_file_size: '4mb',             // 最大文件体积限制
+                flash_swf_url: '../assets/lib/plupload/js/Moxie.swf',  //引入flash，相对路径
+                max_retries: 3,                     // 上传失败最大重试次数
+                dragdrop: true,                     // 开启可拖曳上传
+                drop_element: 'addContent',          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+                chunk_size: '4mb',                  // 分块上传时，每块的体积
+                auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                init: {
+                    'FilesAdded': function(up, files) {
+                        var windowURL = window.URL ||window.webkitURL;
+                        plupload.each(files, function(file) {
+                            console.log(file.getNative());
+                            var dataUrl =  windowURL.createObjectURL(file.getNative());
+                            $("#addbox_img").css("background-image","url("+dataUrl+")");
+                        });
+                        common.loadingStart();
+                    },
+                    'UploadProgress': function(up, file) {
+                        // 每个文件上传时，处理相关的事情
+                    },
+                    'FileUploaded': function(up, file, info) {
+                        common.loadingEnd();
+                        console.log(info);
+                        var infoObj = JSON.parse(info);
+
+                         var sourceLink = common.imgUrl + infoObj.key;
+                        $("#pickfilesInput").val(sourceLink);
+                        $("#addbox_img").css("background-image","url("+sourceLink+")");
+
+                    },
+                    'Error': function(up, err, errTip) {
+                        common.msgShow(errTip)
+                    }
+                }
+            });
         }
         
     };

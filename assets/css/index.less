@@ -249,3 +249,29 @@ button.btn.btn-main {
 .box-add.box-save-btn {
   font-size: 20px;
 }
+.loadingGIF {
+  z-index: 99;
+  top: 40%;
+  position: absolute;
+  left: 40%;
+  right: 40%;
+  width: 20%;
+  text-align: center;
+}
+.message {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0.51);
+  margin: 0 auto;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  &.active{
+    display: block;
+  }
+}

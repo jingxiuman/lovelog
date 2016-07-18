@@ -30,5 +30,34 @@
       "main.html"
     ],
     "priority": 0
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "assets/css/index.css",
+      "assets/lib/date/zepto.mdatetimer.css",
+      "assets/lib/requirejs/require.js",
+      "LICENSE",
+      "README.md",
+      "bower.json",
+      "box.html",
+      "old/addBox.html",
+      "old/boxAdd.html",
+      "old/boxList.html",
+      "old/index.html",
+      "old/main.html",
+      "modules/addBox.js",
+      "modules/indexCtrl.js",
+      "js/common.js",
+      "js/index.js",
+      "js/router.js",
+      "css/common.less",
+      "css/mui.css",
+      "css/mui.min.css",
+      "css/style.css",
+      "css/style.less"
+    ],
+    "refer": [],
+    "priority": 0
   }
 }

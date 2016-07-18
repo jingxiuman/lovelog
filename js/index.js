@@ -13,7 +13,9 @@ requirejs.config({
         url:'../assets/lib/js-url/url.min',
         dataPick:'../assets/lib/date/zepto.mdatetimer',
         boxList:'../modules/indexCtrl',
-        addBox:'../modules/addBox'
+        addBox:'../modules/addBox',
+        plupload:'../assets/lib/plupload/js/plupload.full.min',
+        qiniu:'../assets/lib/qiniu/dist/qiniu.min'
         
     },
     shim:{
@@ -31,6 +33,13 @@ requirejs.config({
         },
         dataPick:{
             deps:['zepto']
+        },
+        qiniu:{
+            deps:['plupload'],
+            exports:'Qiniu'
+        },
+        plupload:{
+            exports:'plupload'
         }
     },
     urlArgs:'v='+version
