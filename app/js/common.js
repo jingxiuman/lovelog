@@ -56,7 +56,6 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 $dom.remove();
             }
             body.append(html);
-            console.log($dom)
             body.find(".message").addClass("active");
             setTimeout(function () {
                 body.find(".message").removeClass("active");

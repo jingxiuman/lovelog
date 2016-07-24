@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-var version = "1.0.0";
+var version = "1.0.1";
 
 requirejs.config({
     paths:{
@@ -15,7 +15,8 @@ requirejs.config({
         boxList:'../modules/indexCtrl',
         addBox:'../modules/addBox',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
-        qiniu:'../assets/lib/qiniu/dist/qiniu.min'
+        qiniu:'../assets/lib/qiniu/dist/qiniu.min',
+       // mui:'../assets/lib/mui/dist/js/mui.min'
         
     },
     shim:{
@@ -48,10 +49,30 @@ require(['common','router','template','dataPick'],function (common,router) {
     console.log('版本号:'+version);
     var main = {
         init:function () {
-            
             common.bmobInit();
             router.init();
-           
+            this.bindUI();
+            this.getPlatData();
+        },
+        getPlatData:function () {
+
+
+               // alert( "首页加载时间: " + window.plus.runtime.launchLoadedTime + "ms" );
+
+        },
+        bindUI:function () {
+            var webview = plus.webview.currentWebview();
+            document.body.addEventListener('touchmove',function(event){
+                event.preventDefault();
+            },false);
+            $(".header").on('click',function () {
+                //$(".content").html(JSON.stringify(webview));
+                console.log(JSON.stringify(webview.WebviewStyles));
+                alert(webview.getURL())
+            });
+            $(".share.iconfont").on('click',function () {
+                webview.reload();
+            })
 
         }
     };

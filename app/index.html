@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" >
 <head>
     <meta charset="UTF-8">
     <title>事件纪念日</title>
@@ -10,10 +10,10 @@
 </head>
 <body>
     <header class="header">
-
-    <div class="share iconfont">
-        &#xe602;
-    </div>
+        <div class="header-title">事件纪念日</div>
+        <div class="share iconfont">
+            &#xe602;
+        </div>
     </header>
     <div class="content" id="app">
 
@@ -27,7 +27,7 @@
 <script id="boxList" type="text/html">
     {{ each list as value  }}
     <div class="index-box">
-        <div class="index-box-main" >
+        <div class="index-box-main" style="background-image: url('{{ value.img }}')">
             <div class="index-box-mask"></div>
             <div class="index-box-content">
                 <div class="index-box-CountDown">
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label>事件时间</label>
             <div class="input-group">
-                <input type="text" id="picktime" placeholder="点击添加时间"  readonly="readonly">
+                <input type="date" id="picktime" placeholder="点击添加时间"  >
 
             </div>
         </div>
@@ -86,7 +86,7 @@
             {{ if type == 'index' }}
             <div class="box-add iconfont" >&#xe601;</div>
             {{ else  }}
-            <div class="box-add box-save-btn" >保存</div>
+            <div class="box-add box-save-btn" id="box_save_btn" >保存</div>
             {{ /if }}
             <div class="clearfix"></div>
 

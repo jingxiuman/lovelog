@@ -8,21 +8,29 @@ define(['router','template','bmob','zepto','qiniu','plupload','common'],function
             //common.msgShow("你好")
         },
         bindUI:function () {
+            var that =this;
             this.uploadImgToQiniu();
-            var thingName = $("#incidentName").val().trim(),
-                thingTime = $("#picktime").val().trim(),
-                thingImg = $("#pickfilesInput").val().trim();
-            $(".box-save-btn").on('click',function(){
-                if(thingName !=''  && thingTime !=''){
-                    console.log("名称:"+thingName);
-                    console.log("时间:"+thingTime);
-                    console.log("图片:"+thingImg)
-                    
-                }else{
-                    common.msgShow("名称和事件,你都填了么?")
-                }
 
+            $(function () {
+                var thingName = $("#incidentName");
+                var thingTime = $("#picktime");
+                var thingImg = $("#pickfilesInput");
+                $("#box_save_btn").on('click',function(){
+                    console.log($("#incidentName").val());
+                    common.msgShow("开始保存");
+                    console.log("名称:"+thingName.val());
+                    console.log("时间:"+thingTime.val());
+                    console.log("图片:"+thingImg.val())
+                    if(thingName.val() !=''  && thingTime.val() !=''){
+
+                        that.submitData(thingName.val(),new Date(thingTime.val()).getTime(),thingImg.val());
+                    }else{
+                        common.msgShow("名称和事件,你都填了么?")
+                    }
+
+                })
             })
+
         },
         render:function(id,data){
             var that = this;
@@ -39,9 +47,12 @@ define(['router','template','bmob','zepto','qiniu','plupload','common'],function
                 
             },800);
 
-            this.bindUI();
 
-            $("#footer").html(template('template_footer',{type:'add'}))
+
+            $("#footer").html(template('template_footer',{type:'add'}));
+
+            common.loadingEnd();
+            that.bindUI();
         },
         uploadImgToQiniu:function () {
             var uploader = Qiniu.uploader({
@@ -90,8 +101,25 @@ define(['router','template','bmob','zepto','qiniu','plupload','common'],function
         }
         
     };
-    main.submitData = function () {
-      console.log(" 保存成功")  
+    main.submitData = function (thingName,time,img) {
+      console.log(" 保存成功")  ;
+        var boxObj = Bmob.Object.extend("boxlist");
+        var box = new boxObj();
+
+        box.save({
+            eventTime:time +'',
+            eventName:thingName,
+            machineId:'869322021132608',
+            img:img
+        }, {
+            success: function(object) {
+                common.msgShow("保存成功")
+                router.goTo('index')
+            },
+            error: function(model, error) {
+                common.msgShow(error)
+            }
+        });
     };
     return main
 });
