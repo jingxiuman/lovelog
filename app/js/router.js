@@ -29,13 +29,16 @@ define(['url','zepto','boxList','addBox','common'],function (url, $,boxList,addB
         goTo:function (page,data) {
             var self = this;
             if(page == self.getUrl('?page')){
-                //location.reload();
+                window.location.reload();
             }else{
-                  location.search = "?page="+page;
+                window.location.href = "?page="+page;
             }
 
 
         }
     };
+    Object.defineProperty(window,'router',{
+        value:main
+    });
     return main;
 });

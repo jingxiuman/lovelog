@@ -25,25 +25,22 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
             }
         },
         loadingStart:function(){
-            var loadingWrapper = document.createElement('div');
-            loadingWrapper.setAttribute('id','loadingWrapper');
-            loadingWrapper.style.width=window.screen.width+'px';
-            loadingWrapper.style.height=window.screen.height+'px';
-            loadingWrapper.style.position='fixed';
-            loadingWrapper.style.left= 0;
-            loadingWrapper.style.top= 0;
-            loadingWrapper.style.backgroundColor='rgba(0,0,0,0.4)';
-            loadingWrapper.style.textAlign='center';
-            var loadingGIF = document.createElement('img');
-            loadingGIF.src='assets/img/loading.svg';
-            loadingGIF.setAttribute('class','loadingGIF');
-            loadingWrapper.appendChild(loadingGIF);
-            document.body.appendChild(loadingWrapper);
-            document.body.style.overflow='hidden';
+            var body = $('body');
+
+            var str = '<div id="loadingWrapper"><div class="spinner"> <div class="spinner-container container1"> <div class="circle1"></div> ' +
+                '<div class="circle2"></div> <div class="circle3"></div> <div class="circle4"></div> </div> ' +
+                '<div class="spinner-container container2"> <div class="circle1"></div> <div class="circle2"></div> <div class="circle3"></div> ' +
+                '<div class="circle4"></div> </div> <div class="spinner-container container3"> <div class="circle1"></div> ' +
+                '<div class="circle2"></div> <div class="circle3"></div> <div class="circle4"></div> </div> </div></div>';
+            body.append(str);
         },
         loadingEnd:function () {
-            var loadingWrapper = document.getElementById('loadingWrapper');
-            document.body.removeChild(loadingWrapper);
+            try {
+                var loadingWrapper = document.getElementById('loadingWrapper');
+                document.body.removeChild(loadingWrapper);
+            }catch (e){
+                console.log(e);
+            }
         },
         msgShow:function (msg) {
             var $dom = $(".message"),body = $("body");
@@ -62,6 +59,20 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
             },1200)
 
         },
+        getLocal:function (item) {
+            return localStorage.getItem(item);
+        },
+        setLocal:function (data) {
+            return localStorage.setItem(data.key,data.value);
+        }
+    };
+    main.goTo = function (page,data) {
+        var self = this;
+        if(page == router.getUrl('?page')){
+            window.location.reload();
+        }else{
+            window.location.href = "?page="+page;
+        }
     };
     return main;
     

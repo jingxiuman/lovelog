@@ -6,6 +6,7 @@ var version = "1.0.1";
 requirejs.config({
     paths:{
         zepto:'../assets/lib/zepto/zepto.min',
+        touch:'../assets/lib/zeptojs/src/touch',
         bmob:'../assets/lib/bmob/bmob',
         template:'../assets/lib/artTemplate/dist/template',
         common:'./common',
@@ -22,6 +23,9 @@ requirejs.config({
     shim:{
         zepto:{
             exports:'$'
+        },
+        touch:{
+          deps:['zepto']
         },
         bmob:{
             exports:'Bmob'
@@ -44,30 +48,41 @@ requirejs.config({
         }
     },
     urlArgs:'v='+version
+    //urlArgs:'v='+new Date().getTime()
 });
-require(['common','router','template','dataPick'],function (common,router) {
+require(['common','router','template','dataPick','touch'],function (common,router) {
     console.log('版本号:'+version);
     var main = {
+        checkAPP:false,
         init:function () {
+            var that =this;
             common.bmobInit();
+
+            if(window.plus){
+                that.bindUI()
+            }else{
+                document.addEventListener("plusready",that.bindUI,false);
+            }
             router.init();
-            this.bindUI();
-            this.getPlatData();
-        },
-        getPlatData:function () {
-
-
-               // alert( "首页加载时间: " + window.plus.runtime.launchLoadedTime + "ms" );
 
         },
         bindUI:function () {
-            var webview = plus.webview.currentWebview();
-            document.body.addEventListener('touchmove',function(event){
-                event.preventDefault();
-            },false);
+            var that =this;
+                if (window.plus) {
+                    // $('.content').html(that.plus.device.uuid)
+
+                    that.checkAPP = true;
+                    common.setLocal({
+                        key: 'uuid',
+                        value: plus.device.uuid
+                    })
+                } else {
+                    that.checkAPP = false;
+                    common.msgShow("请使用APP登录")
+                }
+                var webview = plus.webview.currentWebview();
             $(".header").on('click',function () {
                 //$(".content").html(JSON.stringify(webview));
-                console.log(JSON.stringify(webview.WebviewStyles));
                 alert(webview.getURL())
             });
             $(".share.iconfont").on('click',function () {
@@ -76,9 +91,6 @@ require(['common','router','template','dataPick'],function (common,router) {
 
         }
     };
-    Object.defineProperty(window, 'APP', {
-        value: main
-    }) ;
     main.init();
 
 });

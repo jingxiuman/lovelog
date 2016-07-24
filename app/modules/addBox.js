@@ -1,10 +1,13 @@
 /**
  * Created by knowthis on 16/7/2.
  */
-define(['router','template','bmob','zepto','qiniu','plupload','common'],function (router,template,Bmob,$,Qiniu,plupload,common) {
+define(['template','bmob','zepto','qiniu','plupload','common'],
+    function (template,Bmob,$,Qiniu,plupload,common) {
     var main = {
+        uuid:'',
         init:function () {
             this.render('addBox',{});
+            this.uuid = common.getLocal('uuid');
             //common.msgShow("你好")
         },
         bindUI:function () {
@@ -102,24 +105,29 @@ define(['router','template','bmob','zepto','qiniu','plupload','common'],function
         
     };
     main.submitData = function (thingName,time,img) {
-      console.log(" 保存成功")  ;
-        var boxObj = Bmob.Object.extend("boxlist");
-        var box = new boxObj();
+        var that =this;
+        if(that.uuid != '') {
+            var boxObj = Bmob.Object.extend("boxlist");
+            var box = new boxObj();
 
-        box.save({
-            eventTime:time +'',
-            eventName:thingName,
-            machineId:'869322021132608',
-            img:img
-        }, {
-            success: function(object) {
-                common.msgShow("保存成功")
-                router.goTo('index')
-            },
-            error: function(model, error) {
-                common.msgShow(error)
-            }
-        });
+            box.save({
+                eventTime: time + '',
+                eventName: thingName,
+                machineId: that.uuid,
+                img: img,
+                isDel:false
+            }, {
+                success: function (object) {
+                    common.msgShow("保存成功");
+                    window.router.goTo('index',{})
+                },
+                error: function (model, error) {
+                    common.msgShow(error)
+                }
+            });
+        }else{
+            common.msgShow("获取唯一识别号失败")
+        }
     };
     return main
 });

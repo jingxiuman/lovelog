@@ -12,7 +12,7 @@
     <header class="header">
         <div class="header-title">事件纪念日</div>
         <div class="share iconfont">
-            &#xe602;
+            &#xe605;
         </div>
     </header>
     <div class="content" id="app">
@@ -26,7 +26,7 @@
 
 <script id="boxList" type="text/html">
     {{ each list as value  }}
-    <div class="index-box">
+    <div class="index-box" data-id="{{ value.id }}">
         <div class="index-box-main" style="background-image: url('{{ value.img }}')">
             <div class="index-box-mask"></div>
             <div class="index-box-content">
@@ -80,7 +80,7 @@
     </div>
 </script>
 <script type="text/html" id="template_footer">
-    <div class="footer-item"><a href="?page=news">事件新闻</a></div>
+    <div class="footer-item"><a href="?page=about">关于我们</a></div>
     <div class="footer-item" >
         <a href="{{ type == 'index'?'?page=add':'javascript:void(0)' }}">
             {{ if type == 'index' }}
