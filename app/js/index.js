@@ -58,38 +58,53 @@ require(['common','router','template','dataPick','touch'],function (common,route
             var self =this;
             common.bmobInit();
             if(QC.Login.check()){
-                QC.Login.getMe(function (openId, accessToken) {
-                    self.info.openId = openId;
-                    self.info.accessToken = accessToken;
-                    console.log(self.info);
-                    common.setLocal({
-                        key:'uuid',
-                        value:openId
-                    });
-                    // QC.api('get_user_info',{
-                    //     access_token:accessToken,
-                    //     oauth_consumer_key:'',
-                    //     openid:openId,
-                    //     format:'json'
-                    // })
-                });
-
-
+                self.saveOpenID();
                 router.init();
             }else{
                 QC.Login({
                     btnId:"qqLoginBtn",
                     size: "A_XL"
                 },function (reqData, opts) {
-                    alert(JSON.parse(reqData));
                     console.log(reqData);
-
-                    console.log(opts);
+                    self.info.username = reqData.nickname;
+                    self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1
+                    self.saveOpenID();
+                    var boxObj = Bmob.Object.extend("userInfo");
+                    var box = new boxObj();
+                    box.save({
+                        username: reqData.nickname,
+                        user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
+                        sex: reqData.gender,
+                        province:reqData.province,
+                        city:reqData.city,
+                        openid:self.info.openId
+                    }, {
+                        success: function (object) {
+                            self.info.userID = object.id;
+                            common.msgShow("登录成功");
+                            router.init();
+                        },
+                        error: function (model, error) {
+                            common.msgShow(error)
+                        }
+                    });
 
                 })
             }
 
 
+        },
+        saveOpenID:function () {
+            var self =this;
+            QC.Login.getMe(function (openId, accessToken) {
+                self.info.openId = openId;
+                self.info.accessToken = accessToken;
+                console.log(self.info);
+                common.setLocal({
+                    key:'uuid',
+                    value:openId
+                });
+            });
         },
         checkLogin:function () {
           if(common.getLocal('uuid') == null || common.getLocal('uuid') == ''){
