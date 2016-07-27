@@ -58,7 +58,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
             var self =this;
             common.bmobInit();
             if(QC.Login.check()){
-                self.saveOpenID();
+                self.saveOpenID('hasLogin');
                 router.init();
             }else{
                 QC.Login({
@@ -68,33 +68,15 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     console.log(reqData);
                     self.info.username = reqData.nickname;
                     self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1
-                    self.saveOpenID();
-                    var boxObj = Bmob.Object.extend("userInfo");
-                    var box = new boxObj();
-                    box.save({
-                        username: reqData.nickname,
-                        user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
-                        sex: reqData.gender,
-                        province:reqData.province,
-                        city:reqData.city,
-                        openid:self.info.openId
-                    }, {
-                        success: function (object) {
-                            self.info.userID = object.id;
-                            common.msgShow("登录成功");
-                            router.init();
-                        },
-                        error: function (model, error) {
-                            common.msgShow(error)
-                        }
-                    });
+                    self.saveOpenID('login');
+
 
                 })
             }
 
 
         },
-        saveOpenID:function () {
+        saveOpenID:function (type) {
             var self =this;
             QC.Login.getMe(function (openId, accessToken) {
                 self.info.openId = openId;
@@ -104,17 +86,32 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     key:'uuid',
                     value:openId
                 });
+                if(type == 'login') {
+                    self.saveUser();
+                }
             });
         },
-        checkLogin:function () {
-          if(common.getLocal('uuid') == null || common.getLocal('uuid') == ''){
-              return false;
-          }else{
-              return true;
-          }
-        },
-        bindUI:function () {
 
+        saveUser:function () {
+            var boxObj = Bmob.Object.extend("userInfo");
+            var box = new boxObj();
+            box.save({
+                username: reqData.nickname,
+                user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
+                sex: reqData.gender,
+                province:reqData.province,
+                city:reqData.city,
+                openid:self.info.openId
+            }, {
+                success: function (object) {
+                    self.info.userID = object.id;
+                    common.msgShow("登录成功");
+                    router.init();
+                },
+                error: function (model, error) {
+                    common.msgShow(error)
+                }
+            });
         },
         render:function () {
 
