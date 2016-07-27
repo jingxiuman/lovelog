@@ -65,8 +65,15 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     common.setLocal({
                         key:'uuid',
                         value:openId
-                    })
+                    });
+                    // QC.api('get_user_info',{
+                    //     access_token:accessToken,
+                    //     oauth_consumer_key:'',
+                    //     openid:openId,
+                    //     format:'json'
+                    // })
                 });
+
 
                 router.init();
             }else{
