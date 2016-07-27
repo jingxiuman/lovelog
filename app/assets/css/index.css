@@ -254,7 +254,7 @@ button.btn.btn-main {
   top: 40%;
   left: 0;
   right: 0;
-  width: 50%;
+  min-width: 50%;
   background-color: rgba(0, 0, 0, 0.51);
   margin: 0 auto;
   color: #fff;
@@ -390,4 +390,21 @@ div#loadingWrapper {
     transform: scale(1);
     -webkit-transform: scale(1);
   }
+}
+.login {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.27);
+  z-index: 20;
+}
+.loginMain {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  margin: 0 10%;
+  text-align: center;
 }

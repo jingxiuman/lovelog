@@ -88,12 +88,10 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
 
                     } else {
                         common.msgShow("你的数据被偷走了，下面加一个")
-                       // plus.nativeUI.toast("你的数据被偷走了，下面加一个")
                     }
                     main.render('boxList', {list: main.data})
                 }, error: function (error) {
                     common.msgShow("当前错误：" + error)
-                    //plus.nativeUI.toast("当前错误：" + error)
                 }
             });
         }else{

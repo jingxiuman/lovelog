@@ -17,7 +17,7 @@ requirejs.config({
         addBox:'../modules/addBox',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
         qiniu:'../assets/lib/qiniu/dist/qiniu.min',
-       // mui:'../assets/lib/mui/dist/js/mui.min'
+        // mui:'../assets/lib/mui/dist/js/mui.min'
         
     },
     shim:{
@@ -53,44 +53,45 @@ requirejs.config({
 require(['common','router','template','dataPick','touch'],function (common,router) {
     console.log('版本号:'+version);
     var main = {
-        checkAPP:false,
+        info:{},
         init:function () {
-            var that =this;
-            common.bmobInit();
-
-            if(window.plus){
-                that.bindUI()
+            var self =this;
+            if(QC.Login.check()){
+                router.init();
             }else{
-                document.addEventListener("plusready",that.bindUI,false);
+                QC.Login({
+                    btnId:"qqLoginBtn",
+                    size: "A_XL"
+                },function (reqData, opts) {
+                    console.log(reqData);
+
+                    console.log(opts);
+
+                }).getMe(function (openId, accessToken) {
+                    self.info.openId = openId;
+                    self.info.accessToken = accessToken;
+                    console.log(self.info)
+
+                });
             }
-            router.init();
+
 
         },
+        checkLogin:function () {
+          if(common.getLocal('uuid') == null || common.getLocal('uuid') == ''){
+              return false;
+          }else{
+              return true;
+          }
+        },
         bindUI:function () {
-            var that =this;
-                if (window.plus) {
-                    // $('.content').html(that.plus.device.uuid)
 
-                    that.checkAPP = true;
-                    common.setLocal({
-                        key: 'uuid',
-                        value: plus.device.uuid
-                    })
-                } else {
-                    that.checkAPP = false;
-                    common.msgShow("请使用APP登录")
-                }
-                var webview = plus.webview.currentWebview();
-            $(".header").on('click',function () {
-                //$(".content").html(JSON.stringify(webview));
-                alert(webview.getURL())
-            });
-            $(".share.iconfont").on('click',function () {
-                webview.reload();
-            })
+        },
+        render:function () {
 
         }
     };
-    main.init();
+   main.init()
+
 
 });

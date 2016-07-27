@@ -13,7 +13,7 @@ define(['url','zepto','boxList','addBox','common'],function (url, $,boxList,addB
         list:function(){
             var self = this;
             var pageName = this.getUrl('?page');
-            common.loadingStart();
+
             switch (pageName){
                 case 'index':
                     boxList.init();
