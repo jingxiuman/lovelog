@@ -56,23 +56,30 @@ require(['common','router','template','dataPick','touch'],function (common,route
         info:{},
         init:function () {
             var self =this;
+            common.bmobInit();
             if(QC.Login.check()){
+                QC.Login.getMe(function (openId, accessToken) {
+                    self.info.openId = openId;
+                    self.info.accessToken = accessToken;
+                    console.log(self.info);
+                    common.setLocal({
+                        key:'uuid',
+                        value:openId
+                    })
+                });
+
                 router.init();
             }else{
                 QC.Login({
                     btnId:"qqLoginBtn",
                     size: "A_XL"
                 },function (reqData, opts) {
+                    alert(JSON.parse(reqData));
                     console.log(reqData);
 
                     console.log(opts);
 
-                }).getMe(function (openId, accessToken) {
-                    self.info.openId = openId;
-                    self.info.accessToken = accessToken;
-                    console.log(self.info)
-
-                });
+                })
             }
 
 
