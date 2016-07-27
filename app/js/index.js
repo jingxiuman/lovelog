@@ -54,6 +54,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
     console.log('版本号:'+version);
     var main = {
         info:{},
+        reqData:{},
         init:function () {
             var self =this;
             common.bmobInit();
@@ -67,7 +68,8 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 },function (reqData, opts) {
                     console.log(reqData);
                     self.info.username = reqData.nickname;
-                    self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1
+                    self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1;
+                    self.reqData = reqData;
                     self.saveOpenID('login');
 
 
@@ -86,13 +88,19 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     key:'uuid',
                     value:openId
                 });
+                common.setLocal({
+                    key:'info',
+                    value:JSON.stringify(self.info)
+                });
                 if(type == 'login') {
                     self.saveUser();
                 }
             });
         },
 
-        saveUser:function () {
+        saveUser:function ( ) {
+            var self =this;
+            var reqData =self.reqData;
             var boxObj = Bmob.Object.extend("userInfo");
             var box = new boxObj();
             box.save({
