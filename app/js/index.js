@@ -4,6 +4,7 @@
 var version = "1.0.1";
 
 requirejs.config({
+    baseUrl:'./js',
     paths:{
         zepto:'../assets/lib/zepto/zepto.min',
         touch:'../assets/lib/zeptojs/src/touch',
