@@ -57,6 +57,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
         reqData:{},
         init:function () {
             var self =this;
+            //self.checkQQ();
             common.bmobInit();
             if(QC.Login.check()){
                 self.saveOpenID('hasLogin');
@@ -70,13 +71,9 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     self.info.username = reqData.nickname;
                     self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1;
                     self.reqData = reqData;
-                    self.saveOpenID('login');
-
-
+                    self.saveUser();
                 })
             }
-
-
         },
         saveOpenID:function (type) {
             var self =this;
@@ -92,10 +89,11 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     key:'info',
                     value:JSON.stringify(self.info)
                 });
-                if(type == 'login') {
-                    self.saveUser();
-                }
+
             });
+            if(type == 'login') {
+                self.saveUser();
+            }
         },
 
         saveUser:function ( ) {
@@ -117,12 +115,17 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     router.init();
                 },
                 error: function (model, error) {
+                    console.log(error);
                     common.msgShow(error)
                 }
             });
         },
-        render:function () {
-
+        checkQQ:function () {
+            var str = navigator.userAgent;
+            if(str.indexOf('QQ') >0){
+                $(".header").hide();
+                $(".content").addClass('contentQQ')
+            }
         }
     };
    main.init()

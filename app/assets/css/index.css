@@ -35,6 +35,9 @@ body,
   box-sizing: border-box;
   z-index: 99;
 }
+.content.contentQQ {
+  padding-top: 10px;
+}
 .header {
   background: #fa8282;
   width: 100%;
