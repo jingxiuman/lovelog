@@ -46,8 +46,8 @@ requirejs.config({
             exports:'plupload'
         }
     },
-    urlArgs:'v='+version
-    //urlArgs:'v='+new Date().getTime()
+    //urlArgs:'v='+version
+    urlArgs:'v='+new Date().getTime()
 });
 require(['common','router','template','dataPick','touch'],function (common,router) {
     console.log('版本号:'+version);
@@ -105,7 +105,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     router.init();
                 },
                 error: function (model, error) {
-                    console.log(error);
+                    console.log(error.description);
                     router.init();
                     common.msgShow(error)
                 }

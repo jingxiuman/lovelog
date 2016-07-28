@@ -104,16 +104,17 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
 
                         that.doCallback(callback, response);
                     } else {
+                        alert(response);
                         that.msgShow(response.message);
                     }
                 },
                 error: function(response) {
-                    F.trigger('gotoError');
+                   console.log(response)
                 }
             });
         },
         getQQinfo:function (callback) {
-            this.ajaxFunc('/qqLogin/api.php',{type:'getUserInfo'},callback)
+            this.ajaxFunc('qqLogin/api.php',{type:'getUserInfo'},callback)
         }
     };
     main.goTo = function (page,data) {
