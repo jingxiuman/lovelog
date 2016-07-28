@@ -4,6 +4,7 @@
 define(['zepto','bmob','template'],function ($,Bmob,template) {
     var main = {
         debug:true,
+        hostType:'dev',
         imgUrl:'http://7xlabr.com1.z0.glb.clouddn.com/',
         tokenUrl:'http://lovelog.zhouxianbao.cn/api/admin/php/token.php',
         config:{
@@ -16,6 +17,15 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 appKey:'5c7ad2453529fe3cef9a7f840568263c'
             }
         },
+        host:{
+            dev:{
+                api:'http://lovelog.zhouxianbao.cn/api/'
+            }
+        },
+        getHost:function(){
+            var that =this;
+            return that.host[that.hostType];
+        },
         bmobInit:function () {
             var self = this;
             if(self.debug){
@@ -23,6 +33,16 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
             }else{
                 Bmob.initialize(self.config.release.appKey,self.config.release.apiKey);
             }
+        },
+        getLocationParam:function () {
+            var url = window.location.search;
+            var params = url.toString().slice(1).split("&");
+            var returnObject = {};
+            for(var i = 0; i != params.length; i++) {
+                var index = params[i].indexOf("=");
+                returnObject[params[i].slice(0, index)] = params[i].slice(index+1);
+            }
+            return returnObject;
         },
         loadingStart:function(){
             var body = $('body');
@@ -64,6 +84,36 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
         },
         setLocal:function (data) {
             return localStorage.setItem(data.key,data.value);
+        },
+        doCallback: function(callback, response) {
+
+            if (!callback) return;
+            var callbackFunc = callback.func,
+                callbackContext = callback.context;
+            callbackFunc && typeof(callbackFunc) == 'function' && callbackFunc.call(callbackContext, response.data);
+        },
+        ajaxFunc:function (url,data,callback) {
+            var that =this;
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: that.getHost().api + url,
+                data: data,
+                success: function(response) {
+                    if (+response.ret == 0) {
+
+                        that.doCallback(callback, response);
+                    } else {
+                        that.msgShow(response.message);
+                    }
+                },
+                error: function(response) {
+                    F.trigger('gotoError');
+                }
+            });
+        },
+        getQQinfo:function (callback) {
+            this.ajaxFunc('/qqLogin/api.php',{type:'getUserInfo'},callback)
         }
     };
     main.goTo = function (page,data) {

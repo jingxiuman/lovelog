@@ -58,35 +58,44 @@ require(['common','router','template','dataPick','touch'],function (common,route
             var self =this;
             //self.checkQQ();
             common.bmobInit();
-            if(self.checkIsLogin()){
-                common.getQQinfo({
-                    func:self.saveUser,
-                    context:self
-                })
+            if(QC.Login.check()){
+                self.saveOpenID('hasLogin');
             }else{
-                window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
-
+                QC.Login({
+                    btnId:"qqLoginBtn",
+                    size: "A_XL"
+                },function (reqData, opts) {
+                    console.log(reqData);
+                    self.info.username = reqData.nickname;
+                    self.info.pic = reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1;
+                    self.reqData = reqData;
+                    self.saveUser();
+                })
             }
-
         },
-        checkIsLogin:function () {
-          if(common.getLocal('uuid') == '' || common.getLocal('uuid') == undefined){
-              if(common.getLocationParam().openid == '' || common.getLocationParam().openid == undefined){
-                  return false
-              }else{
-                  common.setLocal({
-                      key:'uuid',
-                      value:common.getLocationParam().openid
-                  });
-                  return true;
-              }
+        saveOpenID:function (type) {
+            var self =this;
+            QC.Login.getMe(function (openId, accessToken) {
+                self.info.openId = openId;
+                self.info.accessToken = accessToken;
+                console.log(self.info);
+                common.setLocal({
+                    key:'uuid',
+                    value:openId
+                });
+                common.setLocal({
+                    key:'info',
+                    value:JSON.stringify(self.info)
+                });
 
-              return false;
-          }else{
-              return true;
-          }
+            });
+            router.init();
+            if(type == 'login') {
+                self.saveUser();
+            }
         },
-        saveUser:function ( response) {
+
+        saveUser:function ( ) {
             var self =this;
             var reqData =self.reqData;
             var boxObj = Bmob.Object.extend("userInfo");
