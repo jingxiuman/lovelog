@@ -70,6 +70,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
 
             }
+            self.bindUI();
         },
         checkIsLogin:function () {
           if(common.getLocal('uuid') == '' || common.getLocal('uuid') == undefined){
