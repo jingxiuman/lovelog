@@ -54,6 +54,9 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 '<div class="circle2"></div> <div class="circle3"></div> <div class="circle4"></div> </div> </div></div>';
             body.append(str);
         },
+        renderUI:function (id, data) {
+            return $("#app").html(template(id,data));
+        },
         loadingEnd:function () {
             try {
                 var loadingWrapper = document.getElementById('loadingWrapper');

@@ -67,7 +67,12 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     context:self
                 })
             }else{
-                window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
+                var temp = common.renderUI('template_login',{type:'qq'});
+                console.log(temp);
+                temp.find('.login-qq').on('click',function () {
+                    window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
+                });
+
 
             }
             self.bindUI();
@@ -127,7 +132,8 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 $(".header").hide();
                 $(".content").addClass('contentQQ')
             }
-        }
+        },
+
     };
    main.init()
 
