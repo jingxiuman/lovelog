@@ -70,7 +70,6 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
 
             }
-
         },
         checkIsLogin:function () {
           if(common.getLocal('uuid') == '' || common.getLocal('uuid') == undefined){
@@ -115,6 +114,11 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 }
             });
 
+        },
+        bindUI:function () {
+          $(".share").on('click',function () {
+              window.location.reload(true);
+          })  ;
         },
         checkQQ:function () {
             var str = navigator.userAgent;

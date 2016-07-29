@@ -18,6 +18,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
         bindUI:function () {
             var that =this;
             $(".index-box").on('longTap',function (e) {
+                e.preventDefault();
 
                 var current = $(this).attr('data-id');
                 if(confirm("确认删除?")) {
@@ -32,6 +33,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
                         }
                     });
                 }
+                return false;
             })
         }
     };
