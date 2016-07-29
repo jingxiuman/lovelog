@@ -19,6 +19,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
             var that =this;
             $(".index-box").on('longTap',function (e) {
                 e.preventDefault();
+                e.stopImmediatePropagation();
 
                 var current = $(this).attr('data-id');
                 if(confirm("确认删除?")) {
