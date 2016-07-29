@@ -60,7 +60,8 @@ require(['common','router','template','dataPick','touch'],function (common,route
             //self.checkQQ();
             common.bmobInit();
             if(self.checkIsLogin()){
-                alert(common.getLocal('uuid'));
+                //alert(common.getLocal('uuid'));
+                router.init();
                 common.getQQinfo({
                     func:self.saveUser,
                     context:self
@@ -113,7 +114,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     console.log(error.description);
                 }
             });
-            router.init();
+
         },
         checkQQ:function () {
             var str = navigator.userAgent;
