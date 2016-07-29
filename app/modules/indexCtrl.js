@@ -17,7 +17,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
         },
         bindUI:function () {
             var that =this;
-            $(".index-box").on('longTap',function (e) {
+            $(".index-box").on('swipeLeft',function (e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
 
