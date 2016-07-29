@@ -101,9 +101,9 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 data: data,
                 success: function(response) {
                     if (+response.ret == 0) {
-
                         that.doCallback(callback, response);
                     } else {
+                        localStorage.clear();
                         alert(response);
                         that.msgShow(response.message);
                     }

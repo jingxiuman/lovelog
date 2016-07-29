@@ -60,6 +60,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
             //self.checkQQ();
             common.bmobInit();
             if(self.checkIsLogin()){
+                alert(common.getLocal('uuid'));
                 common.getQQinfo({
                     func:self.saveUser,
                     context:self
@@ -103,14 +104,16 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 success: function (object) {
                     self.info.userID = object.id;
                     common.msgShow("登录成功");
-                    router.init();
+                    common.setLocal({
+                        key:'objectId',
+                        value:object.id
+                    })
                 },
                 error: function (model, error) {
                     console.log(error.description);
-                    router.init();
-                    common.msgShow(error)
                 }
             });
+            router.init();
         },
         checkQQ:function () {
             var str = navigator.userAgent;
