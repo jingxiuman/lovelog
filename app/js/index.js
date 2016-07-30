@@ -106,7 +106,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 sex: reqData.gender,
                 province:reqData.province,
                 city:reqData.city,
-                openid:self.info.openId
+                openid:self.info.openid
             };
             console.log(data);
             common.setLocal({
