@@ -78,18 +78,19 @@ require(['common','router','template','dataPick','touch'],function (common,route
             self.bindUI();
         },
         checkIsLogin:function () {
+            var that =this;
           if(common.getLocal('uuid') == '' || common.getLocal('uuid') == undefined){
               if(common.getLocationParam().openid == '' || common.getLocationParam().openid == undefined){
                   return false
               }else{
+                  that.info.openid = common.getLocationParam().openid;
                   common.setLocal({
                       key:'uuid',
-                      value:common.getLocationParam().openid
+                      value:that.info.openid
                   });
                   return true;
               }
 
-              return false;
           }else{
               return true;
           }
