@@ -107,6 +107,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 city:reqData.city,
                 openid:self.info.openId
             };
+            console.log(data);
             common.setLocal({
                 key:'userInfo',
                 value:JSON.stringify(data)
@@ -124,7 +125,6 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     console.log(error.description);
                 }
             });
-
         },
         bindUI:function () {
           $(".share").on('click',function () {
