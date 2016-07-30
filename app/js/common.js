@@ -34,6 +34,17 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 Bmob.initialize(self.config.release.appKey,self.config.release.apiKey);
             }
         },
+        isOwnEmpty :function (obj)
+        {
+            for(var name in obj)
+            {
+                if(obj.hasOwnProperty(name))
+                {
+                    return false;
+                }
+            }
+            return true;
+        },
         getLocationParam:function () {
             var url = window.location.search;
             var params = url.toString().slice(1).split("&");

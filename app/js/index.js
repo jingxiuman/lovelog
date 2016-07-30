@@ -54,18 +54,28 @@ require(['common','router','template','dataPick','touch'],function (common,route
     console.log('版本号:'+version);
     var main = {
         info:{},
+        userInfo:{},
         reqData:{},
+        userInfoObj:{},
         init:function () {
             var self =this;
-            //self.checkQQ();
+            self.initBmob();
             common.bmobInit();
             if(self.checkIsLogin()){
-                //alert(common.getLocal('uuid'));
                 router.init();
-                common.getQQinfo({
-                    func:self.saveUser,
-                    context:self
-                })
+                self.userInfoObj.get(common.getLocal('objectId'), {
+                    success: function(object) {
+                        // The object was retrieved successfully.
+                        console.log(object)
+                    },
+                    error: function(object, error) {
+                        common.getQQinfo({
+                            func:self.saveUser,
+                            context:self
+                        })
+                    }
+                });
+
             }else{
                 var temp = common.renderUI('template_login',{type:'qq'});
                 console.log(temp);
@@ -75,7 +85,14 @@ require(['common','router','template','dataPick','touch'],function (common,route
 
 
             }
+            self.renderUI();
             self.bindUI();
+
+        },
+        initBmob:function () {
+            var self =this;
+            var boxObj = Bmob.Object.extend("userInfo");
+            self.userInfoObj = new boxObj();
         },
         checkIsLogin:function () {
             var that =this;
@@ -98,8 +115,8 @@ require(['common','router','template','dataPick','touch'],function (common,route
         saveUser:function ( response) {
             var self =this;
             var reqData =response;
-            var boxObj = Bmob.Object.extend("userInfo");
-            var box = new boxObj();
+
+            var objectId = common.getLocal('objectId');
             var data = {
                 username: reqData.nickname,
                 user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
@@ -108,24 +125,26 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 city:reqData.city,
                 openid:self.info.openid
             };
-            console.log(data);
+            self.userInfo = data;
             common.setLocal({
                 key:'userInfo',
                 value:JSON.stringify(data)
             });
-            box.save(data, {
-                success: function (object) {
-                    self.info.userID = object.id;
-                    common.msgShow("登录成功");
-                    common.setLocal({
-                        key:'objectId',
-                        value:object.id
-                    })
-                },
-                error: function (model, error) {
-                    console.log(error.description);
-                }
-            });
+            if(objectId  == '') {
+                self.userInfoObj.save(data, {
+                    success: function (object) {
+                        self.info.userID = object.id;
+                        common.msgShow("登录成功");
+                        common.setLocal({
+                            key: 'objectId',
+                            value: object.id
+                        })
+                    },
+                    error: function (model, error) {
+                        console.log(error.description);
+                    }
+                });
+            }
         },
         bindUI:function () {
           $(".share").on('click',function () {
@@ -139,6 +158,11 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 $(".content").addClass('contentQQ')
             }
         },
+        renderUI:function () {
+            var self =this;
+            $(".head-pic").css("backgroud-image","url("+self.userInfo.user_pic+")")
+
+        }
 
     };
    main.init()
