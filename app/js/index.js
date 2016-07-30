@@ -99,14 +99,19 @@ require(['common','router','template','dataPick','touch'],function (common,route
             var reqData =self.reqData;
             var boxObj = Bmob.Object.extend("userInfo");
             var box = new boxObj();
-            box.save({
+            var data = {
                 username: reqData.nickname,
                 user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
                 sex: reqData.gender,
                 province:reqData.province,
                 city:reqData.city,
                 openid:self.info.openId
-            }, {
+            };
+            common.setLocal({
+                key:'userInfo',
+                value:JSON.stringify(data)
+            });
+            box.save(data, {
                 success: function (object) {
                     self.info.userID = object.id;
                     common.msgShow("登录成功");
