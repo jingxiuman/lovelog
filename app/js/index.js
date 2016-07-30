@@ -47,8 +47,8 @@ requirejs.config({
             exports:'plupload'
         }
     },
-    //urlArgs:'v='+version
-    urlArgs:'v='+new Date().getTime()
+    urlArgs:'v='+version
+    //urlArgs:'v='+new Date().getTime()
 });
 require(['common','router','template','dataPick','touch'],function (common,router) {
     console.log('版本号:'+version);
@@ -57,41 +57,60 @@ require(['common','router','template','dataPick','touch'],function (common,route
         userInfo:{},
         reqData:{},
         userInfoObj:{},
+        userInfoGetObJ:{},
+        objID:'',
         init:function () {
             var self =this;
             self.initBmob();
-            common.bmobInit();
             if(self.checkIsLogin()){
+                common.loadingStart();
+                self.initLocalData();
                 router.init();
-                self.userInfoObj.get(common.getLocal('objectId'), {
-                    success: function(object) {
-                        // The object was retrieved successfully.
-                        console.log(object)
-                    },
-                    error: function(object, error) {
-                        common.getQQinfo({
-                            func:self.saveUser,
-                            context:self
-                        })
-                    }
-                });
+                if(common.isOwnEmpty(self.userInfo)) {
+                    self.userInfoGetObJ.get(self.objID, {
+                        success: function (object) {
+                            common.setLocal({
+                                key: 'userInfo',
+                                value: JSON.stringify({
+                                    username: object.username,
+                                    user_pic: object.user_pic,
+                                    sex: object.sex,
+                                    province:object.province,
+                                    city:object.city,
+                                    openid:object.openid
+                                })
+                            });
+                            self.initLocalData();
+                        },
+                        error: function (object, error) {
+                            common.getQQinfo({
+                                func: self.saveUser,
+                                context: self
+                            })
+                        }
+                    });
+                }
 
             }else{
                 var temp = common.renderUI('template_login',{type:'qq'});
-                console.log(temp);
                 temp.find('.login-qq').on('click',function () {
                     window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
                 });
-
-
             }
             self.renderUI();
             self.bindUI();
 
         },
+        initLocalData:function () {
+            this.objID = common.getLocal('objectId');
+            this.userInfo = common.getLocal('userInfo')?JSON.parse(common.getLocal('userInfo')):{};
+            this.info.openid = common.getLocal('uuid');
+        },
         initBmob:function () {
+            common.bmobInit();
             var self =this;
             var boxObj = Bmob.Object.extend("userInfo");
+            self.userInfoGetObJ = new Bmob.Query(boxObj);
             self.userInfoObj = new boxObj();
         },
         checkIsLogin:function () {
@@ -160,7 +179,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
         },
         renderUI:function () {
             var self =this;
-            $(".head-pic").css("backgroud-image","url("+self.userInfo.user_pic+")")
+            $(".head-pic").css("background-image","url("+self.userInfo.user_pic+")")
 
         }
 

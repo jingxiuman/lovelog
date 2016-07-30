@@ -49,7 +49,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
             that.dataObj.notEqualTo("isDel", true);
             that.dataObj.find({
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     var nowTime = new Date().getTime(), interval, type, year, day, dateStr;
                     if (response.length > 0) {
                         response.forEach(function (item) {
@@ -73,7 +73,7 @@ define(['router','template','bmob','common'],function (router,template,Bmob,comm
                                 date_month = date.getMonth()+1;
 
                             dateStr = '距离' + date_year + '年' + date_month + '月' + date.getDate() + '日';
-                            console.log("总共"+interval+'天'+"--"+year+'年'+day+'天,时间:'+dateStr);
+                           // console.log("总共"+interval+'天'+"--"+year+'年'+day+'天,时间:'+dateStr);
                             var img_t = item.get('img');
                             //console.log(img_t)
                             main.data.push({
