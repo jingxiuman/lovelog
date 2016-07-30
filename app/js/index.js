@@ -96,7 +96,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
         },
         saveUser:function ( response) {
             var self =this;
-            var reqData =self.reqData;
+            var reqData =response;
             var boxObj = Bmob.Object.extend("userInfo");
             var box = new boxObj();
             var data = {
