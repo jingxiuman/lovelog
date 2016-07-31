@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-var version = "1.0.1";
+var version = "2.0.2";
 
 requirejs.config({
     baseUrl:'./js',
@@ -60,36 +60,15 @@ require(['common','router','template','dataPick','touch'],function (common,route
         userInfoObj:{},
         userInfoGetObJ:{},
         objID:'',
+        dataObj:{},
         init:function () {
             var self =this;
             self.initBmob();
             if(self.checkIsLogin()){
                 common.loadingStart();
-                self.initLocalData();
                 router.init();
-                if(common.isOwnEmpty(self.userInfo)) {
-                    self.userInfoGetObJ.get(self.objID, {
-                        success: function (object) {
-                            common.setLocal({
-                                key: 'userInfo',
-                                value: JSON.stringify({
-                                    username: object.username,
-                                    user_pic: object.user_pic,
-                                    sex: object.sex,
-                                    province:object.province,
-                                    city:object.city,
-                                    openid:object.openid
-                                })
-                            });
-                            self.initLocalData();
-                        },
-                        error: function (object, error) {
-                            common.getQQinfo({
-                                func: self.saveUser,
-                                context: self
-                            })
-                        }
-                    });
+                if(common.isOwnEmpty(self.userInfo) ) {
+                    self.getUserInfo();
                 }
 
             }else{
@@ -98,8 +77,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                     window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
                 });
             }
-            self.renderUI();
-            self.bindUI();
+
 
         },
         initLocalData:function () {
@@ -107,12 +85,14 @@ require(['common','router','template','dataPick','touch'],function (common,route
             this.objID = common.getLocal('objectId');
             this.userInfo = common.getLocal('userInfo')?JSON.parse(common.getLocal('userInfo')):{};
             this.info.openid = common.getLocal('uuid');
-
+            self.renderUI();
+            self.bindUI();
         },
         initBmob:function () {
             common.bmobInit();
             var self =this;
             var boxObj = Bmob.Object.extend("userInfo");
+            self.dataObj.userInfo = boxObj;
             self.userInfoGetObJ = new Bmob.Query(boxObj);
             self.userInfoObj = new boxObj();
         },
@@ -134,11 +114,52 @@ require(['common','router','template','dataPick','touch'],function (common,route
               return true;
           }
         },
+        /**
+         * 获取用户信息
+         */
+        getUserInfo:function () {
+            var self =this;
+            var temp = new Bmob.Query(self.dataObj.userInfo);
+            temp.equalTo('openid',self.info.openid);
+            temp.first({
+                success: function (result) {
+                    if(common.tools.checkNull(result)){
+                        console.log("数据库没有该数据");
+                        common.getQQinfo({
+                            func: self.saveUser,
+                            context: self
+                        })
+                    }else{
+                        console.log("数据库存有该数据");
+                        common.setLocal({
+                            key: 'userInfo',
+                            value: JSON.stringify({
+                                username: result.get('username'),
+                                user_pic: result.get('user_pic'),
+                                sex: result.get('sex'),
+                                province:result.get('province'),
+                                city:result.get('city'),
+                                openid:result.get('openid')
+                            })
+                        });
+                        common.setLocal({
+                            key: 'objectId',
+                            value: result.id
+                        });
+                        self.initLocalData();
+                    }
+
+                },
+                error: function (model, error) {
+                    console.log(error.code)
+
+                }
+            });
+        },
         saveUser:function ( response) {
             var self =this;
             var reqData =response;
 
-            var objectId = common.getLocal('objectId');
             var data = {
                 username: reqData.nickname,
                 user_pic: reqData.figureurl_qq_2 != ''?reqData.figureurl_qq_2:reqData.figureurl_qq_1,
@@ -152,21 +173,21 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 key:'userInfo',
                 value:JSON.stringify(data)
             });
-            if(objectId  == '') {
-                self.userInfoObj.save(data, {
-                    success: function (object) {
-                        self.info.userID = object.id;
-                        common.msgShow("登录成功");
-                        common.setLocal({
-                            key: 'objectId',
-                            value: object.id
-                        })
-                    },
-                    error: function (model, error) {
-                        console.log(error.description);
-                    }
-                });
-            }
+            console.log(self.info.openid)
+            self.userInfoObj.save(data, {
+                success: function (object) {
+                    self.info.userID = object.id;
+                    common.msgShow("登录成功");
+                    common.setLocal({
+                        key: 'objectId',
+                        value: object.id
+                    });
+                    self.initLocalData();
+                },
+                error: function (model, error) {
+                    console.log(error.description);
+                }
+            });
         },
         bindUI:function () {
             var self =this;
@@ -203,8 +224,9 @@ require(['common','router','template','dataPick','touch'],function (common,route
         },
         renderUI:function () {
             var self =this;
-            $(".head-pic").css("background-image","url("+self.userInfo.user_pic+")")
-
+            if(self.userInfo.user_pic != '' && self.userInfo.user_pic !=undefined) {
+                $(".head-pic").css("background-image", "url(" + self.userInfo.user_pic + ")")
+            }
         }
 
     };

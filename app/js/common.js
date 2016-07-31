@@ -96,6 +96,15 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
             },1200)
 
         },
+        tools:{
+            checkNull:function (item) {
+                if(item == '' || item == undefined){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
         getLocal:function (item) {
             return localStorage.getItem(item);
         },

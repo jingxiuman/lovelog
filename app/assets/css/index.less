@@ -444,32 +444,32 @@ button.login-qq {
 }
 .person {
   position: absolute;
-  top: 34vw;
+  top: 60vw;
   background: #fff;
   width: 80%;
   left: 10%;
   right: 10%;
-  height: 55vw;
+  min-height: 225px;
   animation: keyframe_person .5s ease-in;
 }
 @-webkit-keyframes keyframe_person {
 
 0%{
-  transform: translate(0 ,-34vw);
+  -webkit-transform: translate(0 ,-150px);
 }
   90%{
-    transform: translate(0 ,10vw);
+    -webkit-transform: translate(0 ,20px);
   }
   100%{
-    transform: translate(0,0);
+    -webkit-transform: translate(0,0);
   }
 }
 @keyframes keyframe_person {
-0%{
-  transform: translate(0 ,-34vw);
-}
+  0%{
+    transform: translate(0 ,-150px);
+  }
   90%{
-    transform: translate(0 ,10vw);
+    transform: translate(0 ,20px);
   }
   100%{
     transform: translate(0,0);
@@ -490,6 +490,7 @@ button.login-qq {
 }
 .person-item  {
   height: 35px;
+  line-height: 35px;
   span {
     width: 50%;
     display: block;
