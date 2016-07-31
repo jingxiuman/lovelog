@@ -68,6 +68,9 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
         renderUI:function (id, data) {
             return $("#app").html(template(id,data));
         },
+        renderUI_append:function (id, data) {
+            return $("#app").append(template(id,data));
+        },
         loadingEnd:function () {
             try {
                 var loadingWrapper = document.getElementById('loadingWrapper');

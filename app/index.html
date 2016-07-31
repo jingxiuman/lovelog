@@ -25,6 +25,7 @@
 
     </div>
 
+
     <footer class="footer" id="footer">
 
 
@@ -102,12 +103,41 @@
     <div class="footer-item"><a href="?page=index">我的事件</a></div>
 </script>
 <script type="text/html" id="template_login">
+
     <div  class="login">
+        {{ if data.type == 'QQ' }}
         <div class="loginMain" id="qqLoginBtn">
             <button type="button" class="login-qq"></button>
         </div>
+        {{else if data.type == 'person' }}
+        <div class="person">
+            <div class="head-pic person-head " style="background-image: url('{{ data.info.user_pic }}')"></div>
+            <div class="person-main">
 
+                <div class="person-item">
+                    <span>用户id:</span>
+                    <span>{{ data.id }}</span>
+                </div>
+                <div class="person-item">
+                    <span>用户名:</span>
+                    <span>{{ data.info.username }}</span>
+                </div>
+                <div class="person-item">
+                    <span>性别:</span>
+                    <span>{{ data.info.sex }}</span>
+                </div>
+                <div class="person-item">
+                    <span>地区:</span>
+                    <span>{{ data.info.province +'--'+ data.info.city }}</span>
+                </div>
+                <div class="person-close">
+                    <button type="button" >关闭</button>
+                </div>
+            </div>
+        </div>
+        {{ /if }}
     </div>
+
 </script>
 </body>
 </html>

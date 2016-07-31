@@ -402,6 +402,7 @@ div#loadingWrapper {
   top: 0;
   background: rgba(0, 0, 0, 0.27);
   z-index: 20;
+  transition: all 1s;
 }
 .loginMain {
   position: absolute;
@@ -427,4 +428,69 @@ button.login-qq {
   border-radius: 54px;
   background-size: 100%;
   margin: 10px;
+}
+.person {
+  position: absolute;
+  top: 34vw;
+  background: #fff;
+  width: 80%;
+  left: 10%;
+  right: 10%;
+  height: 55vw;
+  animation: keyframe_person 0.5s ease-in;
+}
+@-webkit-keyframes keyframe_person {
+  0% {
+    transform: translate(0, -34vw);
+  }
+  90% {
+    transform: translate(0, 10vw);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes keyframe_person {
+  0% {
+    transform: translate(0, -34vw);
+  }
+  90% {
+    transform: translate(0, 10vw);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+.head-pic.person-head {
+  position: absolute;
+  top: -9vw;
+  width: 64px;
+  height: 64px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.person-main {
+  padding-top: 10%;
+  text-align: center;
+}
+.person-item {
+  height: 35px;
+}
+.person-item span {
+  width: 50%;
+  display: block;
+  float: left;
+}
+.person-item span:last-child {
+  text-align: left;
+}
+.person-close button {
+  border: 1px solid #fa8282;
+  background-color: #fa8282;
+  color: #fff;
+  padding: 2vw 11vw;
+}
+.person-close button:active {
+  background-color: #ca6b6b;
 }

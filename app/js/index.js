@@ -92,7 +92,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 }
 
             }else{
-                var temp = common.renderUI('template_login',{type:'qq'});
+                var temp = common.renderUI('template_login',{data:{type:'QQ'}});
                 temp.find('.login-qq').on('click',function () {
                     window.location.href ='http://lovelog.zhouxianbao.cn/api/qqLogin/oauth'
                 });
@@ -102,9 +102,11 @@ require(['common','router','template','dataPick','touch'],function (common,route
 
         },
         initLocalData:function () {
+            var self =this;
             this.objID = common.getLocal('objectId');
             this.userInfo = common.getLocal('userInfo')?JSON.parse(common.getLocal('userInfo')):{};
             this.info.openid = common.getLocal('uuid');
+
         },
         initBmob:function () {
             common.bmobInit();
@@ -166,9 +168,30 @@ require(['common','router','template','dataPick','touch'],function (common,route
             }
         },
         bindUI:function () {
-          $(".share").on('click',function () {
-              window.location.reload(true);
-          })  ;
+            var self =this;
+              $(".share").on('click',function () {
+                  window.location.reload(true);
+              })  ;
+            $(".head-pic").on('click',function () {
+                console.log(self.userInfo);
+                self.checkPersonInfo()
+            });
+
+        },
+        /**
+         * 检测是否有用户信息模块
+         */
+        checkPersonInfo:function () {
+            var self  =this,dom;
+            console.log($("#app").hasClass("login"));
+            if(!$("#app div").hasClass("login")) {
+                dom = common.renderUI_append('template_login', {data: {type: 'person', info: self.userInfo, id: self.objID}})
+            }else{
+                $(".login").remove();
+            }
+            dom && dom.find(".person-close").on('click',function () {
+                self.checkPersonInfo()
+            })
         },
         checkQQ:function () {
             var str = navigator.userAgent;
