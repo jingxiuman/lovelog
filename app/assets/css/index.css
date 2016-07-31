@@ -494,3 +494,16 @@ button.login-qq {
 .person-close button:active {
   background-color: #ca6b6b;
 }
+.about {
+  padding: 15px;
+  color: #a06666;
+}
+.about-title {
+  text-align: center;
+  font-size: 5vw;
+  line-height: 20vw;
+}
+.about-main {
+  font-size: 16px;
+  line-height: 27px;
+}

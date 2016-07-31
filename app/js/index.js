@@ -16,6 +16,7 @@ requirejs.config({
         dataPick:'../assets/lib/date/zepto.mdatetimer',
         boxList:'../modules/indexCtrl',
         addBox:'../modules/addBox',
+        about:'../modules/aboutCtrl',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
         qiniu:'../assets/lib/qiniu/dist/qiniu.min',
         
