@@ -182,6 +182,24 @@ require(['common','router','template','dataPick','touch'],function (common,route
                         key: 'objectId',
                         value: object.id
                     });
+                    var boxObj = Bmob.Object.extend("boxlist");
+                    var box = new boxObj();
+
+                    box.save({
+                        eventTime: new Date().getTime(),
+                        eventName: " 第一次使用事件纪念日",
+                        machineId: self.info.openid,
+                        img: '',
+                        isDel:false
+                    }, {
+                        success: function (object) {
+                            common.msgShow("保存成功");
+                            window.router.goTo('index',{})
+                        },
+                        error: function (model, error) {
+                            common.msgShow(error)
+                        }
+                    });
                     self.initLocalData();
                 },
                 error: function (model, error) {
