@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-var version = "2.0.2";
+var version = "2.0.3";
 
 requirejs.config({
     baseUrl:'./js',
@@ -18,7 +18,7 @@ requirejs.config({
         addBox:'../modules/addBox',
         about:'../modules/aboutCtrl',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
-        qiniu:'../assets/lib/qiniu/dist/qiniu.min',
+        qiniu:'../assets/lib/qiniu/dist/qiniu.min'
         
     },
     shim:{
@@ -125,6 +125,23 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 success: function (result) {
                     if(common.tools.checkNull(result)){
                         console.log("数据库没有该数据");
+                        var firstBox = Bmob.Object.extend("boxlist");
+                        var firstbox = new firstBox();
+                        firstbox.save({
+                            eventTime: new Date().getTime()+'',
+                            eventName: " 第一次使用事件纪念日",
+                            machineId: common.getLocal('uuid'),
+                            img: '',
+                            isDel:false
+                        }, {
+                            success: function (object) {
+                                console.log(object);
+                                router.init();
+                            },
+                            error: function (model, error) {
+                               console.log(error)
+                            }
+                        });
                         common.getQQinfo({
                             func: self.saveUser,
                             context: self
@@ -182,24 +199,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                         key: 'objectId',
                         value: object.id
                     });
-                    var boxObj = Bmob.Object.extend("boxlist");
-                    var box = new boxObj();
 
-                    box.save({
-                        eventTime: new Date().getTime(),
-                        eventName: " 第一次使用事件纪念日",
-                        machineId: self.info.openid,
-                        img: '',
-                        isDel:false
-                    }, {
-                        success: function (object) {
-                            common.msgShow("保存成功");
-                            window.router.goTo('index',{})
-                        },
-                        error: function (model, error) {
-                            common.msgShow(error)
-                        }
-                    });
                     self.initLocalData();
                 },
                 error: function (model, error) {

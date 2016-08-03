@@ -31,137 +31,169 @@
 
     </footer>
 
-<script id="boxList" type="text/html">
-    {{ each list as value  }}
-    <div class="index-box" data-id="{{ value.id }}">
-        <div class="index-box-main" style="background-image: url('{{ value.img }}')">
-            <div class="index-box-mask"></div>
-            <div class="index-box-content">
-                <div class="index-box-CountDown">
+    <script id="boxList" type="text/html">
+        {{ each list as value  }}
+        <div class="index-box" data-id="{{ value.id }}">
+            <div class="index-box-main" style="background-image: url('{{ value.img }}')">
+                <div class="index-box-mask"></div>
+                <div class="index-box-content">
+                    <div class="index-box-CountDown">
 
-                    <div class="time {{ value.eventYear != 0?'':'hidden'  }}">
-                        {{ value.eventYear }}
-                        <span class="title">年</span>
+                        <div class="time {{ value.eventYear != 0?'':'hidden'  }}">
+                            {{ value.eventYear }}
+                            <span class="title">年</span>
+                        </div>
+                        <div class="time">
+                            {{ value.eventDay }}
+                            <span class="title">天</span>
+                        </div>
                     </div>
-                    <div class="time">
-                        {{ value.eventDay }}
-                        <span class="title">天</span>
-                    </div>
+                    <div class="index-box-time">{{ value.eventTime }}</div>
                 </div>
-                <div class="index-box-time">{{ value.eventTime }}</div>
-            </div>
-
-        </div>
-        <div class="index-box-name">
-           {{ value.eventName }}
-        </div>
-    </div>
-    {{ /each }}
-</script>
-<script id="addBox" type="text/html">
-    <div class="add">
-        <div class="form-group">
-            <label>事件名称</label>
-            <div class="input-group">
-                <input type="text" id="incidentName">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>事件时间</label>
-            <div class="input-group">
-                <input type="date" id="picktime" placeholder="点击添加时间"  >
 
             </div>
-        </div>
-        <div class="form-group">
-            <label>封&nbsp;&nbsp;面&nbsp;&nbsp;图 </label>
-            <div class="input-group" id="addContent">
-                <button type="button" class="btn btn-main" id="pickfiles">添加封面</button>
-                <input type="text" class="hidden" id="pickfilesInput">
+            <div class="index-box-name">
+               {{ value.eventName }}
             </div>
         </div>
-        <div class="box-img" id="addbox_img">
-
-        </div>
-
-    </div>
-</script>
-<script type="text/html" id="template_footer">
-    <div class="footer-item"><a href="?page=about">关于我们</a></div>
-    <div class="footer-item" >
-        <a href="{{ type == 'index'?'?page=add':'javascript:void(0)' }}">
-            {{ if type == 'index' }}
-            <div class="box-add iconfont" >&#xe601;</div>
-            {{ else  }}
-            <div class="box-add box-save-btn" id="box_save_btn" >保存</div>
-            {{ /if }}
-            <div class="clearfix"></div>
-
-        </a>
-
-    </div>
-    <div class="footer-item"><a href="?page=index">我的事件</a></div>
-</script>
-<script type="text/html" id="template_login">
-
-    <div  class="login">
-        {{ if data.type == 'QQ' }}
-        <div class="loginMain" id="qqLoginBtn">
-            <button type="button" class="login-qq"></button>
-        </div>
-        {{else if data.type == 'person' }}
-        <div class="person">
-            <div class="head-pic person-head " style="background-image: url('{{ data.info.user_pic }}')"></div>
-            <div class="person-main">
-
-                <div class="person-item">
-                    <span>用户id:</span>
-                    <span>{{ data.id }}</span>
-                </div>
-                <div class="person-item">
-                    <span>用户名:</span>
-                    <span>{{ data.info.username }}</span>
-                </div>
-                <div class="person-item">
-                    <span>性别:</span>
-                    <span>{{ data.info.sex }}</span>
-                </div>
-                <div class="person-item">
-                    <span>地区:</span>
-                    <span>{{ data.info.province +'--'+ data.info.city }}</span>
-                </div>
-                <div class="person-close">
-                    <button type="button" >关闭</button>
-                </div>
-            </div>
-        </div>
+        {{ /each }}
+        {{ if list.length ==0 }}
+        <div class="nodata">咱没有添加事件,你点击下面的添加一个呗</div>
         {{ /if }}
-    </div>
+    </script>
+    <script id="addBox" type="text/html">
+        <div class="add">
+            <div class="form-group">
+                <label>事件名称</label>
+                <div class="input-group">
+                    <input type="text" id="incidentName">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>事件时间</label>
+                <div class="input-group">
+                    <input type="date" id="picktime" placeholder="点击添加时间"  >
 
-</script>
-<script type="text/html" id="template_about">
-    <div class="about">
-        <div class="about-title"> 关于我们</div>
-        <div class="about-main">
-            <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;做个一个个人业余开发,因为经常会忘记别人的生日,还有一些特殊日子。
-                所以开发这样的应用,方便自己去记录一些事件,对于容易遗忘的事情,通过这个app 告诉自己,
-                似乎已经过去很久了
-            </p>
-            <p>
-                &nbsp;&nbsp;&nbsp;&nbsp; 这个app也有个同款的安卓app,之前因为自己使用,然后放到应用宝上面,就没有管过了,
-                本以为没有推广,app不会有人去用。但是有天,我心血来潮去数据库查了一下有多少人使用,结果让我着实的吓了一跳,发现有就将近600多人使用
-                。让我感受一种莫名的自豪感,因为确实在某一方面,他给我们带来了方便,所以我开发了这个web 更加方便大家。
-            </p>
-            <p>
-                &nbsp;&nbsp;&nbsp;&nbsp; 感谢开发app使用开源一些框架,以及腾讯QQ提供的用户登录的接口
-            </p>
-            <div style="text-align: right">
-               <span >--笨笨时光机</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>封&nbsp;&nbsp;面&nbsp;&nbsp;图 </label>
+                <div class="input-group" id="addContent">
+                    <button type="button" class="btn btn-main" id="pickfiles">添加封面</button>
+                    <input type="text" class="hidden" id="pickfilesInput">
+                </div>
+            </div>
+            <div class="box-img" id="addbox_img">
+
             </div>
 
         </div>
-    </div>
-</script>
+    </script>
+    <script type="text/html" id="template_footer">
+        <div class="footer-item"><a href="?page=about">关于我们</a></div>
+        <div class="footer-item" >
+            <a href="{{ type == 'index'?'?page=add':'javascript:void(0)' }}">
+                {{ if type == 'index' }}
+                <div class="box-add iconfont" >&#xe601;</div>
+                {{ else  }}
+                <div class="box-add box-save-btn" id="box_save_btn" >保存</div>
+                {{ /if }}
+                <div class="clearfix"></div>
+
+            </a>
+
+        </div>
+        <div class="footer-item"><a href="?page=index">我的事件</a></div>
+    </script>
+    <script type="text/html" id="template_login">
+
+        <div  class="login">
+            {{ if data.type == 'QQ' }}
+            <div class="loginMain" id="qqLoginBtn">
+                <div class="head">登录界面</div>
+                <div class="form-group-login">
+                    <label class="col-2">用户名:</label>
+                    <div class="col-10 ">
+                        <input type="text" class="input-group-login" >
+                    </div>
+                </div>
+                <div class="form-group-login">
+                    <label class="col-2">密码:</label>
+                    <div class="col-10 ">
+                        <input type="password" class="input-group-login">
+                    </div>
+                </div>
+                <div class="form-group-login btn-group-main">
+                    <div class="btn-group-login">
+                        <button type="button" class="btn">登录</button>
+                    </div>
+                    <div class="btn-group-login">
+                        <button type="button" class="btn">注册</button>
+                    </div>
+                </div>
+                <div class="form-group-login union-login">
+
+                        <button type="button" class="login-qq"></button>
+
+                        <button type="button" class="login-weibo">微博登录</button>
+
+
+                </div>
+
+            </div>
+            {{else if data.type == 'person' }}
+            <div class="person">
+                <div class="head-pic person-head " style="background-image: url('{{ data.info.user_pic }}')"></div>
+                <div class="person-main">
+
+                    <div class="person-item">
+                        <span>用户id:</span>
+                        <span>{{ data.id }}</span>
+                    </div>
+                    <div class="person-item">
+                        <span>用户名:</span>
+                        <span>{{ data.info.username }}</span>
+                    </div>
+                    <div class="person-item">
+                        <span>性别:</span>
+                        <span>{{ data.info.sex }}</span>
+                    </div>
+                    <div class="person-item">
+                        <span>地区:</span>
+                        <span>{{ data.info.province +'--'+ data.info.city }}</span>
+                    </div>
+                    <div class="person-close">
+                        <button type="button" >关闭</button>
+                    </div>
+                </div>
+            </div>
+            {{ /if }}
+        </div>
+
+    </script>
+    <script type="text/html" id="template_about">
+        <div class="about">
+            <div class="about-title"> 关于我们</div>
+            <div class="about-main">
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;做个一个个人业余开发,因为经常会忘记别人的生日,还有一些特殊日子。
+                    所以开发这样的应用,方便自己去记录一些事件,对于容易遗忘的事情,通过这个app 告诉自己,
+                    似乎已经过去很久了
+                </p>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp; 这个app也有个同款的安卓app,之前因为自己使用,然后放到应用宝上面,就没有管过了,
+                    本以为没有推广,app不会有人去用。但是有天,我心血来潮去数据库查了一下有多少人使用,结果让我着实的吓了一跳,发现有就将近600多人使用
+                    。让我感受一种莫名的自豪感,因为确实在某一方面,他给我们带来了方便,所以我开发了这个web 更加方便大家。
+                </p>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp; 感谢开发app使用开源一些框架,以及腾讯QQ提供的用户登录的接口
+                </p>
+                <div style="text-align: right">
+                   <span >--笨笨时光机</span>
+                </div>
+
+            </div>
+        </div>
+    </script>
 </body>
 </html>
