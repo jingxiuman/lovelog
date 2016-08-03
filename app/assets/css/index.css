@@ -28,6 +28,7 @@ body,
   height: 100%;
 }
 .content {
+  max-width: 414px;
   padding-top: 54px;
   padding-bottom: 65px;
   overflow: auto;
