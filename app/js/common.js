@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-define(['zepto','bmob','template'],function ($,Bmob,template) {
+define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
     var main = {
         debug:true,
         hostType:'dev',
@@ -16,15 +16,6 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
                 apiKey:'80972bba840af2e4d3a260d02796c1c0',
                 appKey:'5c7ad2453529fe3cef9a7f840568263c'
             }
-        },
-        host:{
-            dev:{
-                api:'http://lovelog.zhouxianbao.cn/api/'
-            }
-        },
-        getHost:function(){
-            var that =this;
-            return that.host[that.hostType];
         },
         bmobInit:function () {
             var self = this;
@@ -123,7 +114,7 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: that.getHost().api + url,
+                url: host.api + url,
                 data: data,
                 success: function(response) {
                     if (+response.ret == 0) {
@@ -141,6 +132,9 @@ define(['zepto','bmob','template'],function ($,Bmob,template) {
         },
         getQQinfo:function (callback) {
             this.ajaxFunc('qqLogin/api.php',{type:'getUserInfo'},callback)
+        },
+        register:function (data,callback) {
+            this.ajaxFunc('users/login',data,callback)
         }
     };
     main.goTo = function (page,data) {

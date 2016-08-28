@@ -18,8 +18,7 @@
     "tests"
   ],
   "devDependencies": {
-    "zepto": "^1.1.6",
-    "mui": "https://github.com/dcloudio/mui.git#^3.0.0"
+    "zepto": "^1.1.6"
   },
   "dependencies": {
     "requirejs": "^2.2.0",

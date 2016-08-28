@@ -114,31 +114,23 @@
                 <div class="form-group-login">
                     <label class="col-2">用户名:</label>
                     <div class="col-10 ">
-                        <input type="text" class="input-group-login" >
+                        <input type="text" class="input-group-login"  id=" ">
                     </div>
                 </div>
                 <div class="form-group-login">
                     <label class="col-2">密码:</label>
                     <div class="col-10 ">
-                        <input type="password" class="input-group-login">
+                        <input type="password" class="input-group-login" id="password">
                     </div>
                 </div>
                 <div class="form-group-login btn-group-main">
                     <div class="btn-group-login">
-                        <button type="button" class="btn">登录</button>
-                    </div>
-                    <div class="btn-group-login">
-                        <button type="button" class="btn">注册</button>
+                        <button type="button" class="btn" id="register">注册并登录</button>
                     </div>
                 </div>
-                <div class="form-group-login union-login">
-
-                        <button type="button" class="login-qq"></button>
-
-                        <button type="button" class="login-weibo">微博登录</button>
-
-
-                </div>
+                <!--<div class="form-group-login union-login">-->
+                    <!--<button type="button" class="login-qq"></button>-->
+                <!--</div>-->
 
             </div>
             {{else if data.type == 'person' }}

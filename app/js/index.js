@@ -18,7 +18,8 @@ requirejs.config({
         addBox:'../modules/addBox',
         about:'../modules/aboutCtrl',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
-        qiniu:'../assets/lib/qiniu/dist/qiniu.min'
+        qiniu:'../assets/lib/qiniu/dist/qiniu.min',
+        host:'../host'
         
     },
     shim:{
@@ -216,6 +217,18 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 console.log(self.userInfo);
                 self.checkPersonInfo()
             });
+            $("#register").on('click',function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                common.register({
+                    username:username,
+                    password:password
+                },{
+                    func:self.userLoginOk,
+                    context:self
+                })
+
+            })
 
         },
         /**

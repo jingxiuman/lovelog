@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/app/js/index.js" libraries="{ECMAScript 6, zepto}" />
+    <file url="file://$PROJECT_DIR$/app/js/common.js" libraries="{zepto-DefinitelyTyped}" />
+    <file url="file://$PROJECT_DIR$/app/js/index.js" libraries="{ECMAScript 6}" />
+    <file url="PROJECT" libraries="{jquery-DefinitelyTyped, requirejs-DefinitelyTyped, zepto-DefinitelyTyped}" />
   </component>
 </project>
