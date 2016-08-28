@@ -1,8 +1,8 @@
 /**
  * Created by knowthis on 16/7/2.
  */
-define(['template','bmob','zepto','qiniu','plupload','common'],
-    function (template,Bmob,$,Qiniu,plupload,common) {
+define(['template','zepto','qiniu','plupload','common'],
+    function (template,$,Qiniu,plupload,common) {
     var main = {
         uuid:'',
         init:function () {

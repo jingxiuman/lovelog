@@ -2,7 +2,7 @@
  * Created by knowthis on 16/7/31.
  */
 
-define(['router','template','bmob','common'],function (router,template,Bmob,common) {
+define(['router','template',,'common'],function (router,template,common) {
     var main = {
         uuid:'',
         dataObj:{},

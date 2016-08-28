@@ -1,32 +1,13 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
+define(['zepto','template','host'],function ($,template,host) {
     var main = {
         debug:true,
         hostType:'dev',
-        imgUrl:'http://7xlabr.com1.z0.glb.clouddn.com/',
+
         tokenUrl:'http://lovelog.zhouxianbao.cn/api/admin/php/token.php',
-        config:{
-            dev:{
-                apiKey:'a72538cabf0f9e5bc3f369752c307500', 
-                appKey:'135d81f0771b7c0ac7a040ca233a2249'
-            },
-            release:{
-                apiKey:'80972bba840af2e4d3a260d02796c1c0',
-                appKey:'5c7ad2453529fe3cef9a7f840568263c'
-            }
-        },
-        bmobInit:function () {
-            var self = this;
-            if(self.debug){
-                Bmob.initialize(self.config.dev.appKey,self.config.dev.apiKey);
-            }else{
-                Bmob.initialize(self.config.release.appKey,self.config.release.apiKey);
-            }
-        },
-        isOwnEmpty :function (obj)
-        {
+        isOwnEmpty :function (obj) {
             for(var name in obj)
             {
                 if(obj.hasOwnProperty(name))
@@ -35,16 +16,6 @@ define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
                 }
             }
             return true;
-        },
-        getLocationParam:function () {
-            var url = window.location.search;
-            var params = url.toString().slice(1).split("&");
-            var returnObject = {};
-            for(var i = 0; i != params.length; i++) {
-                var index = params[i].indexOf("=");
-                returnObject[params[i].slice(0, index)] = params[i].slice(index+1);
-            }
-            return returnObject;
         },
         loadingStart:function(){
             var body = $('body');
@@ -55,9 +26,6 @@ define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
                 '<div class="circle4"></div> </div> <div class="spinner-container container3"> <div class="circle1"></div> ' +
                 '<div class="circle2"></div> <div class="circle3"></div> <div class="circle4"></div> </div> </div></div>';
             body.append(str);
-        },
-        renderUI:function (id, data) {
-            return $("#app").html(template(id,data));
         },
         renderUI_append:function (id, data) {
             return $("#app").append(template(id,data));
@@ -81,26 +49,158 @@ define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
                 $dom.remove();
             }
             body.append(html);
-            body.find(".message").addClass("active");
-            setTimeout(function () {
-                body.find(".message").removeClass("active");
-            },1200)
+            var msgMain = body.find(".message");
+            if(!msgMain.hasClass('active')){
+                msgMain.addClass("active");
+            }
+
 
         },
-        tools:{
-            checkNull:function (item) {
-                if(item == '' || item == undefined){
-                    return true;
-                }else{
+        msgShowDelay:function (msg) {
+            this.msgShow(msg);
+            setTimeout(function () {
+                $("body").find(".message").removeClass("active");
+            },1500)
+        },
+        msgStop:function () {
+            var body = $("body");
+            var msgMain = body.find(".message");
+            if(msgMain.hasClass('active')){
+                msgMain.removeClass("active");
+            }
+        },
+        strLimit:function (str,num) {
+
+            if(str.length > num){
+                return str.slice(0,num)+'...'
+            }else{
+                return str
+            }
+        },
+        renderUI: function (domID, id, data) {
+            return $("#" + domID).html(template(id, {main: data}))
+        },
+        renderUI_p: function (domID, id, data) {
+            return $("#" + domID).append(template(id, {main: data}))
+        },
+        setLocal: function (data) {
+            if(typeof(data.value)=='object'){
+                window.localStorage.setItem(data.key, JSON.stringify(data.value));
+            } else if(typeof(data.value)=='string'){
+                window.localStorage.setItem(data.key, data.value);
+            }
+        },
+        getLocal: function (key) {
+            var val = window.localStorage.getItem(key) || "";
+            if(val.search(/:/i)>0){
+                val = JSON.parse(val);
+            }
+            return val;
+        },
+        /**
+         * 跳转页面
+         * url:页面名称 例如index.html
+         * data:参数 {key:value} == ?key=value
+         * @param url
+         * @param data
+         */
+        gotoPage: function (url, data) {
+            var path = window.location.pathname,
+                that = this,
+                parameter = '?';
+            if (url) {
+                if (!that.checkObjectNull(data)) {
+                    Object.keys(data).forEach(function (item, i) {
+                        if (i == 0) {
+                            parameter += item + '=' + data[item];
+                        } else {
+                            parameter += "&" + item + '=' + data[item];
+                        }
+                    });
+                }
+                var pathArr = path.split("/"),
+                    pathArrNew = pathArr.splice(0, pathArr.length - 1);
+                path = "";
+                pathArrNew.forEach(function (item) {
+                    if (item) {
+                        path += "/" + item;
+                    }
+
+                });
+                path += "/" + url + parameter;
+                if(that.getLocationParam().page != data.page){
+                    window.location.href = (window.location.origin + path);
+                }
+
+               //
+            }
+
+
+        },
+        checkIsLogin:function () {
+            var self =this;
+            if((self.getLocal('token') == '' || self.getLocal('token') == undefined) ||
+                (self.getLocal('info') == '' || self.getLocal('info') == undefined)){
+                return false;
+            }else{
+                return true;
+            }
+        },
+        /**
+         * 检测对象是否为空
+         * 如果对象为空 true ,反之 相反
+         * @param obj
+         * @returns {boolean}
+         */
+        checkObjectNull: function (obj) {
+            for (var name in obj) {
+                if (obj.hasOwnProperty(name)) {
                     return false;
                 }
             }
+            return true;
+
         },
-        getLocal:function (item) {
-            return localStorage.getItem(item);
+        getLocationParam: function () {
+            var url = window.location.search;
+            var params = url.toString().slice(1).split("&");
+            var returnObject = {};
+            for (var i = 0; i != params.length; i++) {
+                var index = params[i].indexOf("=");
+                returnObject[params[i].slice(0, index)] = params[i].slice(index + 1);
+            }
+            return returnObject;
         },
-        setLocal:function (data) {
-            return localStorage.setItem(data.key,data.value);
+        getParam: function (url) {
+            var params = url ? url.toString().split("&"):[];
+            var returnObject = {};
+
+            for (var i = 0; i != params.length; i++) {
+                var index = params[i].indexOf("=");
+                returnObject[params[i].slice(0, index)] = params[i].slice(index + 1);
+            }
+            return returnObject;
+        },
+        getCookie: function (name) {
+            return document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)")) == null ? null : decodeURIComponent(RegExp.$2);
+        },
+        setCookie: function (c_name, value, day) {
+            day = day || 700;
+            var exdate = new Date();
+            if (day >= 1) {
+                exdate.setDate(exdate.getDate() + day);
+                exdate.setHours(0);
+                exdate.setMinutes(0);
+                exdate.setSeconds(0);
+            } else {
+                var h = Math.floor(24 * day);
+                exdate.setDate(exdate.getDate());
+                exdate.setHours(exdate.getHours() + h);
+                exdate.setMinutes(exdate.getMinutes());
+                exdate.setSeconds(exdate.getSeconds());
+            }
+
+            document.cookie = c_name + "=" + escape(value) + ";expires=" + exdate.toGMTString();
         },
         doCallback: function(callback, response) {
 
@@ -111,17 +211,21 @@ define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
         },
         ajaxFunc:function (url,data,callback) {
             var that =this;
+            if(url != 'users/login'){
+                data.token = that.getLocal('token');
+                data.info = that.getLocal('info')
+            }
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: host.api + url,
                 data: data,
                 success: function(response) {
-                    if (+response.ret == 0) {
+                    if (+response.code == 0) {
                         that.doCallback(callback, response);
                     } else {
                         localStorage.clear();
-                        alert(response);
                         that.msgShow(response.message);
                     }
                 },
@@ -130,21 +234,17 @@ define(['zepto','bmob','template','host'],function ($,Bmob,template,host) {
                 }
             });
         },
-        getQQinfo:function (callback) {
-            this.ajaxFunc('qqLogin/api.php',{type:'getUserInfo'},callback)
-        },
         register:function (data,callback) {
             this.ajaxFunc('users/login',data,callback)
+        },
+        getBoxList:function (data,callback) {
+            this.ajaxFunc('box/all',data,callback)
         }
     };
-    main.goTo = function (page,data) {
-        var self = this;
-        if(page == router.getUrl('?page')){
-            window.location.reload();
-        }else{
-            window.location.href = "?page="+page;
-        }
+    main.init =function () {
+
     };
+    main.init();
     return main;
     
 });

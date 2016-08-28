@@ -108,13 +108,13 @@
     <script type="text/html" id="template_login">
 
         <div  class="login">
-            {{ if data.type == 'QQ' }}
+            {{ if main.type == 'login' }}
             <div class="loginMain" id="qqLoginBtn">
                 <div class="head">登录界面</div>
                 <div class="form-group-login">
                     <label class="col-2">用户名:</label>
                     <div class="col-10 ">
-                        <input type="text" class="input-group-login"  id=" ">
+                        <input type="text" class="input-group-login"  id="username">
                     </div>
                 </div>
                 <div class="form-group-login">
@@ -133,7 +133,7 @@
                 <!--</div>-->
 
             </div>
-            {{else if data.type == 'person' }}
+            {{else if main.type == 'person' }}
             <div class="person">
                 <div class="head-pic person-head " style="background-image: url('{{ data.info.user_pic }}')"></div>
                 <div class="person-main">

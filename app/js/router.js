@@ -10,6 +10,7 @@ define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBo
         getUrl:function(type){
             return url(type,location.href)
         },
+
         list:function(){
             var self = this;
             var pageName = this.getUrl('?page');
@@ -25,7 +26,7 @@ define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBo
                     addBox.init();
                     break;
                 default:
-                    boxList.init();
+                    //boxList.init();
                     break;
             }
         },
