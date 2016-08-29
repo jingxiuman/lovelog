@@ -54,10 +54,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
         init:function () {
             var self =this;
             router.init();
-            if(common.checkIsLogin()){
-                common.gotoPage('index.html',{page:'index'})
-
-            }else{
+            if(!common.checkIsLogin()){
                 common.renderUI('app','template_login',{type:'login'});
                 self.bindUI();
 
@@ -100,7 +97,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 key:'token',
                 value:response.token
             });
-            common.gotoPage('',{page:'index'})
+            common.gotoPage('index.html',{page:'index'})
         },
         /**
          * 检测是否有用户信息模块

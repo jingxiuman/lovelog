@@ -5,8 +5,8 @@ define(['zepto','template','host'],function ($,template,host) {
     var main = {
         debug:true,
         hostType:'dev',
-
-        tokenUrl:'http://lovelog.zhouxianbao.cn/api/admin/php/token.php',
+        host:host,
+        tokenUrl:host.api+'pic/token',
         isOwnEmpty :function (obj) {
             for(var name in obj)
             {
@@ -56,11 +56,11 @@ define(['zepto','template','host'],function ($,template,host) {
 
 
         },
-        msgShowDelay:function (msg) {
+        msgShowDelay:function (msg,time) {
             this.msgShow(msg);
             setTimeout(function () {
                 $("body").find(".message").removeClass("active");
-            },1500)
+            },time)
         },
         msgStop:function () {
             var body = $("body");
@@ -239,6 +239,9 @@ define(['zepto','template','host'],function ($,template,host) {
         },
         getBoxList:function (data,callback) {
             this.ajaxFunc('box/all',data,callback)
+        },
+        createBox:function (data,callback) {
+            this.ajaxFunc('box/create',data,callback)
         }
     };
     main.init =function () {
