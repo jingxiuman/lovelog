@@ -224,9 +224,10 @@ define(['zepto','template','host'],function ($,template,host) {
                 success: function(response) {
                     if (+response.code == 0) {
                         that.doCallback(callback, response);
-                    } else {
+                    } else{
                         localStorage.clear();
                         that.msgShow(response.message);
+                        that.gotoPage('index.html',{})
                     }
                 },
                 error: function(response) {

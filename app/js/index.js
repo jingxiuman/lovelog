@@ -54,11 +54,14 @@ require(['common','router','template','dataPick','touch'],function (common,route
         init:function () {
             var self =this;
             router.init();
+
             if(!common.checkIsLogin()){
                 common.renderUI('app','template_login',{type:'login'});
-                self.bindUI();
-
+            }else{
+                common.gotoPage('index.html',{page:'index'})
             }
+            self.bindUI();
+
         },
 
 

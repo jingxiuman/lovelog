@@ -26,11 +26,11 @@ define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBo
                     addBox.init();
                     break;
                 default:
-                    //boxList.init();
+                    self.goTo('index')
                     break;
             }
         },
-        goTo:function (page,data) {
+        goTo:function (page) {
             var self = this;
             if(page == self.getUrl('?page')){
                 window.location.reload();
