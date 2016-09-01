@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBox,about) {
+define(['url','zepto','boxList','addBox','about','login'],function (url, $,boxList,addBox,about,login) {
     var main = {
         init :function () {
             this.list();
@@ -14,6 +14,7 @@ define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBo
         list:function(){
             var self = this;
             var pageName = this.getUrl('?page');
+            console.log(pageName)
 
             switch (pageName){
                 case 'index':
@@ -25,15 +26,18 @@ define(['url','zepto','boxList','addBox','about'],function (url, $,boxList,addBo
                 case 'add':
                     addBox.init();
                     break;
+                case 'login':
+                    login.init();
+                    break;
                 default:
-                    self.goTo('index')
+                    self.goTo('login');
                     break;
             }
         },
         goTo:function (page) {
             var self = this;
             if(page == self.getUrl('?page')){
-                window.location.reload();
+                //window.location.reload();
             }else{
                 window.location.href = "?page="+page;
             }

@@ -16,6 +16,7 @@ requirejs.config({
         boxList:'../modules/indexCtrl',
         addBox:'../modules/addBox',
         about:'../modules/aboutCtrl',
+        login:'../modules/loginCtrl',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
         qiniu:'../assets/lib/qiniu/dist/qiniu.min',
         host:'../host'
@@ -54,17 +55,11 @@ require(['common','router','template','dataPick','touch'],function (common,route
         init:function () {
             var self =this;
             router.init();
-
             if(!common.checkIsLogin()){
-                common.renderUI('app','template_login',{type:'login'});
-            }else{
-                common.gotoPage('index.html',{page:'index'})
+               common.gotoPage('index.html',{page:'login'})
             }
             self.bindUI();
-
         },
-
-
         /**
          * 获取用户信息
          */
@@ -77,31 +72,10 @@ require(['common','router','template','dataPick','touch'],function (common,route
                 console.log(self.userInfo);
                 self.checkPersonInfo()
             });
-            $("#register").on('click',function () {
-                var username = $('#username').val();
-                var password = $('#password').val();
-                common.register({
-                    username:username,
-                    password:password
-                },{
-                    func:self.loginFunc,
-                    context:self
-                })
 
-            })
 
         },
-        loginFunc:function (response) {
-            common.setLocal({
-                key:'info',
-                value:response.info
-            });
-            common.setLocal({
-                key:'token',
-                value:response.token
-            });
-            common.gotoPage('index.html',{page:'index'})
-        },
+
         /**
          * 检测是否有用户信息模块
          */

@@ -5,6 +5,7 @@
 define(['router','template','common'],function (router,template,common) {
     var main = {
         init:function () {
+            common.loadingStart();
             this.render()
         },
         render:function(){

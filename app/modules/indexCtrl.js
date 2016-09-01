@@ -8,10 +8,12 @@ define(['router','template','common'],function (router,template,common) {
         init:function () {
             common.loadingStart();
             var self =this;
-            common.getBoxList({},{
-                func:self.getDataFunc,
-                context:self
-            })
+            if(common.checkIsLogin()) {
+                common.getBoxList({}, {
+                    func: self.getDataFunc,
+                    context: self
+                })
+            }
         },
         render:function(id,data){
             $("#app").html(template(id,data));
