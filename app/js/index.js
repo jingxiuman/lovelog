@@ -1,7 +1,7 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-var version = "2.0.3";
+var version = "2.0.4";
 
 requirejs.config({
     baseUrl:'./js',
