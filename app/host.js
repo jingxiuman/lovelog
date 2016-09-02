@@ -1,4 +1,3 @@
-'use strict';
 
 define([], function (argument) {
 	var urlObj = {
