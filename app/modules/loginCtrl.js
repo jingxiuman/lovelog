@@ -19,13 +19,24 @@ define(['common'],function (common) {
             $("#register").on('click',function () {
                 var username = $('#username').val();
                 var password = $('#password').val();
-                common.register({
-                    username:username,
-                    password:password
-                },{
-                    func:self.loginFunc,
-                    context:self
-                })
+                // common.register({
+                //     username: username,
+                //     password: password
+                // }, {
+                //     func: self.loginFunc,
+                //     context: self
+                // });
+                if(username.trim() != '' && password.trim() != '') {
+                    common.register({
+                        username: username,
+                        password: password
+                    }, {
+                        func: self.loginFunc,
+                        context: self
+                    })
+                }else{
+                    common.msgShowDelay('用户和密码不能为空',3)
+                }
 
             })
 

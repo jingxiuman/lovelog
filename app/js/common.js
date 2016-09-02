@@ -60,7 +60,7 @@ define(['zepto','template','host'],function ($,template,host) {
             this.msgShow(msg);
             setTimeout(function () {
                 $("body").find(".message").removeClass("active");
-            },time)
+            },time*1000)
         },
         msgStop:function () {
             var body = $("body");
@@ -226,7 +226,7 @@ define(['zepto','template','host'],function ($,template,host) {
                         that.doCallback(callback, response);
                     } else{
                         localStorage.clear();
-                        that.msgShow(response.message);
+                        that.msgShowDelay(response.msg,3);
                         that.gotoPage('index.html',{})
                     }
                 },

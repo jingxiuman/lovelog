@@ -293,13 +293,14 @@ button.btn.btn-main {
   top: 40%;
   left: 0;
   right: 0;
-  min-width: 50%;
+  max-width: 80%;
   background-color: rgba(0, 0, 0, 0.51);
   margin: 0 auto;
   color: #fff;
   text-align: center;
   border-radius: 5px;
   padding: 16px;
+  z-index: 999;
   &.active{
     display: block;
   }
@@ -427,7 +428,7 @@ div#loadingWrapper {
     }
 }
 .login {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -585,6 +586,9 @@ button.login-weibo {
     margin: 0 auto;
     background-color: rgba(250, 130, 130, 0.74);
     color: #ffffff;
+    &:active{
+      background-color: rgb(201, 103, 103);
+    }
 
   }
 }

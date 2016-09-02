@@ -15,6 +15,6 @@ define([], function (argument) {
             imgUrl:'http://7xlabr.com1.z0.glb.clouddn.com/',
 		}
 	};
-	var environment = 'release';
+	var environment = 'test';
 	return urlObj[environment];
 });
