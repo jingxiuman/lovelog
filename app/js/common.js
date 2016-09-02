@@ -227,7 +227,8 @@ define(['zepto','template','host'],function ($,template,host) {
                     } else{
                         localStorage.clear();
                         that.msgShowDelay(response.msg,3);
-                        that.gotoPage('index.html',{})
+
+                       // that.gotoPage('index.html',{page:'login'})
                     }
                 },
                 error: function(response) {

@@ -41,7 +41,7 @@ body,
   padding-top: 10px;
 }
 .header {
-  background: #fa8282;
+  background: #ff4081;
   width: 100%;
   height: 54px;
   position: fixed;
@@ -57,7 +57,7 @@ body,
   color: #fff;
 }
 .footer {
-  background: #fa8282;
+  background: #ff4081;
   width: 100%;
   position: fixed;
   left: 0;
@@ -118,7 +118,7 @@ body,
   text-align: center;
 }
 .index-box-CountDown .time {
-  color: #fa8282;
+  color: #ff4081;
   font-family: flagship_slabbold;
   display: inline-block;
   font-size: 66px;
@@ -163,7 +163,7 @@ body,
   position: absolute;
   right: 0;
   bottom: 15px;
-  background: #fa8282;
+  background: #ff4081;
   line-height: 60px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }
@@ -244,7 +244,7 @@ button.btn.btn-main {
   padding: 10px;
   width: 100%;
   border-radius: 5px;
-  background-color: #fa8282;
+  background-color: #ff4081;
   color: #fff;
 }
 .box-img {
@@ -434,7 +434,7 @@ div#loadingWrapper {
 }
 .loginMain .head {
   line-height: 38px;
-  background-color: #fa8282;
+  background-color: #ff4081;
   color: #ffffff;
 }
 button.login-qq {
@@ -522,13 +522,13 @@ button.login-weibo {
   text-align: left;
 }
 .person-close button {
-  border: 1px solid #fa8282;
-  background-color: #fa8282;
+  border: 1px solid #ff4081;
+  background-color: #ff4081;
   color: #fff;
   padding: 2vw 11vw;
 }
 .person-close button:active {
-  background-color: #ca6b6b;
+  background-color: #e33772;
 }
 .about {
   padding: 15px;
@@ -562,11 +562,11 @@ button.login-weibo {
   width: 90%;
   height: 35px;
   margin: 0 auto;
-  background-color: rgba(250, 130, 130, 0.74);
+  background-color: #ff4081;
   color: #ffffff;
 }
 .btn-group-login button:active {
-  background-color: #c96767;
+  background-color: #b22d59;
 }
 .btn-group-main {
   margin-top: 10px;
