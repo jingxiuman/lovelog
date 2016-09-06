@@ -47,7 +47,7 @@ define(['common'],function (common) {
                 common.renderUI('app', 'template_login', {type: 'login'});
                 self.bindUI();
             }else{
-                common.goTo('index.html',{page:'index'})
+                common.gotoPage('index.html',{page:'index'})
             }
         }
     };
