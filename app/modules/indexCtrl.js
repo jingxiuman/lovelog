@@ -4,7 +4,6 @@
 define(['router','template','common'],function (router,template,common) {
     var main = {
 
-        dataObj:{},
         init:function () {
             common.loadingStart();
             var self =this;
@@ -29,16 +28,14 @@ define(['router','template','common'],function (router,template,common) {
 
                 var current = $(this).attr('data-id');
                 if(confirm("确认删除?")) {
-                    that.dataObj.get(current, {
-                        success: function (gameScore) {
-                            gameScore.set('isDel', true);
-                            gameScore.save();
-                            window.location.reload(true);
+                    common.delBox({
+                        id:current
+                    },{
+                        func:function(){
+                           window.location.reload(true);
                         },
-                        error: function (object, error) {
-
-                        }
-                    });
+                        context:that
+                    })
                 }
                 return false;
             })
