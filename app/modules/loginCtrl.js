@@ -43,8 +43,12 @@ define(['common'],function (common) {
         },
         renderUI:function () {
             var self =this;
-            common.renderUI('app','template_login',{type:'login'});
-            self.bindUI();
+            if(!common.checkIsLogin()) {
+                common.renderUI('app', 'template_login', {type: 'login'});
+                self.bindUI();
+            }else{
+                common.goTo('index.html',{page:'index'})
+            }
         }
     };
     modules.init = function () {
