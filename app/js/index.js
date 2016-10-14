@@ -59,6 +59,7 @@ require(['common','router','template','dataPick','touch'],function (common,route
                common.gotoPage('index.html',{page:'login'})
             }
             self.bindUI();
+            alert(navigator.userAgent)
         },
         /**
          * 获取用户信息

@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/app/js/common.js" libraries="{zepto-DefinitelyTyped}" />
     <file url="file://$PROJECT_DIR$/app/js/index.js" libraries="{ECMAScript 6}" />
     <file url="PROJECT" libraries="{jquery-DefinitelyTyped, requirejs-DefinitelyTyped, zepto-DefinitelyTyped}" />
+    <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>
