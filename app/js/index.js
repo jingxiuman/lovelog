@@ -17,6 +17,7 @@ requirejs.config({
         addBox:'../modules/addBox',
         about:'../modules/aboutCtrl',
         login:'../modules/loginCtrl',
+        idea:'../modules/ideaCtrl',
         plupload:'../assets/lib/plupload/js/plupload.full.min',
         qiniu:'../assets/lib/qiniu/dist/qiniu.min',
         host:'../host'

@@ -247,6 +247,9 @@ define(['zepto','template','host'],function ($,template,host) {
         },
         delBox:function (data,callback) {
             this.ajaxFunc('box/del',data,callback)
+        },
+        addIdea:function (data, callback) {
+            this.ajaxFunc('users/addIdea',data,callback)
         }
     };
     main.init =function () {

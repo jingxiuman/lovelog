@@ -1,11 +1,11 @@
 /**
  * Created by knowthis on 16/6/18.
  */
-define(['url','zepto','boxList','addBox','about','login'],function (url, $,boxList,addBox,about,login) {
+define(['url','zepto','boxList','addBox','about','login','idea'],
+    function (url, $,boxList,addBox,about,login,idea) {
     var main = {
         init :function () {
             this.list();
-
         },
         getUrl:function(type){
             return url(type,location.href)
@@ -14,7 +14,8 @@ define(['url','zepto','boxList','addBox','about','login'],function (url, $,boxLi
         list:function(){
             var self = this;
             var pageName = this.getUrl('?page');
-            console.log(pageName)
+            console.log(pageName);
+            $("body").addClass('page-'+pageName);
 
             switch (pageName){
                 case 'index':
@@ -25,6 +26,9 @@ define(['url','zepto','boxList','addBox','about','login'],function (url, $,boxLi
                     break;
                 case 'add':
                     addBox.init();
+                    break;
+                case 'idea':
+                    idea.init();
                     break;
                 case 'login':
                     login.init();

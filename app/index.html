@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="assets/lib/date/zepto.mdatetimer.css">
     <!--<script src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js"-->
             <!--data-appid="101334797" data-redirecturi="http://lovelog.zhouxianbao.cn/app/checklogin.html"></script>-->
-    <script  src="assets/lib/requirejs/require.js"></script>
-    <script src="js/index.js"></script>
     <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260617080'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260617080' type='text/javascript'%3E%3C/script%3E"));</script>
 
 </head>
@@ -89,7 +87,7 @@
         </div>
     </script>
     <script type="text/html" id="template_footer">
-        <div class="footer-item"><a href="?page=about">关于我们</a></div>
+        <div class="footer-item"><a href="?page=idea">提出意见</a></div>
         <div class="footer-item" >
             <a href="{{ type == 'index'?'?page=add':'javascript:void(0)' }}">
                 {{ if type == 'index' }}
@@ -164,7 +162,7 @@
     </script>
     <script type="text/html" id="template_about">
         <div class="about">
-            <div class="about-title"> 关于我们</div>
+            <div class="about-title"> 提出意见</div>
             <div class="about-main">
                 <p>
                     &nbsp;&nbsp;&nbsp;&nbsp;因为经常会忘记别人的生日,还有一些特殊日子。
@@ -183,5 +181,25 @@
             </div>
         </div>
     </script>
+    <script type="text/html" id="template_idea">
+        <div class="add">
+            <div class="form-group">
+                <label>意见标题</label>
+                <div class="input-group">
+                    <input type="text" id="idea_title">
+                </div>
+            </div>
+            <div class="form-group textArea-group">
+                <label>意见内容</label>
+                <div class="input-group">
+                    <textarea class="textArea" rows="10" id="idea_content"></textarea>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+</script>
+    <script  src="assets/lib/requirejs/require.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
