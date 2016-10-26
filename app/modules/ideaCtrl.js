@@ -31,6 +31,8 @@ define(['router','common'],function (router,common) {
                 content:content
             },{
                 func:function (response) {
+                    $("#idea_title").val('');
+                    $("#idea_content").val('');
                     common.msgShowDelay('保存成功，感谢你的意见',1)
                 },
                 context:self
