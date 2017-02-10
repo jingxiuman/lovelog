@@ -1,0 +1,237 @@
+@font-face {
+  font-family: 'iconfont';
+  /* project id 35466 */
+  src: url('//at.alicdn.com/t/font_5w2vafda358f47vi.eot');
+  src: url('//at.alicdn.com/t/font_5w2vafda358f47vi.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_5w2vafda358f47vi.woff') format('woff'), url('//at.alicdn.com/t/font_5w2vafda358f47vi.ttf') format('truetype'), url('//at.alicdn.com/t/font_5w2vafda358f47vi.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 0.38647343rem;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+body {
+  font-size: 0.48309179rem;
+  background: url("//cdn.xbpig.cn/tpv9dh822va-stefan-stefancik.jpg");
+  background-size: 100%;
+  background-position: center;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.img {
+  width: 100%;
+}
+/**
+公共页面样式
+ */
+#root {
+  height: 100%;
+  width: 100%;
+}
+#root > div {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(170deg, rgba(48, 162, 188, 0.8) 1%, #3A326B 100%);
+}
+.common {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-size: 0.38647343rem;
+}
+.common-head {
+  background: none;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 0.43478261rem;
+  height: 0.86956522rem;
+  line-height: 0.86956522rem;
+}
+.common-content {
+  position: absolute;
+  top: 0.86956522rem;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  bottom: 1.69082126rem;
+  overflow: auto;
+}
+.common-footer {
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.69082126rem;
+  width: 100%;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.21);
+}
+.common-footer .nav-item {
+  color: #FFFFFF;
+  flex: 1;
+  text-align: center;
+}
+.common-footer .nav-item .icon {
+  font-size: 0.84541063rem;
+}
+.common-footer .nav-item .title {
+  font-size: 0.28985507rem;
+}
+.icon-back {
+  font-size: 0.48309179rem;
+  float: left;
+  margin-left: 0.48309179rem;
+}
+.icon-refresh {
+  font-size: 0.48309179rem;
+  float: right;
+  margin-right: 0.48309179rem;
+}
+.line {
+  z-index: -1;
+  width: 0.09661836rem;
+  background: #FFFFFF;
+  height: 100%;
+  position: absolute;
+  left: 2.17391304rem;
+  top: 0;
+  bottom: 0;
+}
+.time {
+  z-index: 12;
+  width: 100%;
+  margin-bottom: 0.48309179rem;
+}
+.time-time {
+  width: 1.69082126rem;
+  color: #FFFFFF;
+  text-align: right;
+  float: left;
+}
+.time-time .clock {
+  margin-top: 0.96618357rem;
+  font-size: 0.57971014rem;
+}
+.time-time .date {
+  font-size: 0.28985507rem;
+}
+.time-type {
+  position: relative;
+  margin-top: 1.08695652rem;
+  margin-left: 0.12077295rem;
+  float: left;
+  width: 0.72463768rem;
+  height: 0.72463768rem;
+  border-radius: 0.72463768rem;
+  background-color: #FFFFFF;
+  text-align: center;
+  line-height: 0.72463768rem;
+  font-size: 0.48309179rem;
+  color: #fa7298;
+}
+.time-content {
+  box-sizing: border-box;
+  position: relative;
+  margin-left: 0.24154589rem;
+  padding: 0.2173913rem;
+  float: left;
+  width: 6.64251208rem;
+  background: #FFFFFF;
+  color: #95989A;
+  border-radius: 5px;
+  min-height: 2.65700483rem;
+  height: 2.65700483rem;
+}
+.time-content.time-thing {
+  height: 3.62318841rem;
+  background: #FFFFFF url(http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png);
+  background-size: 100%;
+  background-position: center;
+  text-align: center;
+  color: #FFFFFF;
+}
+.time-content.time-thing .bg {
+  border-radius: 5px;
+  z-index: 15;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.36);
+}
+.time-content.time-thing .title {
+  font-size: 0.86956522rem;
+  margin-top: 0.96618357rem;
+}
+.time-content.time-thing .info {
+  color: #fa7298;
+  font-size: 0.28985507rem;
+}
+.time-content.time-thing .intro {
+  font-size: 0.28985507rem;
+}
+.time-content .title {
+  text-align: center;
+  font-size: 0.43478261rem;
+  margin-bottom: 0.2173913rem;
+}
+.time-content .content {
+  font-size: 0.28985507rem;
+  line-height: 0.38647343rem;
+  height: 0.77294686rem;
+  overflow: hidden;
+}
+.time-content .address {
+  position: absolute;
+  left: 0.2173913rem;
+  bottom: 0.2173913rem;
+  font-size: 0.28985507rem;
+  margin-top: 0.28985507rem;
+}
+.time-content:before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 1.32850242rem;
+  width: 10px;
+  height: 10px;
+  background-color: #FFFFFF;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+.time-content:after {
+  content: '';
+  width: 0.09661836rem;
+  background: #FFFFFF;
+  position: absolute;
+  left: -0.65217391rem;
+  top: 0;
+  bottom: -0.48309179rem;
+  z-index: -1;
+}

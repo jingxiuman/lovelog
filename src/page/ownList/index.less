@@ -1,0 +1,129 @@
+@import "../../common/common";
+.line{
+  z-index:-1;
+  width: 4/@screenWidth;
+  background: #FFFFFF;
+  height: 100%;
+  position: absolute;
+  left: 90/@screenWidth;
+  top:0;
+  bottom:0;
+}
+.time{
+  z-index: 12;
+  width: 100%;
+
+  margin-bottom: 20/@screenWidth;
+}
+.time-time{
+  width: 70/@screenWidth;
+  color: #FFFFFF;
+  text-align: right;
+  float: left;
+  .clock{
+    margin-top: 40/@screenWidth;
+    font-size: 24/@screenWidth;
+  }
+  .date{
+    font-size: 12/@screenWidth;
+  }
+}
+.time-type{
+  position: relative;
+  margin-top: 45/@screenWidth;
+  margin-left:5/@screenWidth ;
+  float: left;
+  width: 30/@screenWidth;
+  height: 30/@screenWidth;
+  border-radius: 30/@screenWidth;
+  background-color: #FFFFFF;
+  text-align: center;
+  line-height: 30/@screenWidth;
+  font-size: 20/@screenWidth;
+  color: @base_red;
+
+}
+.time-content{
+  box-sizing: border-box;
+  position: relative;
+  margin-left: 10/@screenWidth;
+  padding: 9/@screenWidth;
+  float: left;
+  width: 275/@screenWidth;
+  background: #FFFFFF;
+  color: @base_font;
+  border-radius: 5px;
+  min-height: 110/@screenWidth;
+  height: 110/@screenWidth;
+  &.time-thing{
+    height: 150/@screenWidth;
+    background: #FFFFFF url(http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png);
+    background-size: 100%;
+    background-position: center;
+    text-align: center;
+    color: #FFFFFF;
+    .bg{
+      border-radius: 5px;
+      z-index: 15;
+      position: absolute;
+      left:0;
+      right:0;
+      bottom: 0;
+      top:0;
+      background-color: rgba(0, 0, 0, 0.36);
+     }
+    .title{
+      font-size: 36/@screenWidth;
+
+      margin-top: 40/@screenWidth;
+    }
+    .info{
+      color: @base_red;
+      font-size: 12/@screenWidth;
+    }
+    .intro{
+      font-size: 12/@screenWidth;
+    }
+  }
+  .title{
+    text-align: center;
+    font-size: 18/@screenWidth;
+    margin-bottom: 9/@screenWidth;
+  }
+  .content{
+    font-size: 12/@screenWidth;
+    line-height: 16/@screenWidth;
+    height: 32/@screenWidth ;
+    overflow: hidden;
+  }
+  .address{
+    position: absolute;
+    left: 9/@screenWidth;
+    bottom: 9/@screenWidth;
+    font-size: 12/@screenWidth;
+    margin-top: 12/@screenWidth;
+  }
+  &:before{
+    content: '';
+    position: absolute;
+    left: -5px;
+    top:55/@screenWidth;
+    width: 10px;
+    height: 10px;
+    background-color: #FFFFFF;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+  &:after{
+    content: '';
+    //height: 100%;
+    width: 4/@screenWidth;
+    background: #FFFFFF;
+    position: absolute;
+    left: -27/@screenWidth;
+    top:0;
+    bottom: -20/@screenWidth;
+    z-index: -1;
+
+  }
+}
