@@ -12,30 +12,6 @@ export default class Timeline extends Component {
         this.state = props;
         this.tools = new Common();
     }
-    formatTimeLine(timestamps,type){
-        let str ='',nowTime = new Date().getTime(), interval, year, day, dateStr, timeStr;
-        timestamps *= 1000;
-        interval = Math.round(Math.abs((timestamps - nowTime) / 86400000));
-        year = parseInt(interval / 365);
-        day = parseInt(interval % 365);
-        let timS = timestamps ;
-        let date = new Date(timS),
-            date_year = date.getFullYear(),
-            date_month = date.getMonth() + 1;
-        dateStr = '距离' + date_year + '年' + date_month + '月' + date.getDate() + '日';
-        if (year > 0) {
-            timeStr = year + '年' + day + '天';
-        } else {
-            timeStr = day + '天';
-        }
-        if(type === 'time'){
-            str = dateStr;
-        }else{
-            str = timeStr;
-        }
-        return str;
-    }
-
     render( ) {
         if(this.state.type === 'thing') {
             return (
@@ -71,8 +47,8 @@ export default class Timeline extends Component {
                     <Link  to={`/detail/${this.state.data.id}`} >
                         <div className="time-content time-thing" style={{'backgroundImage':'url('+this.state.data.bg+')'}}>
                             <div className="bg" >
-                                <div className="title">{this.formatTimeLine(this.state.data.time)}</div>
-                                <div className="info">距离{this.formatTimeLine(this.state.data.time,'time')}</div>
+                                <div className="title">{this.tools.formatTimeLine(this.state.data.time,'time')}</div>
+                                <div className="info">距离{this.tools.formatTimeLine(this.state.data.time,'date')}</div>
                                 <div className="intro">{this.state.data.title}</div>
                             </div>
                         </div>

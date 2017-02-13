@@ -3,21 +3,21 @@
  * auther website:http://zhouxianbao.cn
  */
 import React,{Component} from 'react';
-import {Router} from'react-router';
+import {browserHistory} from'react-router';
 export default class Header  extends Component{
     constructor(props){
         super(props);
         this.state = this.props;
-        console.log(Router);
+       // console.log(browserHistory);
         if(this.props && this.props.type == 'detail'){
             this.backIcon =  <i onClick={this.backFunc} className="iconfont icon-back">&#xe6c2;</i>;
+            this.refreshIcon =  <i onClick={this.refreshFunc} className="iconfont icon-refresh">&#xe624;</i>
+        }else if(this.props && this.props.type == 'index'){
             this.refreshIcon =  <i onClick={this.refreshFunc} className="iconfont icon-refresh">&#xe624;</i>
         }
     }
     backFunc = () =>{
         window.history.back();
-
-
     };
     /**
      * 刷新点击事件

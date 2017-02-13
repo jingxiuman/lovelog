@@ -96,6 +96,10 @@ body {
   flex: 1;
   text-align: center;
 }
+.common-footer .nav-item a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
 .common-footer .nav-item .icon {
   font-size: 0.84541063rem;
 }

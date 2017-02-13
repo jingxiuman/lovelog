@@ -32,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <div className="common">
-          <Header/>
+          <Header type="index"/>
           <div className="common-content">
               {this.state.list.map((item)=> <TimeLine key={item.id} type={item.type} data={item} /> )}
           </div>

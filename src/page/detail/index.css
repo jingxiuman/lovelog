@@ -96,6 +96,10 @@ body {
   flex: 1;
   text-align: center;
 }
+.common-footer .nav-item a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
 .common-footer .nav-item .icon {
   font-size: 0.84541063rem;
 }
@@ -154,7 +158,7 @@ body {
   margin: 0 auto 0.24154589rem;
   font-size: 0.28985507rem;
   display: flex;
-  padding-bottom: 0.24154589rem;
+  padding-bottom: 0.12077295rem;
   border-bottom: 1px solid rgba(149, 152, 154, 0.13);
 }
 .container .address,
