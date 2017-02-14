@@ -23,7 +23,7 @@ export default class Common {
         interval = Math.round(Math.abs((timestamps - nowTime) / 86400000));
         year = parseInt(interval / 365);
         day = parseInt(interval % 365);
-        let timS = timestamps ;
+        let timS = timestamps;
         let date = new Date(timS),
             date_year = date.getFullYear(),
             date_month = date.getMonth() + 1;

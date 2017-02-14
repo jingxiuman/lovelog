@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TimeLine from '../../components/timelineItem';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
+import Header,{Footer,Container} from '../../components/common';
 import './index.css';
 
 class App extends Component {
@@ -33,9 +32,9 @@ class App extends Component {
     return (
       <div className="common">
           <Header type="index"/>
-          <div className="common-content">
+          <Container>
               {this.state.list.map((item)=> <TimeLine key={item.id} type={item.type} data={item} /> )}
-          </div>
+          </Container>
           <Footer/>
       </div>
     );

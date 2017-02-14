@@ -3,9 +3,8 @@
  * auther website:http://zhouxianbao.cn
  */
 import React,{Component} from 'react';
-import Header from './../../components/header';
-import Footer from './../../components/footer';
-import Common from './../../common/common';
+import Header,{Footer,Container} from '../../components/common';
+import { Link } from 'react-router';
 import './index.css'
 class DoorItem extends Component{
     constructor( props){
@@ -14,20 +13,23 @@ class DoorItem extends Component{
         this.state = {
             icon:props.icon,
             name:props.name,
+            url:props.url,
             img:props.img
         }
     }
 
     render(){
         return <div className="doorItem" >
+            <Link to={this.state.url}>
             <div className="doorIcon">
                 <i className="iconfont"dangerouslySetInnerHTML={ {__html: this.state.icon}} ></i>
             </div>
             <div className="doorName">{this.state.name}</div>
-            {this.state.img !=''?
+            {this.state.img !==''?
             <div className="doorSee">
                 <img src={this.state.img} alt=""/>
             </div>:''}
+            </Link>
         </div>
     }
 }
@@ -41,10 +43,12 @@ export default class profile extends Component{
             },
             doorList:[{
                 icon:'&#xe808;',
+                url:'',
                 name:'社交圈',
                 img:'//cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png'
             },{
                 icon:'&#xe601;',
+                url:'/feedback',
                 name:'意见反馈',
                 img:''
             }]
@@ -53,7 +57,7 @@ export default class profile extends Component{
     render(){
         return<div className="common">
             <Header type="index" />
-            <div className="common-content">
+            <Container>
                 <div className="profile_img">
                     <img src="http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png" alt=""/>
                 </div>
@@ -61,11 +65,12 @@ export default class profile extends Component{
                 <div className="doorList">
                     {this.state.doorList.map((item,index)=>
                         <DoorItem key={index}
+                                  url={item.url}
                                   icon={item.icon}
                                   name={item.name}
                                   img={item.img}/>)}
                 </div>
-            </div>
+            </Container>
 
             <Footer/>
         </div>;

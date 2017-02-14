@@ -1,4 +1,4 @@
-@import "../../common/common";
+@import "../../common/variable";
 .profile_img{
   width: 128/@screenWidth;
   height: 128/@screenWidth;
@@ -24,6 +24,9 @@
   color: @base_font;
   line-height: 32/@screenWidth;
   box-sizing: border-box;
+  a{
+    color: @base_font;
+  }
   &:not(:last-child){
     border-bottom: 1px solid @base_line;
   }
