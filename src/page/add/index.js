@@ -4,7 +4,7 @@
  */
 import React,{Component} from 'react';
 import Header,{Footer,Container} from '../../components/common';
-import {DatePicker} from 'antd';
+import DatePicker from 'react-mobile-datepicker';
 import moment from 'moment';
 import './index.css';
 
@@ -21,7 +21,7 @@ export default class AddBox extends Component{
                 </div>
                 <div className="input-group">
                     <label htmlFor="">事件时间</label>
-                    <DatePicker  defaultValue={moment('2015-01-01', 'YYYY-MM-DD')} />
+                    <DatePicker  value={moment('2015-01-01', 'YYYY-MM-DD')} />
                 </div>
                 <div className="input-group">
                     <label htmlFor="">事件类型</label>

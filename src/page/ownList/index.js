@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import TimeLine from '../../components/timelineItem';
+import { browserHistory } from 'react-router'
 import Header,{Footer,Container} from '../../components/common';
+import common from '../../common/common';
 import './index.css';
 
 class App extends Component {
     constructor(props){
         super(props);
+
         this.state = {
             list: [{
                 id:1,
@@ -26,6 +29,11 @@ class App extends Component {
                 bg: 'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
                 content: '你说啥呢，啊实打实大师东北部吧你说啥呢，啊实打实大师东北部吧你说啥呢，啊实打实大师东北部吧'
             }]
+        }
+    }
+    componentDidMount(){
+        if(!common.checkLogin()){
+            browserHistory.push('/login')
         }
     }
   render() {

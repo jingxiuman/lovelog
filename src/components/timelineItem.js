@@ -4,13 +4,13 @@
  */
 import React, {Component} from 'react';
 import { Link } from 'react-router';
-import Common from '../common/common';
+import common from '../common/common';
 
 export default class Timeline extends Component {
     constructor(props) {
         super(props);
         this.state = props;
-        this.tools = new Common();
+        this.tools = common;
     }
     render( ) {
         if(this.state.type === 'thing') {

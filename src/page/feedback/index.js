@@ -36,7 +36,7 @@ export default class Detail extends Component{
     render(){
         return <div className="common">
             <Header type="detail" />
-            <Container>
+            <Container classAdd={{'feedbackContainer':true}}>
                 <div className="feedback-input">
                     <textarea name="" id="" rows="5">
 

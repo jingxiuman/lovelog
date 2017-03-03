@@ -1,3 +1,6 @@
+.common-content.feedbackContainer {
+  bottom: 0 ;
+}
 .feedback-input {
   margin: 0 auto;
   width: 90%;

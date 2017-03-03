@@ -2,8 +2,27 @@
  * Created by knowthis on 2017/2/10.
  * auther website:http://zhouxianbao.cn
  */
-export default class Common {
-    formatCreate(timestamp,type){
+import axios from 'axios';
+import _ from 'underscore';
+let common;
+let that;
+export default  common  = {
+    debug:true,
+    tools:_,
+    init:function () {
+        that = this;
+    },
+    apiUrl:function () {
+      if(this.debug){
+          return '//api.ithbut.com/'
+      }else{
+          return '//api.xbpig.cn/'
+      }
+    },
+    msgShow:function (msg) {
+
+    },
+    formatCreate : function(timestamp,type){
         let time = new Date(timestamp*1000),str;
         if(type === 'time'){
             str =  time.getHours()+':'+time.getMinutes();
@@ -14,10 +33,9 @@ export default class Common {
             str = time.getFullYear() +'/'+(time.getMonth()+1)+'/'+time.getDay() +' '+ time.getHours()+':'+time.getMinutes();
 
         }
-
         return str;
-    }
-    formatTimeLine(timestamps,type){
+    },
+    formatTimeLine:function(timestamps,type){
         let str ='',nowTime = new Date().getTime(), interval, year, day, dateStr, timeStr;
         timestamps *= 1000;
         interval = Math.round(Math.abs((timestamps - nowTime) / 86400000));
@@ -39,5 +57,58 @@ export default class Common {
             str = timeStr;
         }
         return str;
+    },
+    checkLogin:function () {
+        if(that.getLocalStorage('info') != '' && that.getLocalStorage('token') != ''){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    /**
+     * 设置localStorage数据
+     * 格式
+     * {key:'',value:''}
+     *
+     * @param data
+     */
+    setLocalStorage: function(data) {
+        if(typeof(data.value) == 'object') {
+            window.sessionStorage.setItem(data.key, JSON.stringify(data.value));
+        } else if(typeof(data.value) == 'string') {
+            window.sessionStorage.setItem(data.key, data.value);
+        }
+    },
+    /**
+     * 设置localStorage数据
+     * @param key
+     * @returns {string}
+     */
+    getLocalStorage: function(key) {
+        let val = window.sessionStorage.getItem(key) || "";
+        if(val.search(/:/i) > 0) {
+            val = JSON.parse(val);
+        }
+        return val;
+    },
+    commonAjax:function (url,data) {
+        return axios.post(this.apiUrl()+url,data).then(function (res) {
+            if(res.data.code == 0) {
+                return res.data.data;
+            }else{
+               // Message.toast(res.data.msg);
+                that.msgShow(res.data.msg);
+                //return res;
+            }
+        }).catch(function (error) {
+            console.log(error)
+        })
+    },
+
+    userLogin:function (data) {
+        return this.commonAjax('api2/user/login',data)
     }
-}
+
+
+};
+common.init();

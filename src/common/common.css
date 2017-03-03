@@ -1,3 +1,4 @@
+@import "layer.css";
 @font-face {
   font-family: 'iconfont';
   /* project id 35466 */
@@ -22,7 +23,7 @@ body {
   overflow: hidden;
 }
 body {
-  font-size: 0.48309179rem;
+  font-size: 0.38647343rem !important;
   background: url("//cdn.xbpig.cn/tpv9dh822va-stefan-stefancik.jpg");
   background-size: 100%;
   background-position: center;

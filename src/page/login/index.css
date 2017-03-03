@@ -1,6 +1,5 @@
 .add-container {
   padding: 0.36231884rem;
-  bottom: 0;
 }
 .input-group {
   width: 100%;
@@ -37,6 +36,29 @@
 .input-group .address {
   display: inline-block;
   margin-left: 0.28985507rem;
+}
+.imgList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgList .item {
+  flex: 1 auto 2.41545894rem;
+  width: 2.41545894rem;
+  height: 2.41545894rem;
+  margin: 0.12077295rem;
+}
+.imgList .item img {
+  width: 100%;
+}
+.imgList .item.item-add {
+  background: #FFFFFF;
+  color: #95989A;
+  line-height: 2.41545894rem;
+  text-align: center;
+}
+.imgList .item.item-add .iconfont {
+  font-size: 1.20772947rem;
 }
 .btn-group {
   width: 100%;
