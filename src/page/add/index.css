@@ -12,6 +12,14 @@
   text-align: center;
   vertical-align: top;
 }
+.input-group .btn-time {
+  margin-left: 0.24154589rem;
+  display: inline-block;
+}
+.input-group .time-value {
+  margin-left: 0.48309179rem;
+  display: inline-block;
+}
 .input-group .input-control,
 .input-group input {
   margin-left: 0.28985507rem;

@@ -4,6 +4,7 @@
  */
 import React, {Component} from 'react';
 import Header, {Container} from '../../components/common';
+import { browserHistory } from 'react-router';
 import common from '../../common/common';
 import './index.css';
 
@@ -14,30 +15,37 @@ export default class Login extends Component {
         this.state = {
             username:'',
             password:''
-        }
+        };
         this.loginFunc = this.loginFunc.bind(this);
         this.changeUsername = this.changeUsername.bind(this);
         this.changePassword = this.changePassword.bind(this);
     }
     changeUsername(e){
-        console.log(e.target.value);
+
         this.setState({username:e.target.value})
 
     }
     changePassword(e){
-        console.log(e.target.value);
         this.setState({password:e.target.value})
     }
     loginFunc(e) {
         console.log('yes',this.state);
         common.userLogin(this.state).then(function (res) {
-            //Toast.info('登录成功', 1000);
-            //Message.toast('登录成功');
+            console.log(common.tools.isUndefined(res));
+            if(!common.tools.isUndefined(res)){
+                common.setLocalStorage({key:'info',value:res.info});
+                common.setLocalStorage({key:'token',value:res.token});
+                browserHistory.push('/')
+            }
             console.log(res)
         });
         e.preventDefault();
     }
-
+    componentDidMount() {
+        if(common.checkLogin()){
+            browserHistory.push('/')
+        }
+    }
     render() {
         return <div className="common">
             <Header type="index"/>

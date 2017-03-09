@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TimeLine from '../../components/timelineItem';
-import { browserHistory } from 'react-router'
+import { browserHistory } from 'react-router';
 import Header,{Footer,Container} from '../../components/common';
 import common from '../../common/common';
 import './index.css';
@@ -8,44 +8,65 @@ import './index.css';
 class App extends Component {
     constructor(props){
         super(props);
-
         this.state = {
-            list: [{
-                id:1,
-                type: 'thing',
-                create: '1486626102',
-                title: '第一次使用旧时光',
-                time: 1486626102,
-                address: '北京路',
-                bg: 'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
-                content: '先说说他打击我的路数: 你没能力 我觉得你没有优点 你有什么优点你应该自己知道 你认为的优点只是你认为的自己而已 你都是缺点 你觉得我不尊重你更说'
-            }, {
-                id:2,
-                type: 'time',
-                create: 1486626102,
-                title: '第一次使用旧时光',
-                time: 1389512010,
-                address: '北京路',
-                bg: 'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
-                content: '你说啥呢，啊实打实大师东北部吧你说啥呢，啊实打实大师东北部吧你说啥呢，啊实打实大师东北部吧'
-            }]
+            list: []
         }
+    }
+    convertData(arr){
+        let temp =[];
+        arr.forEach(function (item) {
+            temp.push({
+                id:item.id,
+                type: item.eventType == 0 ?'time':'thing',
+                create: item.created_at,
+                title: item.eventName,
+                time: item.eventTime,
+                address: item.address,
+                bg: item.img,
+                content:item.eventContent
+            })
+        });
+        console.log(temp);
+        return temp;
+
     }
     componentDidMount(){
+        let that =this;
         if(!common.checkLogin()){
-            browserHistory.push('/login')
+            browserHistory.push('/login');
+            return
         }
+        common.getOwn().then(function (res) {
+            console.log(that.convertData(res));
+            if(res.length >0) {
+                that.setState({list: that.convertData(res)});
+            }
+            console.log('state',that.state.list)
+        })
     }
   render() {
-    return (
-      <div className="common">
-          <Header type="index"/>
-          <Container>
-              {this.state.list.map((item)=> <TimeLine key={item.id} type={item.type} data={item} /> )}
-          </Container>
-          <Footer/>
-      </div>
-    );
+      if(this.state.list.length>0) {
+          return (
+              <div className="common">
+                  <Header type="index"/>
+                  <Container>
+                      {this.state.list.map((item) => <TimeLine key={item.id} type={item.type} data={item}/>)}
+
+                  </Container>
+                  <Footer/>
+              </div>
+          );
+      }else{
+          return (
+              <div className="common">
+                  <Header type="index"/>
+                  <Container>
+                     none
+                  </Container>
+                  <Footer/>
+              </div>
+          );
+      }
   }
 }
 

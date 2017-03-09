@@ -5,6 +5,7 @@
 import React,{Component} from 'react';
 import Header,{Footer,Container} from '../../components/common';
 import { Link } from 'react-router';
+import common from './../../common/common';
 import './index.css'
 class DoorItem extends Component{
     constructor( props){
@@ -41,12 +42,14 @@ export default class profile extends Component{
                 pic:'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
                 name:'xb是个pig？'
             },
-            doorList:[{
-                icon:'&#xe808;',
-                url:'',
-                name:'社交圈',
-                img:'//cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png'
-            },{
+            doorList:[
+            //     {
+            //     icon:'&#xe808;',
+            //     url:'',
+            //     name:'社交圈',
+            //     img:'//cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png'
+            // },
+                {
                 icon:'&#xe601;',
                 url:'/feedback',
                 name:'意见反馈',
@@ -54,14 +57,26 @@ export default class profile extends Component{
             }]
         }
     }
+    componentDidMount() {
+        let that =this;
+        common.getUserInfo({}).then(function (res) {
+            console.log(res);
+            that.setState({
+                info :{
+                    pic:res.userPic,
+                    name:res.username
+                }
+            })
+        })
+    }
     render(){
         return<div className="common">
             <Header type="index" />
             <Container>
                 <div className="profile_img">
-                    <img src="http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png" alt=""/>
+                    <img src={this.state.info.pic} alt=""/>
                 </div>
-                <div className="profile_name">xb是个pig？</div>
+                <div className="profile_name">{ this.state.info.name}</div>
                 <div className="doorList">
                     {this.state.doorList.map((item,index)=>
                         <DoorItem key={index}

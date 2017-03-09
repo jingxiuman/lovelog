@@ -20,6 +20,7 @@ export default  common  = {
       }
     },
     msgShow:function (msg) {
+        alert(msg)
 
     },
     formatCreate : function(timestamp,type){
@@ -74,9 +75,9 @@ export default  common  = {
      */
     setLocalStorage: function(data) {
         if(typeof(data.value) == 'object') {
-            window.sessionStorage.setItem(data.key, JSON.stringify(data.value));
+            window.localStorage.setItem(data.key, JSON.stringify(data.value));
         } else if(typeof(data.value) == 'string') {
-            window.sessionStorage.setItem(data.key, data.value);
+            window.localStorage.setItem(data.key, data.value);
         }
     },
     /**
@@ -85,28 +86,61 @@ export default  common  = {
      * @returns {string}
      */
     getLocalStorage: function(key) {
-        let val = window.sessionStorage.getItem(key) || "";
+        let val = window.localStorage.getItem(key) || "";
         if(val.search(/:/i) > 0) {
             val = JSON.parse(val);
         }
         return val;
     },
-    commonAjax:function (url,data) {
-        return axios.post(this.apiUrl()+url,data).then(function (res) {
-            if(res.data.code == 0) {
-                return res.data.data;
-            }else{
-               // Message.toast(res.data.msg);
-                that.msgShow(res.data.msg);
-                //return res;
-            }
-        }).catch(function (error) {
-            console.log(error)
-        })
+    commonAjax:function (url,data,type) {
+        if(type != 'address') {
+            let publicData = {
+                info: that.getLocalStorage('info') || '',
+                token: that.getLocalStorage('token') || ''
+            };
+            let allData = {};
+            that.tools.extend(allData, data, publicData);
+            console.log(allData);
+            return axios.post(this.apiUrl() + url, allData).then(function (res) {
+                if (res.data.code == 0) {
+                    return res.data.data;
+                } else {
+                    // Message.toast(res.data.msg);
+                    that.msgShow(res.data.msg);
+                    //return res;
+                }
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }else{
+            return axios.get(url,{params:data}).catch(function (error) {
+                console.log(error)
+            })
+        }
     },
-
     userLogin:function (data) {
         return this.commonAjax('api2/user/login',data)
+    },
+    getOwn:function (data) {
+        return this.commonAjax('api2/box/own',data)
+    },
+    getBoxOne:function (data) {
+        return this.commonAjax('api2/box/one',data)
+    },
+    getUserInfo:function (data) {
+        return this.commonAjax('api2/user/detail',data)
+    },
+    getUpdateInfo:function (data) {
+        return this.commonAjax('api2/system/update/list',data)
+    },
+    addAdvance:function (data) {
+        return this.commonAjax('api2/advice/add',data)
+    },
+    getAddress:function (data) {
+        return this.commonAjax('//api.map.baidu.com/geocoder/v2/',data,'address')
+    },
+    addPic:function (data) {
+        return this.commonAjax('api2/pic/add',data)
     }
 
 
