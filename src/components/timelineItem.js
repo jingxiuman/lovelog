@@ -45,7 +45,7 @@ export default class Timeline extends Component {
                     {/*<Link to={{pathname:'/detail',query:{id:this.state.data.id}}}*/}
                     {/*>*/}
                     <Link  to={`/detail/${this.state.data.id}`} >
-                        <div className="time-content time-thing" style={{'backgroundImage':'url('+this.state.data.bg+')'}}>
+                        <div className="time-content time-thing" style={{'backgroundImage':'url('+(this.state.data.bg || '//cdn.xbpig.cn//common/201505051057364017584.jpg')+')'}}>
                             <div className="bg" >
                                 <div className="title">{this.tools.formatTimeLine(this.state.data.time,'time')}</div>
                                 <div className="info">距离{this.tools.formatTimeLine(this.state.data.time,'date')}</div>

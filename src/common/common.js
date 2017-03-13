@@ -19,6 +19,13 @@ export default  common  = {
           return '//api.xbpig.cn/'
       }
     },
+    imgUrl:function () {
+        if(this.debug){
+            return 'http://ohhuk1c8m.bkt.clouddn.com/'
+        }else{
+            return 'http://cdn.xbpig.cn/'
+        }
+    },
     msgShow:function (msg) {
         alert(msg)
 
@@ -93,11 +100,32 @@ export default  common  = {
         return val;
     },
     commonAjax:function (url,data,type) {
-        if(type != 'address') {
-            let publicData = {
-                info: that.getLocalStorage('info') || '',
-                token: that.getLocalStorage('token') || ''
-            };
+        let publicData = {
+            info: that.getLocalStorage('info') || '',
+            token: that.getLocalStorage('token') || ''
+        };
+        if(type == 'address') {
+            return axios.get(url,{params:data}).catch(function (error) {
+                console.log(error)
+            })
+
+        }else if(type == 'file'){
+           let formdata = new FormData();
+           formdata.append('info',publicData.info);
+           formdata.append('token',publicData.token);
+           formdata.append('img',data);
+            return axios.post(this.apiUrl() + url, formdata).then(function (res) {
+                if (res.data.code == 0) {
+                    return res.data.data;
+                } else {
+                    // Message.toast(res.data.msg);
+                    that.msgShow(res.data.msg);
+                    //return res;
+                }
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }else{
             let allData = {};
             that.tools.extend(allData, data, publicData);
             console.log(allData);
@@ -110,10 +138,6 @@ export default  common  = {
                     //return res;
                 }
             }).catch(function (error) {
-                console.log(error)
-            })
-        }else{
-            return axios.get(url,{params:data}).catch(function (error) {
                 console.log(error)
             })
         }
@@ -140,7 +164,10 @@ export default  common  = {
         return this.commonAjax('//api.map.baidu.com/geocoder/v2/',data,'address')
     },
     addPic:function (data) {
-        return this.commonAjax('api2/pic/add',data)
+        return this.commonAjax('api2/pic/add',data,'file')
+    },
+    addBox:function (data) {
+        return this.commonAjax('api2/box/add',data)
     }
 
 

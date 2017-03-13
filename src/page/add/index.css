@@ -61,3 +61,47 @@
   border: 0;
   border-radius: 5px;
 }
+.imgList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgList .item {
+  flex: 1 auto 2.41545894rem;
+  width: 2.41545894rem;
+  height: 2.41545894rem;
+  margin: 0.12077295rem;
+}
+.imgList .item img {
+  width: 100%;
+  height: 100%;
+}
+.imgList .item.item-add {
+  background: #FFFFFF;
+  color: #95989A;
+  line-height: 2.41545894rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.imgList .item.item-add label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.imgList .item.item-add .input-file {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: transparent;
+  color: transparent;
+  -webkit-appearance: none;
+  visibility: hidden;
+}
+.imgList .item.item-add .iconfont {
+  font-size: 1.20772947rem;
+}
