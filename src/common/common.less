@@ -29,6 +29,47 @@ body{
 }
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 //.clearfix{*+height:1%;}
+
+.c-toast {
+  position:fixed;
+  display:table;
+  left:50%;
+  top:50%;
+  color:#fff;
+  border-radius:4px;
+  padding:10px 20px;
+  min-width:100px;
+  max-width:240px;
+  line-height:1.4;
+  text-align:center;
+  word-wrap:break-word;
+  background-color:rgba(0,0,0,0.6);
+  transform:translate(-50%,-50%);
+  z-index:1000;
+}
+.toastmask-enter {
+  opacity:0.1;
+  z-index:100;
+}
+.toastmask-enter.toastmask-active {
+  opacity:1;
+  transition:opacity 300ms ease-in;
+}
+.toastmask-appear {
+  opacity:0.1;
+}
+.toastmask-appear.toastmask-appear-active {
+  opacity:1;
+  transition:opacity 300ms ease-in;
+}
+.toastmask-leave {
+  opacity:1;
+  z-index:100;
+}
+.toastmask-leave.toastmask-leave-active {
+  opacity:0;
+  transition:opacity 300ms ease-in-out;
+}
 .bg{
   position: absolute;
   left: 0;
@@ -102,6 +143,7 @@ body{
     color: #FFFFFF;
     flex:1;
     text-align: center;
+    padding-top: 6/@screenWidth;
     a{
       color: #FFFFFF;
       text-decoration: none;
@@ -124,4 +166,21 @@ body{
   font-size: 20/@screenWidth;
   float: right;
   margin-right: 20/@screenWidth;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-repeat: no-repeat;
+  display: none;
+  background-image: url('//cdn.xbpig.cn/common/loading.gif');
+  background-size: 45px;
+  z-index: 100;
+  &.active{
+    display: block;
+  }
 }

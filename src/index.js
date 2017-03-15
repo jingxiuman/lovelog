@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { browserHistory, Route, Router, IndexRoute } from 'react-router'
 import Root from './Root';
+
 import OwnList from './page/ownList/index';
 import Profile from './page/profile/index';
 import Detail from './page/detail/index';

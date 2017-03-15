@@ -31,7 +31,6 @@ export default class Detail extends Component{
     componentDidMount() {
         let that =this;
         common.getUpdateInfo({}).then(function (res) {
-            console.log(res);
             that.setState({
                 list :res
             })
@@ -51,7 +50,6 @@ export default class Detail extends Component{
 
     }
     advanceValue(e){
-        console.log(e.target.value);
         this.setState({advance:e.target.value})
     }
     render(){

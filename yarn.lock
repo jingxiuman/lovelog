@@ -4232,6 +4232,13 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-transition-group@^15.4.2:
+  version "15.4.2"
+  resolved "http://registry.npm.taobao.org/react-addons-transition-group/download/react-addons-transition-group-15.4.2.tgz#4c42fa1c2ce024acab2924316c0f11268ded1af3"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
 react-dev-utils@^0.4.2:
   version "0.4.2"
   resolved "http://registry.npm.taobao.org/react-dev-utils/download/react-dev-utils-0.4.2.tgz#ba6fae581fe945a2fc402e9b27c71fda4f62f6a1"

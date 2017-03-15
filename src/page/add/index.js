@@ -3,7 +3,7 @@
  * auther website:http://zhouxianbao.cn
  */
 import React, {Component} from 'react';
-import Header, {Footer, Container} from '../../components/common';
+import Header, {Footer, Container,LoadingFunc} from '../../components/common';
 import DatePicker from 'react-mobile-datepicker';
 import { browserHistory } from 'react-router';
 import common from './../../common/common';
@@ -39,7 +39,9 @@ export default class AddBox extends Component {
                     pois: 1,
                     ak: "uP5lhQRSjdMpOpK4nd4EGh32XvZzXjjI"
                 }).then(function (res) {
-                    that.setState({address: res.data.result.formatted_address})
+                    if(res) {
+                        that.setState({address: res.data.result.formatted_address})
+                    }
                 })
             });
         } else {
@@ -88,13 +90,22 @@ export default class AddBox extends Component {
     };
     addPic = (e) => {
         let that = this;
+        let loadTag = new LoadingFunc();
         let file_obj = e.target.files[0], arr = this.state.imgList;
-        common.addPic(file_obj).then(function (res) {
-            console.log(res);
-            arr.push(common.imgUrl() + res);
-            that.setState({imgList: arr})
+        console.log(file_obj);
+        if(file_obj) {
+            if (arr.length <= 9) {
+                common.addPic(file_obj).then(function (res) {
+                    console.log(res);
+                    arr.push(res);
+                    that.setState({imgList: arr});
 
-        });
+                });
+            } else {
+                common.msgShow("最多上传9张")
+            }
+        }
+        loadTag.close();
     };
     changeName = (e) => {
         this.setState({eventName: e.target.value})
@@ -104,6 +115,7 @@ export default class AddBox extends Component {
     };
     submitForm = (e) => {
         let data = this.state;
+        let loadTag = new LoadingFunc();
         common.addBox({
             eventName: data.eventName,
             eventTime: Math.floor(data.time.getTime()/1000),
@@ -113,7 +125,10 @@ export default class AddBox extends Component {
             eventAddress: data.address
         }).then(function (res) {
             console.log(res);
-            browserHistory.push('/')
+            loadTag.close();
+            if(res.length == 0) {
+                browserHistory.push('/')
+            }
         })
     };
 
@@ -155,7 +170,7 @@ export default class AddBox extends Component {
                 </div>
                 <div className="imgList">
                     {this.state.imgList.map((item, index) => <div key={index} className="item">
-                        <img src={item} alt=""/>
+                        <img src={common.imgUrl() +item+'?imageView2/2/w/100/h/100'} alt=""/>
                     </div>)}
 
                     <div className="item item-add">

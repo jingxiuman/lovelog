@@ -3,7 +3,7 @@
  * auther website:http://zhouxianbao.cn
  */
 import React, {Component} from 'react';
-import Header, {Footer, Container} from '../../components/common';
+import Header, {Footer, Container, LoadingFunc} from '../../components/common';
 import common from './../../common/common';
 import './index.css';
 
@@ -11,6 +11,7 @@ export default class Detail extends Component {
     constructor(props) {
         super(props);
         this.tools = common;
+
         this.state = {
             id: this.props.params.id,
             data: {
@@ -20,36 +21,47 @@ export default class Detail extends Component {
                 title: '第一次使用旧时光',
                 time: 1486626102,
                 address: '北京路',
-                bg: 'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
+                bg: '',
                 content: ''
             }
         }
     }
+
     componentDidMount() {
-        let that =this;
+        let that = this;
+        let loadTag = new LoadingFunc();
         common.getBoxOne({
-            id:that.state.id
+            id: that.state.id
         }).then(function (res) {
-            console.log(res);
-            let temp = res[0];
+
+            let temp = res[0], imgArr = [];
+            if (common.checkImgByOld(temp.img)) {
+                imgArr = common.getImgByOld(temp.img)
+            } else {
+                imgArr = temp.img.split("-");
+            }
             that.setState({
-                data:{
+                data: {
                     id: temp.id,
                     create: '1486626102',
                     title: temp.eventName,
                     time: temp.eventTime,
                     address: temp.address,
-                    bg: temp.img,
+                    bg: imgArr[0],
                     content: temp.eventContent
                 }
-            })
+            });
+
+            loadTag.close();
         })
     }
+
     render() {
         return <div className="common">
             <Header type="detail" name={this.state.data.title}/>
             <Container>
-                <div className="head-img" style={{'backgroundImage': 'url(http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png)'}}>
+                <div className="head-img"
+                     style={{'backgroundImage': 'url(' + (this.state.data.bg ? (common.imgUrl() + this.state.data.bg + '?imageView2/2/w/375/h/211') : '') + ')'}}>
                     <div className="head-info">
                         <div className="main">{this.tools.formatTimeLine(this.state.data.time, 'time')}</div>
                         <div className="other">{this.tools.formatTimeLine(this.state.data.time, 'date')}</div>

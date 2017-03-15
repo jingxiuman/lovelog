@@ -10,7 +10,6 @@ import './index.css'
 class DoorItem extends Component{
     constructor( props){
         super(props);
-        console.log(props);
         this.state = {
             icon:props.icon,
             name:props.name,
@@ -60,7 +59,6 @@ export default class profile extends Component{
     componentDidMount() {
         let that =this;
         common.getUserInfo({}).then(function (res) {
-            console.log(res);
             that.setState({
                 info :{
                     pic:res.userPic,
@@ -74,7 +72,10 @@ export default class profile extends Component{
             <Header type="index" />
             <Container>
                 <div className="profile_img">
-                    <img src={this.state.info.pic} alt=""/>
+                    <img src={this.state.info.pic+'?imageView2/2/w/128/h/128'} alt=""/>
+                    <div className="changePic">
+                        <i className="iconfont">&#xe680;</i>
+                    </div>
                 </div>
                 <div className="profile_name">{ this.state.info.name}</div>
                 <div className="doorList">

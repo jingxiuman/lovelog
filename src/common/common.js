@@ -3,6 +3,7 @@
  * auther website:http://zhouxianbao.cn
  */
 import axios from 'axios';
+import toast from './../components/toast';
 import _ from 'underscore';
 let common;
 let that;
@@ -27,7 +28,7 @@ export default  common  = {
         }
     },
     msgShow:function (msg) {
-        alert(msg)
+        toast(msg,2000)
 
     },
     formatCreate : function(timestamp,type){
@@ -99,6 +100,23 @@ export default  common  = {
         }
         return val;
     },
+    getImgByOld:function (img) {
+        let imgArr = [];
+        let reg_img = /^http:\/\/.+\/(.+)$/gi;
+        let result;
+        while((result = reg_img.exec(img)) !== null){
+            imgArr.push(result[1])
+        }
+        return imgArr;
+    },
+    checkImgByOld:function (img) {
+        let reg_img = /^http:\/\/.+\/(.+)$/gi;
+        if(reg_img.test(img)){
+            return true;
+        }else{
+            return false;
+        }
+    },
     commonAjax:function (url,data,type) {
         let publicData = {
             info: that.getLocalStorage('info') || '',
@@ -128,7 +146,6 @@ export default  common  = {
         }else{
             let allData = {};
             that.tools.extend(allData, data, publicData);
-            console.log(allData);
             return axios.post(this.apiUrl() + url, allData).then(function (res) {
                 if (res.data.code == 0) {
                     return res.data.data;
