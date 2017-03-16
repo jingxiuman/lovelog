@@ -1,0 +1,47 @@
+.common-content.feedbackContainer {
+  bottom: 0 ;
+}
+.feedback-input {
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+}
+.feedback-input textarea {
+  width: 100%;
+  border-radius: 5px;
+  padding: 0.24154589rem;
+  border: 0;
+  box-sizing: border-box;
+}
+.feedback-btn {
+  background-color: #fa7298;
+  width: 60%;
+  margin: 0.48309179rem auto 0;
+  height: 1.11111111rem;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 5px;
+}
+.updateLog {
+  width: 90%;
+  margin: 1.25603865rem auto 0;
+}
+.updateLog .item {
+  border: 1px solid #95989A;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 0.38647343rem;
+  margin-bottom: 0.48309179rem;
+}
+.updateLog .item .title {
+  text-align: center;
+  font-size: 0.38647343rem;
+}
+.updateLog .item .version {
+  text-align: center;
+  font-size: 0.28985507rem;
+}
+.updateLog .item .content {
+  font-size: 0.33816425rem;
+  margin-top: 0.33816425rem;
+}

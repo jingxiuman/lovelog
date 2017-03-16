@@ -1,0 +1,48 @@
+@import "../../common/variable";
+.common-content.feedbackContainer{
+  bottom: 0 ;
+}
+.feedback-input{
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+  textarea{
+    width: 100%;
+    border-radius: 5px;
+    padding: 10/@screenWidth;
+    border: 0;
+    box-sizing: border-box;
+  }
+}
+.feedback-btn{
+  background-color: @base_red;
+  width: 60%;
+  margin: 20/@screenWidth auto 0;
+  height: 46/@screenWidth;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 5px;
+}
+.updateLog{
+  width: 90%;
+  margin:  52/@screenWidth auto 0 ;
+  .item{
+    border: 1px solid @base_font;
+    color: #FFFFFF;
+    border-radius: 5px;
+    padding: 16/@screenWidth;
+    margin-bottom: 20/@screenWidth;
+    .title{
+      text-align: center;
+      font-size: 16/@screenWidth;
+    }
+    .version{
+      text-align: center;
+      font-size: 12/@screenWidth;
+    }
+    .content{
+      font-size: 14/@screenWidth;
+      margin-top: 14/@screenWidth;
+    }
+  }
+}

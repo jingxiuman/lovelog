@@ -1,0 +1,69 @@
+.profile_img {
+  width: 3.09178744rem;
+  height: 3.09178744rem;
+  border-radius: 3.09178744rem;
+  margin: 25% auto 0;
+  position: relative;
+}
+.profile_img .changePic {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 3.09178744rem;
+  color: #ffffff;
+  z-index: 111;
+  opacity: 0;
+}
+.profile_img .changePic i {
+  font-size: 0.96618357rem;
+}
+.profile_img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 3.09178744rem;
+}
+.profile_name {
+  text-align: center;
+  margin-top: 0.48309179rem;
+  color: #FFFFFF;
+}
+.doorList {
+  background-color: #FFFFFF;
+  margin-top: 1.20772947rem;
+}
+.doorItem {
+  height: 1.25603865rem;
+  padding: 0.24154589rem;
+  color: #95989A;
+  line-height: 0.77294686rem;
+  box-sizing: border-box;
+}
+.doorItem a {
+  color: #95989A;
+}
+.doorItem:not(:last-child) {
+  border-bottom: 1px solid rgba(149, 152, 154, 0.13);
+}
+.doorIcon {
+  width: 0.77294686rem;
+  height: 0.77294686rem;
+  float: left;
+  color: #fa7298;
+}
+.doorIcon .iconfont {
+  font-size: 0.77294686rem;
+}
+.doorName {
+  float: left;
+  margin-left: 0.24154589rem;
+}
+.doorSee {
+  width: 0.77294686rem;
+  height: 0.77294686rem;
+  float: right;
+}
+.doorSee img {
+  width: 100%;
+}

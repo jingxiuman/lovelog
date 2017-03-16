@@ -1,0 +1,69 @@
+@import "../../common/variable";
+.head-img{
+  position: relative;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 250/@screenWidth;
+  background-size: 100%;
+  background-position: center;
+}
+.head-info{
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom: 0;
+  width: 100%;
+  height: 70/@screenWidth;
+  color: @base_red;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  .main{
+    font-size: 30/@screenWidth;
+    line-height: 52/@screenWidth;
+  }
+  .other{
+    font-size: 12/@screenWidth;
+    color: @base_font;
+    line-height: 18/@screenWidth;
+  }
+}
+.detail_img{
+  width: 90%;
+  padding-top: 50.625%;
+  margin: 10px auto;
+  background-size: 100%;
+  background-origin: content-box;
+  border-radius: 10/@screenWidth;
+  box-shadow: 1px 1px 1px 2px #eae8e8;
+  img{
+    width: 100%;
+    border-radius: 10/@screenWidth;
+  }
+}
+.container{
+  background-color: #FFFFFF;
+  color: @base_font;
+  .title{
+    font-size: 20/@screenWidth;
+    text-align: center;
+    padding-top: 20/@screenWidth;
+  }
+  .other{
+    width: 80%;
+    margin: 0 auto 10/@screenWidth ;
+    font-size: 12/@screenWidth;
+    display: flex;
+    padding-bottom: 5/@screenWidth;
+    border-bottom: 1px solid @base_line;
+  }
+  .address,.createTime{
+    flex: 1;
+    text-align: center;
+  }
+  .content{
+    padding: 0  10/@screenWidth 1rem;
+    min-height: 300/@screenWidth;
+    font-size: 16/@screenWidth;
+    line-height: 24/@screenWidth;
+  }
+}

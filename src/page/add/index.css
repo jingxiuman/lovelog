@@ -1,0 +1,107 @@
+.add-container {
+  padding: 0.36231884rem;
+  bottom: 0;
+}
+.input-group {
+  width: 100%;
+  color: #FFFFFF;
+  margin-bottom: 0.28985507rem;
+}
+.input-group label {
+  font-size: 0.38647343rem;
+  text-align: center;
+  vertical-align: top;
+}
+.input-group .btn-time {
+  margin-left: 0.24154589rem;
+  display: inline-block;
+}
+.input-group .time-value {
+  margin-left: 0.48309179rem;
+  display: inline-block;
+}
+.input-group .input-control,
+.input-group input {
+  margin-left: 0.28985507rem;
+  width: 7.10144928rem;
+  height: 1.11111111rem;
+  border-radius: 0.12077295rem;
+  border: 0;
+  font-size: 0.38647343rem;
+  color: #95989A;
+  padding: 0.24154589rem;
+  box-sizing: border-box;
+}
+.input-group .textarea-control {
+  margin-left: 0.28985507rem;
+  width: 7.10144928rem;
+  border-radius: 0.12077295rem;
+  border: 0;
+  font-size: 0.38647343rem;
+  color: #95989A;
+  padding: 0.24154589rem;
+  box-sizing: border-box;
+}
+.input-group .address {
+  display: inline-block;
+  margin-left: 0.28985507rem;
+}
+.btn-group {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.48309179rem;
+}
+.btn-group .btn-submit {
+  font-size: 0.43478261rem;
+  width: 50%;
+  height: 1.11111111rem;
+  margin: 0 auto;
+  background-color: #fa7298;
+  color: #FFFFFF;
+  border: 0;
+  border-radius: 5px;
+}
+.imgList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgList .item {
+  flex: 1 auto 2.41545894rem;
+  width: 2.41545894rem;
+  height: 2.41545894rem;
+  margin: 0.12077295rem;
+}
+.imgList .item img {
+  width: 100%;
+  height: 100%;
+}
+.imgList .item.item-add {
+  background: #FFFFFF;
+  color: #95989A;
+  line-height: 2.41545894rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.imgList .item.item-add label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.imgList .item.item-add .input-file {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: transparent;
+  color: transparent;
+  -webkit-appearance: none;
+  visibility: hidden;
+}
+.imgList .item.item-add .iconfont {
+  font-size: 1.20772947rem;
+}
