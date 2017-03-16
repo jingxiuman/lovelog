@@ -8,6 +8,5 @@
     <orderEntry type="library" name="zepto-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="jquery-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="requirejs-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="react-DefinitelyTyped" level="application" />
   </component>
 </module>
