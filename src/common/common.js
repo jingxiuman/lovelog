@@ -15,7 +15,7 @@ export default  common  = {
     },
     apiUrl:function () {
       if(this.debug){
-          return '//api.ithbut.com/'
+          return '//apit.xbpig.cn/'
       }else{
           return '//api.xbpig.cn/'
       }
@@ -122,6 +122,7 @@ export default  common  = {
             info: that.getLocalStorage('info') || '',
             token: that.getLocalStorage('token') || ''
         };
+        axios.defaults.withCredentials = true;
         if(type == 'address') {
             return axios.get(url,{params:data}).catch(function (error) {
                 console.log(error)

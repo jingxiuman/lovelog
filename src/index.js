@@ -17,10 +17,10 @@ ReactDOM.render(
         <Route path="/" component={Root}>
             <IndexRoute component={OwnList} />
             <Route path="/detail/:id" component={Detail} />
-            <Route path="profile" component={Profile} />
-            <Route path="add" component={AddBox} />
-            <Route path="feedback" component={Feedback} />
-            <Route path="login" component={Login} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/add" component={AddBox} />
+            <Route path="/feedback" component={Feedback} />
+            <Route path="/login" component={Login} />
         </Route>
     </Router>,
     document.getElementById('root'));
