@@ -1,6 +1,6 @@
 {
   "name": "reactlove",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "react": "^15.4.2",
@@ -20,13 +20,11 @@
     "react-mobile-datepicker": "^3.0.3",
     "react-router": "^3.0.2",
     "underscore": "^1.8.3"
-
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "homepage": "."
+  }
 }

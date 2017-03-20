@@ -46,20 +46,20 @@ export class Footer extends Component {
     render() {
         return <div className="common-footer">
             <div className="nav-item clearfix">
-                <IndexLink to={`/`}>
+                <IndexLink  to="/">
                     <div className="iconfont icon">&#xe613;</div>
                     <div className="title">时光机</div>
                 </IndexLink>
             </div>
             <div className="nav-item">
-                <Link to="/add">
+                <Link to="add">
                     <div className="iconfont icon">&#xe607;</div>
                     <div className="title">新建</div>
                 </Link>
             </div>
 
             <div className="nav-item">
-                <Link to={`/profile`}>
+                <Link to={`profile`}>
                     <div className="iconfont icon">&#xe66b;</div>
                     <div className="title">我的</div>
                 </Link>

@@ -14,13 +14,13 @@ import './common/common.css';
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/" component={Root}>
+        <Route path="/h5" component={Root}>
             <IndexRoute component={OwnList} />
-            <Route path="/detail/:id" component={Detail} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/add" component={AddBox} />
-            <Route path="/feedback" component={Feedback} />
-            <Route path="/login" component={Login} />
+            <Route path="detail/:id" component={Detail} />
+            <Route path="profile" component={Profile} />
+            <Route path="add" component={AddBox} />
+            <Route path="feedback" component={Feedback} />
+            <Route path="login" component={Login} />
         </Route>
     </Router>,
     document.getElementById('root'));

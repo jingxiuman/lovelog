@@ -3,6 +3,7 @@
  * auther website:http://zhouxianbao.cn
  */
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 import toast from './../components/toast';
 import _ from 'underscore';
 let common;
@@ -15,11 +16,12 @@ export default  common  = {
     },
     apiUrl:function () {
       if(this.debug){
-          return '//apit.xbpig.cn/'
+          return '//test.xbpig.cn/'
       }else{
           return '//api.xbpig.cn/'
       }
     },
+    imgDefault:'http://cdn.xbpig.cn/common/colorful-bubble-with-reflection-of-prague-buildings-picjumbo-com.jpg',
     imgUrl:function () {
         if(this.debug){
             return 'http://ohhuk1c8m.bkt.clouddn.com/'
@@ -30,6 +32,16 @@ export default  common  = {
     msgShow:function (msg) {
         toast(msg,2000)
 
+    },
+    getLocationParam: function (hash) {
+        let url =  window.location.search;
+        let params = url.toString().slice(1).split("&");
+        let returnObject = {};
+        for (let i = 0; i != params.length; i++) {
+            let index = params[i].indexOf("=");
+            returnObject[params[i].slice(0, index)] = params[i].slice(index + 1);
+        }
+        return returnObject;
     },
     formatCreate : function(timestamp,type){
         let time = new Date(timestamp*1000),str;
@@ -71,6 +83,7 @@ export default  common  = {
         if(that.getLocalStorage('info') != '' && that.getLocalStorage('token') != ''){
             return true;
         }else{
+            browserHistory.push('login');
             return false;
         }
     },
@@ -122,7 +135,7 @@ export default  common  = {
             info: that.getLocalStorage('info') || '',
             token: that.getLocalStorage('token') || ''
         };
-        axios.defaults.withCredentials = true;
+        //axios.defaults.withCredentials = true;
         if(type == 'address') {
             return axios.get(url,{params:data}).catch(function (error) {
                 console.log(error)
@@ -155,7 +168,11 @@ export default  common  = {
                     that.msgShow(res.data.msg);
                     //return res;
                 }
+                if(res.data.code == 1111){
+                    localStorage.clear();
+                }
             }).catch(function (error) {
+                //that.msgShow(error);
                 console.log(error)
             })
         }

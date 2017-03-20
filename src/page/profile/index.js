@@ -35,10 +35,11 @@ class DoorItem extends Component {
 }
 export default class profile extends Component {
     constructor(props) {
+        common.checkLogin();
         super(props);
         this.state = {
             info: {
-                pic: 'http://cdn.xbpig.cn/bb476573ec70fc2de3ac18cb82e127e2.png',
+                pic: '',
                 name: 'xb是个pig？'
             },
             doorList: [
@@ -63,12 +64,14 @@ export default class profile extends Component {
             let pic;
             if(common.checkImgByOld(res.userPic)){
                 pic = res.userPic
-            }else{
+            }else if(res.userPic){
                 pic = common.imgUrl() + res.userPic;
+            }else{
+                pic = 'http://cdn.xbpig.cn/common/icon-512.png'
             }
             that.setState({
                 info: {
-                    pic: pic,
+                    pic: pic+ '?imageView2/2/w/128/h/128',
                     name: res.username
                 }
             })
@@ -95,7 +98,7 @@ export default class profile extends Component {
             <Header type="index"/>
             <Container>
                 <div className="profile_img">
-                    <img src={this.state.info.pic + '?imageView2/2/w/128/h/128'} alt=""/>
+                    <img src={this.state.info.pic} alt=""/>
                     <input type="file" className="changePic" onChange={this.changePic}/>
                 </div>
                 <div className="profile_name">{ this.state.info.name}</div>

@@ -11,6 +11,11 @@ export default class Timeline extends Component {
         super(props);
         this.state = props;
         this.tools = common;
+        if(this.state.data.bg){
+            this.state.data.bg = common.imgUrl() + this.state.data.bg;
+        }else{
+           this.state.data.bg = common.imgDefault;
+        }
     }
     render( ) {
         if(this.state.type === 'thing') {
@@ -23,7 +28,7 @@ export default class Timeline extends Component {
                     <div className="time-type">
                         <span className="iconfont">&#xe615;</span>
                     </div>
-                    <Link  to={`/detail/${this.state.data.id}`} >
+                    <Link  to={`detail/${this.state.data.id}`} >
                         <div className="time-content">
                             <div className="title">{this.state.data.title}</div>
                             <div className="content">{this.state.data.content}</div>
@@ -42,10 +47,8 @@ export default class Timeline extends Component {
                     <div className="time-type">
                         <span className="iconfont">&#xe615;</span>
                     </div>
-                    {/*<Link to={{pathname:'/detail',query:{id:this.state.data.id}}}*/}
-                    {/*>*/}
-                    <Link  to={`/detail/${this.state.data.id}`} >
-                        <div className="time-content time-thing" style={{'backgroundImage':'url('+((common.imgUrl()+this.state.data.bg+'?imageView2/2/w/250/h/140') || '//cdn.xbpig.cn//common/201505051057364017584.jpg')+')'}}>
+                    <Link  to={`detail/${this.state.data.id}`} >
+                        <div className="time-content time-thing" style={{'backgroundImage':'url('+(this.state.data.bg+'?imageView2/2/w/250/h/140')+')'}}>
                             <div className="bg" >
                                 <div className="title">{this.tools.formatTimeLine(this.state.data.time,'time')}</div>
                                 <div className="info">距离{this.tools.formatTimeLine(this.state.data.time,'date')}</div>

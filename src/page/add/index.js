@@ -15,6 +15,7 @@ moment.locale('zh-cn');
 export default class AddBox extends Component {
     constructor(props) {
         super(props);
+        common.checkLogin();
         let that = this;
         let timeStr = moment().format('YYYY-MM-DD');
         this.state = {
@@ -98,13 +99,13 @@ export default class AddBox extends Component {
                     console.log(res);
                     arr.push(res);
                     that.setState({imgList: arr});
-
+                    loadTag.close();
                 });
             } else {
                 common.msgShow("最多上传9张")
             }
         }
-        loadTag.close();
+
     };
     changeName = (e) => {
         this.setState({eventName: e.target.value})

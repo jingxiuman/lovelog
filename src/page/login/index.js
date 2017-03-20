@@ -29,7 +29,6 @@ export default class Login extends Component {
         this.setState({password:e.target.value})
     }
     loginFunc(e) {
-        console.log('yes',this.state);
         common.userLogin(this.state).then(function (res) {
             console.log(common.tools.isUndefined(res));
             if(!common.tools.isUndefined(res)){

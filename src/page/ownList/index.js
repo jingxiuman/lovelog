@@ -11,7 +11,12 @@ class App extends Component {
         this.state = {
             list: []
         };
-
+        let urlParam = common.getLocationParam();
+        if(urlParam.info != "" && urlParam.token !=""){
+            common.setLocalStorage({key:'info',value:urlParam.info});
+            common.setLocalStorage({key:'token',value:urlParam.token});
+        }
+        console.log()
     }
 
     convertData(arr) {
@@ -24,8 +29,6 @@ class App extends Component {
             } else {
                 imgArr = (item.img && item.img.split("-")) || [];
             }
-
-            console.log(imgArr)
             temp.push({
                 id: item.id,
                 type: item.eventType == 0 ? 'time' : 'thing',

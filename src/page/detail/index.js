@@ -57,11 +57,16 @@ export default class Detail extends Component {
             if (common.checkImgByOld(temp.img)) {
                 imgArr = common.getImgByOld(temp.img)
             } else {
-                imgArr = temp.img.split("-");
+                imgArr = (temp.img && temp.img.split("-")) || [];
             }
-            let imgArr1=[];
-            common.tools.extend(imgArr1,imgArr)
+            let imgArr1=[],imgUrl;
+            common.tools.extend(imgArr1,imgArr);
             imgArr1.shift();
+            if(imgArr[0]){
+                imgUrl = common.imgUrl() + imgArr[0]
+            }else {
+                imgUrl = common.imgDefault;
+            }
             that.setState({
                 data: {
                     id: temp.id,
@@ -69,7 +74,7 @@ export default class Detail extends Component {
                     title: temp.eventName,
                     time: temp.eventTime,
                     address: temp.address,
-                    bg: imgArr[0],
+                    bg: imgUrl ,
                     content: temp.eventContent
                 },
                 imgList:imgArr1
@@ -84,7 +89,7 @@ export default class Detail extends Component {
             <Header type="detail" name={this.state.data.title}/>
             <Container>
                 <div className="head-img"
-                     style={{'backgroundImage': 'url(' + (this.state.data.bg ? (common.imgUrl() + this.state.data.bg + '?imageView2/2/w/375/h/211') : '') + ')'}}>
+                     style={{'backgroundImage': 'url(' + ( this.state.data.bg + '?imageView2/2/w/375/h/211') + ')'}}>
                     <div className="head-info">
                         <div className="main">{this.tools.formatTimeLine(this.state.data.time, 'time')}</div>
                         <div className="other">{this.tools.formatTimeLine(this.state.data.time, 'date')}</div>
