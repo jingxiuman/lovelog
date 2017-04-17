@@ -9,16 +9,16 @@ import _ from 'underscore';
 let common;
 let that;
 export default  common  = {
-    debug:true,
+    debug:false,
     tools:_,
     init:function () {
         that = this;
     },
     apiUrl:function () {
       if(this.debug){
-          return '//test.xbpig.cn/'
+          return '//h5.xbpig.cn/'
       }else{
-          return '//api.xbpig.cn/'
+          return '//h5.xbpig.cn/'
       }
     },
     imgDefault:'http://cdn.xbpig.cn/common/colorful-bubble-with-reflection-of-prague-buildings-picjumbo-com.jpg',
@@ -168,7 +168,7 @@ export default  common  = {
                     that.msgShow(res.data.msg);
                     //return res;
                 }
-                if(res.data.code == 1111){
+                if(res.data.code == 10001){
                     localStorage.clear();
                 }
             }).catch(function (error) {

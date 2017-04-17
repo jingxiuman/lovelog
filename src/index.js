@@ -14,7 +14,7 @@ import './common/common.css';
 
 ReactDOM.render(
     <Router history={browserHistory}>
-        <Route path="/h5" component={Root}>
+        <Route path="/" component={Root}>
             <IndexRoute component={OwnList} />
             <Route path="detail/:id" component={Detail} />
             <Route path="profile" component={Profile} />
