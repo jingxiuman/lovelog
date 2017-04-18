@@ -60,7 +60,7 @@ export default class Login extends Component {
                     </div>
 
                     <div className="btn-group">
-                        <button type="submit" className="btn-submit " >提交</button>
+                        <button type="submit" className="btn-submit " >注册并登录</button>
                     </div>
                 </form>
             </Container>

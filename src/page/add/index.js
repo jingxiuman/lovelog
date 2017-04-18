@@ -47,6 +47,7 @@ export default class AddBox extends Component {
             });
         } else {
             /* 地理位置服务不可用 */
+            common.msgShow("当前不支持地理位置")
         }
 
         this.handleClick = this.handleClick.bind(this);
