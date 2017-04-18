@@ -169,11 +169,19 @@ export default  common  = {
                     //return res;
                 }
                 if(res.data.code == 10001 || res.data.code == 1111){
-                    localStorage.clear();
+                    window.localStorage.clear();
+                    localStorage.removeItem('info');
+                    localStorage.removeItem('token')
                 }
             }).catch(function (error) {
                 //that.msgShow(error);
-                localStorage.clear();
+                window.localStorage.clear();
+
+                localStorage.removeItem('info');
+                localStorage.removeItem('token');
+                if(!localStorage.getItem('token')){
+                    window.location.reload(true);
+                }
                 console.log(error)
             })
         }
