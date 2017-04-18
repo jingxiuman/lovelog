@@ -21,6 +21,9 @@ body {
   box-sizing: border-box;
   overflow: hidden;
 }
+body > span > a {
+  display: none;
+}
 body {
   font-size: 0.38647343rem !important;
   background: url("//cdn.xbpig.cn/tpv9dh822va-stefan-stefancik.jpg");
