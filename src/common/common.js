@@ -173,6 +173,7 @@ export default  common  = {
                 }
             }).catch(function (error) {
                 //that.msgShow(error);
+                localStorage.clear();
                 console.log(error)
             })
         }
