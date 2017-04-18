@@ -168,7 +168,7 @@ export default  common  = {
                     that.msgShow(res.data.msg);
                     //return res;
                 }
-                if(res.data.code == 10001){
+                if(res.data.code == 10001 || res.data.code == 1111){
                     localStorage.clear();
                 }
             }).catch(function (error) {
